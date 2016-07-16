@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'PBRevealViewController_Example' do
+  pod 'PBRevealViewController', :path => '../'
+
+  target 'PBRevealViewController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
