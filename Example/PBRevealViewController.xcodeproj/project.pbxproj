@@ -7,13 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32F2D7D41D3A326000B295EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F2D7D21D3A326000B295EB /* LaunchScreen.storyboard */; };
+		32F2D7D51D3A326000B295EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F2D7D31D3A326000B295EB /* Main.storyboard */; };
+		32F2D7E41D3A32D000B295EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7D71D3A32D000B295EB /* AppDelegate.m */; };
+		32F2D7E51D3A32D000B295EB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7D91D3A32D000B295EB /* MainViewController.m */; };
+		32F2D7E61D3A32D000B295EB /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7DB1D3A32D000B295EB /* MapViewController.m */; };
+		32F2D7E71D3A32D000B295EB /* MenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7DD1D3A32D000B295EB /* MenuTableViewController.m */; };
+		32F2D7E81D3A32D000B295EB /* MenuTableViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7DF1D3A32D000B295EB /* MenuTableViewController2.m */; };
+		32F2D7E91D3A32D000B295EB /* RightMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7E11D3A32D000B295EB /* RightMenuTableViewController.m */; };
+		32F2D7EA1D3A32D000B295EB /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7E31D3A32D000B295EB /* SecondViewController.m */; };
+		32F2D7EC1D3A34EA00B295EB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F2D7EB1D3A34EA00B295EB /* MapKit.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
-		6003F59E195388D20070C39A /* PBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* PBAppDelegate.m */; };
-		6003F5A7195388D20070C39A /* PBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* PBViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -21,7 +29,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		6FA17379B9D48B3D944A0A1E /* Pods_PBRevealViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49637A8FD9F49C218C4ADC5 /* Pods_PBRevealViewController_Example.framework */; };
-		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		A1889B6ED9F1C68E369B89BE /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80AD91F77DB00D48ADE27212 /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C641867AB9A555BF66418BB4 /* Pods_PBRevealViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1615DB9BDA4075C242998C23 /* Pods_PBRevealViewController_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +47,23 @@
 		1615DB9BDA4075C242998C23 /* Pods_PBRevealViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		208C2803DE3FE9DA0D156CDB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		3249FC3E120D43BF1A3B0214 /* Pods-PBRevealViewController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Tests/Pods-PBRevealViewController_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		32F2D7D21D3A326000B295EB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		32F2D7D31D3A326000B295EB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		32F2D7D61D3A32D000B295EB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		32F2D7D71D3A32D000B295EB /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32F2D7D81D3A32D000B295EB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		32F2D7D91D3A32D000B295EB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		32F2D7DA1D3A32D000B295EB /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		32F2D7DB1D3A32D000B295EB /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		32F2D7DC1D3A32D000B295EB /* MenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController.h; sourceTree = "<group>"; };
+		32F2D7DD1D3A32D000B295EB /* MenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController.m; sourceTree = "<group>"; };
+		32F2D7DE1D3A32D000B295EB /* MenuTableViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTableViewController2.h; sourceTree = "<group>"; };
+		32F2D7DF1D3A32D000B295EB /* MenuTableViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTableViewController2.m; sourceTree = "<group>"; };
+		32F2D7E01D3A32D000B295EB /* RightMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightMenuTableViewController.h; sourceTree = "<group>"; };
+		32F2D7E11D3A32D000B295EB /* RightMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightMenuTableViewController.m; sourceTree = "<group>"; };
+		32F2D7E21D3A32D000B295EB /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		32F2D7E31D3A32D000B295EB /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		32F2D7EB1D3A34EA00B295EB /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		499AB3F78AC4DE8D8421DCDB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* PBRevealViewController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PBRevealViewController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -48,10 +73,6 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* PBRevealViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PBRevealViewController-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* PBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBAppDelegate.h; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* PBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBAppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* PBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PBViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* PBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PBViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* PBRevealViewController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PBRevealViewController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -59,7 +80,7 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		80AD91F77DB00D48ADE27212 /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FAE671CCB82291061C4C791 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		9CA281243924DAD416AFB7C1 /* Pods-PBRevealViewController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Tests/Pods-PBRevealViewController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B49637A8FD9F49C218C4ADC5 /* Pods_PBRevealViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32F2D7EC1D3A34EA00B295EB /* MapKit.framework in Frameworks */,
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
@@ -87,6 +109,7 @@
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
 				C641867AB9A555BF66418BB4 /* Pods_PBRevealViewController_Tests.framework in Frameworks */,
+				A1889B6ED9F1C68E369B89BE /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,12 +151,14 @@
 		6003F58C195388D20070C39A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				32F2D7EB1D3A34EA00B295EB /* MapKit.framework */,
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				B49637A8FD9F49C218C4ADC5 /* Pods_PBRevealViewController_Example.framework */,
 				1615DB9BDA4075C242998C23 /* Pods_PBRevealViewController_Tests.framework */,
+				80AD91F77DB00D48ADE27212 /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,11 +166,22 @@
 		6003F593195388D20070C39A /* Example for PBRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* PBAppDelegate.h */,
-				6003F59D195388D20070C39A /* PBAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* PBViewController.h */,
-				6003F5A6195388D20070C39A /* PBViewController.m */,
+				32F2D7D21D3A326000B295EB /* LaunchScreen.storyboard */,
+				32F2D7D31D3A326000B295EB /* Main.storyboard */,
+				32F2D7D61D3A32D000B295EB /* AppDelegate.h */,
+				32F2D7D71D3A32D000B295EB /* AppDelegate.m */,
+				32F2D7D81D3A32D000B295EB /* MainViewController.h */,
+				32F2D7D91D3A32D000B295EB /* MainViewController.m */,
+				32F2D7DA1D3A32D000B295EB /* MapViewController.h */,
+				32F2D7DB1D3A32D000B295EB /* MapViewController.m */,
+				32F2D7DC1D3A32D000B295EB /* MenuTableViewController.h */,
+				32F2D7DD1D3A32D000B295EB /* MenuTableViewController.m */,
+				32F2D7DE1D3A32D000B295EB /* MenuTableViewController2.h */,
+				32F2D7DF1D3A32D000B295EB /* MenuTableViewController2.m */,
+				32F2D7E01D3A32D000B295EB /* RightMenuTableViewController.h */,
+				32F2D7E11D3A32D000B295EB /* RightMenuTableViewController.m */,
+				32F2D7E21D3A32D000B295EB /* SecondViewController.h */,
+				32F2D7E31D3A32D000B295EB /* SecondViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -220,12 +256,15 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "PBRevealViewController_Tests" */;
 			buildPhases = (
+				F57FA0703F75F04B055B38E9 /* Check Pods Manifest.lock */,
 				D8240670470A6F770617026A /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
 				5BF34D0B7820D6EC4D1EB062 /* [CP] Embed Pods Frameworks */,
 				CD91DB09AF4E53BD3B2ED390 /* [CP] Copy Pods Resources */,
+				5E49DEED06C91D5E5D5FE274 /* Embed Pods Frameworks */,
+				AA20DE6145689C4834CD4980 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -276,9 +315,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
+				32F2D7D41D3A326000B295EB /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				32F2D7D51D3A326000B295EB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +393,36 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Tests/Pods-PBRevealViewController_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		5E49DEED06C91D5E5D5FE274 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Example-PBRevealViewController_Tests/Pods-PBRevealViewController_Example-PBRevealViewController_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AA20DE6145689C4834CD4980 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Tests/Pods-PBRevealViewController_Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		CD91DB09AF4E53BD3B2ED390 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +453,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		F57FA0703F75F04B055B38E9 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -390,8 +475,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F59E195388D20070C39A /* PBAppDelegate.m in Sources */,
-				6003F5A7195388D20070C39A /* PBViewController.m in Sources */,
+				32F2D7EA1D3A32D000B295EB /* SecondViewController.m in Sources */,
+				32F2D7E41D3A32D000B295EB /* AppDelegate.m in Sources */,
+				32F2D7E81D3A32D000B295EB /* MenuTableViewController2.m in Sources */,
+				32F2D7E61D3A32D000B295EB /* MapViewController.m in Sources */,
+				32F2D7E91D3A32D000B295EB /* RightMenuTableViewController.m in Sources */,
+				32F2D7E51D3A32D000B295EB /* MainViewController.m in Sources */,
+				32F2D7E71D3A32D000B295EB /* MenuTableViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
