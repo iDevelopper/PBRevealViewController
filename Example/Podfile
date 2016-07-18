@@ -5,7 +5,3 @@ target 'PBRevealViewController_Example' do
 
 end
 
-target 'PBRevealViewController_Tests' do
-    pod 'PBRevealViewController', :path => '../'
-
-end
