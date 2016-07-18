@@ -1,6 +1,5 @@
 # PBRevealViewController
 
-[![CI Status](http://img.shields.io/travis/iDevelopper/PBRevealViewController.svg?style=flat)](https://travis-ci.org/iDevelopper/PBRevealViewController)
 [![Version](https://img.shields.io/cocoapods/v/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 [![License](https://img.shields.io/cocoapods/l/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 [![Platform](https://img.shields.io/cocoapods/p/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
