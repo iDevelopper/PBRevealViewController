@@ -28,7 +28,6 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		6FA17379B9D48B3D944A0A1E /* Pods_PBRevealViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B49637A8FD9F49C218C4ADC5 /* Pods_PBRevealViewController_Example.framework */; };
 		A1889B6ED9F1C68E369B89BE /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80AD91F77DB00D48ADE27212 /* Pods_PBRevealViewController_Example_PBRevealViewController_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C641867AB9A555BF66418BB4 /* Pods_PBRevealViewController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1615DB9BDA4075C242998C23 /* Pods_PBRevealViewController_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -97,7 +96,6 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				6FA17379B9D48B3D944A0A1E /* Pods_PBRevealViewController_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -174,6 +174,12 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController
             forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
+// Ask for animation block of child controller replacement
+- (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
+
+// Ask for completion block of child controller replacement
+- (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
+
 @end
 
 

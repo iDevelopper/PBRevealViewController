@@ -43,6 +43,7 @@
 
     self.revealViewController.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.revealViewController.leftViewRevealWidth = 160.;
+    self.revealViewController.replaceViewAnimationDuration = 0.5;
 }
 
 - (void)didReceiveMemoryWarning {

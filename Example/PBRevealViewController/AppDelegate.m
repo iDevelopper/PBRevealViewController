@@ -149,4 +149,19 @@
     return NO;
 }
 
+- (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
+{
+    NSLog(@"animationBlockForOperation");
+    toViewController.view.alpha = 0.8;
+    void (^animation)() = ^{ toViewController.view.alpha = 1.; };
+    return animation;
+}
+
+- (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
+{
+    NSLog(@"completionBlockForOperation");
+    void (^completion)() = ^{ NSLog(@"Completion"); };
+    return completion;
+}
+
 @end

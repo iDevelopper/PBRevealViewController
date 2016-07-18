@@ -50,6 +50,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UIViewController *controller;
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    switch (indexPath.row) {
+        case 0:
+            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+            break;
+            
+        case 1:
+            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Second"];
+            break;
+            
+        case 2:
+        {
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Map"]];
+            controller = nc;
+        }
+            break;
+            
+        default:
+            break;
+    }
+    [self.revealViewController pushMainViewController:controller animated:YES];
 }
 
 @end
