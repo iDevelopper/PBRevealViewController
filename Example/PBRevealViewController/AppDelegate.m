@@ -130,6 +130,16 @@
 - (void)revealController:(PBRevealViewController *)revealController willAddViewController:(UIViewController *)viewController forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
     NSLog(@"willAddViewController");
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = (UINavigationController *)viewController;
+        if ([nc.topViewController isKindOfClass:[MapViewController class]]) {
+            if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
+                CGRect frame = viewController.view.frame;
+                frame.origin.x = revealController.leftViewRevealWidth;
+                viewController.view.frame = frame;
+            }
+        }
+    }
 }
 
 - (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated
@@ -152,9 +162,42 @@
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
 {
     NSLog(@"animationBlockForOperation");
-    toViewController.view.alpha = 0.8;
-    void (^animation)() = ^{ toViewController.view.alpha = 1.; };
-    return animation;
+
+    // See willAddViewController above
+    
+    void (^animation)();
+    
+    if ([toViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = (UINavigationController *)toViewController;
+        if ([nc.topViewController isKindOfClass:[MapViewController class]]) {
+            if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
+                CGRect mainFrame = toViewController.view.frame;
+                mainFrame.origin.x = 0.;
+                CGRect leftFrame = revealController.leftViewController.view.frame;
+                leftFrame.origin.x = -(revealController.leftViewRevealWidth);
+                leftFrame.size.width = revealController.leftViewRevealWidth;
+                /*
+                void (^animation)() = ^{
+                    toViewController.view.frame = mainFrame;
+                    revealController.leftViewController.view.frame = leftFrame;
+                };
+                */
+                animation = ^{
+                    toViewController.view.frame = mainFrame;
+                    revealController.leftViewController.view.frame = leftFrame;
+                };
+                
+                return animation;
+            }
+        }
+        else {
+            toViewController.view.alpha = 0.6;
+            animation = ^{ toViewController.view.alpha = 1.; };
+            return animation;
+        }
+    }
+    
+    return nil;
 }
 
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController

@@ -47,12 +47,16 @@ extern NSString* const PBSegueRightIdentifier;  // this is @"pb_right"
 @property (nonatomic) CGFloat           leftViewRevealWidth;
 // Defines how much of the right view is shown, default is 160.0f
 @property (nonatomic) CGFloat           rightViewRevealWidth;
-// Duration for the left reveal animation, default is 0.5f
+/// A Boolean value indicating whether the bouncing effect is enabled.
+@property (nonatomic) BOOL              leftBouncingEnabled;
+// Duration for the left reveal animation, default is 0.5f  (used only if leftBouncingEnabled == NO)
 // See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 @property (nonatomic) NSTimeInterval    leftToggleAnimationDuration;
 @property (nonatomic) CGFloat           leftToggleSpringDampingRatio;
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
-// Duration for the right reveal animation, default is 0.5f
+/// A Boolean value indicating whether the bouncing effect is enabled.
+@property (nonatomic) BOOL              rightBouncingEnabled;
+// Duration for the right reveal animation, default is 0.5f (used only if rightBouncingEnabled == NO)
 // See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 @property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
 @property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
@@ -126,7 +130,8 @@ typedef enum
     PBRevealControllerOperationReplaceLeftController,
     PBRevealControllerOperationReplaceMainController,
     PBRevealControllerOperationReplaceRightController,
-    PBRevealControllerOperationPushMainController,
+    PBRevealControllerOperationPushMainControllerFromLeft,
+    PBRevealControllerOperationPushMainControllerFromRight
     
 } PBRevealControllerOperation;
 
