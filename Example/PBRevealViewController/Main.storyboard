@@ -239,8 +239,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to open left view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-QQ-cBw">
-                                <rect key="frame" x="211" y="289" width="178" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe to open left or right view" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-QQ-cBw">
+                                <rect key="frame" x="181" y="289" width="238" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Second" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5G-O0-pNg">
+                                <rect key="frame" x="270.5" y="28" width="59" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -250,6 +256,8 @@
                         <constraints>
                             <constraint firstItem="vfJ-QQ-cBw" firstAttribute="centerX" secondItem="0vj-8T-wyB" secondAttribute="centerX" id="GQH-0M-GX6"/>
                             <constraint firstItem="vfJ-QQ-cBw" firstAttribute="centerY" secondItem="0vj-8T-wyB" secondAttribute="centerY" id="X4i-FB-Oaa"/>
+                            <constraint firstItem="A5G-O0-pNg" firstAttribute="centerX" secondItem="0vj-8T-wyB" secondAttribute="centerX" id="ZJW-8l-p4N"/>
+                            <constraint firstItem="A5G-O0-pNg" firstAttribute="top" secondItem="4GT-ky-7T3" secondAttribute="bottom" constant="8" symbolic="YES" id="z9T-W7-8dc"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -290,7 +298,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Th0-bL-9Bt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128" y="2106"/>
+            <point key="canvasLocation" x="1128" y="3498"/>
+        </scene>
+        <!--Third-->
+        <scene sceneID="p8H-sp-Bvr">
+            <objects>
+                <viewController storyboardIdentifier="Third" id="s5m-af-0he" customClass="ThirdViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="piE-QE-snE"/>
+                        <viewControllerLayoutGuide type="bottom" id="G45-lq-gY6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="T9f-nc-S5a">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Third" id="TWl-fq-mCq">
+                        <barButtonItem key="leftBarButtonItem" image="Reveal" id="ggE-3T-Ric"/>
+                        <barButtonItem key="rightBarButtonItem" image="Reveal" id="Gzs-Yc-tD6"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftButton" destination="ggE-3T-Ric" id="bwJ-3r-yOx"/>
+                        <outlet property="rightButton" destination="Gzs-Yc-tD6" id="lmb-f6-cOw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2m8-Fm-1Zu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1128" y="2067"/>
+        </scene>
+        <!--Fourth-->
+        <scene sceneID="jkP-mD-XjE">
+            <objects>
+                <viewController storyboardIdentifier="Fourth" id="4IP-Wf-pIr" customClass="FourthViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pSf-k3-Xlh"/>
+                        <viewControllerLayoutGuide type="bottom" id="fLL-Dn-mr7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y1V-2c-ByU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Fourth" id="O2o-q6-7I8">
+                        <barButtonItem key="leftBarButtonItem" image="Reveal" id="guh-6g-ni9"/>
+                        <barButtonItem key="rightBarButtonItem" image="Reveal" id="vje-19-EX5"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leftButton" destination="guh-6g-ni9" id="6k7-vE-Mxy"/>
+                        <outlet property="rightButton" destination="vje-19-EX5" id="ndf-o0-kQR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ko-ek-yUR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1128" y="2787"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1ZJ-fr-O4Q">

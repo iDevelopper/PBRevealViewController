@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MapViewController.h"
+#import "ThirdViewController.h"
 
 @interface AppDelegate ()
 
@@ -134,9 +135,7 @@
         UINavigationController *nc = (UINavigationController *)viewController;
         if ([nc.topViewController isKindOfClass:[MapViewController class]]) {
             if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
-                CGRect frame = viewController.view.frame;
-                frame.origin.x = revealController.leftViewRevealWidth;
-                viewController.view.frame = frame;
+                viewController.view.alpha = 0.5;
             }
         }
     }
@@ -162,7 +161,7 @@
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
 {
     NSLog(@"animationBlockForOperation");
-
+    
     // See willAddViewController above
     
     void (^animation)();
@@ -171,32 +170,14 @@
         UINavigationController *nc = (UINavigationController *)toViewController;
         if ([nc.topViewController isKindOfClass:[MapViewController class]]) {
             if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
-                CGRect mainFrame = toViewController.view.frame;
-                mainFrame.origin.x = 0.;
-                CGRect leftFrame = revealController.leftViewController.view.frame;
-                leftFrame.origin.x = -(revealController.leftViewRevealWidth);
-                leftFrame.size.width = revealController.leftViewRevealWidth;
-                /*
-                void (^animation)() = ^{
-                    toViewController.view.frame = mainFrame;
-                    revealController.leftViewController.view.frame = leftFrame;
-                };
-                */
                 animation = ^{
-                    toViewController.view.frame = mainFrame;
-                    revealController.leftViewController.view.frame = leftFrame;
+                    toViewController.view.alpha = 1.;
                 };
                 
                 return animation;
             }
         }
-        else {
-            toViewController.view.alpha = 0.6;
-            animation = ^{ toViewController.view.alpha = 1.; };
-            return animation;
-        }
     }
-    
     return nil;
 }
 
@@ -205,6 +186,29 @@
     NSLog(@"completionBlockForOperation");
     void (^completion)() = ^{ NSLog(@"Completion"); };
     return completion;
+}
+
+- (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock
+{
+    NSLog(@"blockForOperation");
+    
+    if ([toViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = (UINavigationController *)toViewController;
+        if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
+            void (^block)() = ^{
+                toViewController.view.alpha = 0.;
+                [UIView animateWithDuration:1. delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                    fromViewController.view.alpha = 0.;
+                    toViewController.view.alpha = 1.;
+                } completion:^(BOOL finished) {
+                    NSLog(@"Custom Completion");
+                    finalBlock();
+                }];
+            };
+            return block;
+        }
+    }
+    return nil;
 }
 
 @end

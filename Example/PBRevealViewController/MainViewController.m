@@ -25,13 +25,15 @@
 {
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
-     } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+     }
+                                 completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
      {
          
      }];
     
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -44,6 +46,7 @@
     self.revealViewController.delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     self.revealViewController.leftViewRevealWidth = 160.;
     self.revealViewController.replaceViewAnimationDuration = 0.5;
+    self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
 }
 
 - (void)didReceiveMemoryWarning {

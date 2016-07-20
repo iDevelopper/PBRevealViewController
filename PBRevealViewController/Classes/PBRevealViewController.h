@@ -38,6 +38,17 @@ extern NSString* const PBSegueRightIdentifier;  // this is @"pb_right"
 
 @end
 
+// Enum values for toggleAnimationType
+typedef enum
+PBRevealToggleAnimationType
+{
+    PBRevealToggleAnimationTypeNone,
+    PBRevealToggleAnimationTypeCrossDissolve,
+    PBRevealToggleAnimationTypePushSideView,
+    PBRevealToggleAnimationTypeCustom // See delegate methods
+    
+} PBRevealToggleAnimationType;
+
 @interface PBRevealViewController : UIViewController
 
 // If storyboard is not used
@@ -47,22 +58,25 @@ extern NSString* const PBSegueRightIdentifier;  // this is @"pb_right"
 @property (nonatomic) CGFloat           leftViewRevealWidth;
 // Defines how much of the right view is shown, default is 160.0f
 @property (nonatomic) CGFloat           rightViewRevealWidth;
-/// A Boolean value indicating whether the bouncing effect is enabled.
-@property (nonatomic) BOOL              leftBouncingEnabled;
-// Duration for the left reveal animation, default is 0.5f  (used only if leftBouncingEnabled == NO)
+
+// Animation type, default is PBRevealToggleAnimationTypeNone
+@property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
+
+// Duration for the left reveal animation, default is 0.5f
 // See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 @property (nonatomic) NSTimeInterval    leftToggleAnimationDuration;
 @property (nonatomic) CGFloat           leftToggleSpringDampingRatio;
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
-/// A Boolean value indicating whether the bouncing effect is enabled.
-@property (nonatomic) BOOL              rightBouncingEnabled;
-// Duration for the right reveal animation, default is 0.5f (used only if rightBouncingEnabled == NO)
+
+// Duration for the right reveal animation, default is 0.5f
 // See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 @property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
 @property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
 @property (nonatomic) CGFloat           rightToggleSpringVelocity;
+
 // Duration for animated replacement of view controllers, default is 0.25f
 @property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
+
 // Defines the radius of the left view's shadow, default is 5.0f
 @property (nonatomic) CGFloat           leftViewShadowRadius;
 // Defines the radius of the left view's shadow offset default is {0.0f,2.5f}
@@ -71,6 +85,7 @@ extern NSString* const PBSegueRightIdentifier;  // this is @"pb_right"
 @property (nonatomic) CGFloat           leftViewShadowOpacity;
 // Defines the left view's shadow color, default is blackColor
 @property (nonatomic) UIColor           *leftViewShadowColor;
+
 // Defines the radius of the right view's shadow, default is 5.0f
 @property (nonatomic) CGFloat           rightViewShadowRadius;
 // Defines the radius of the right view's shadow offset default is {0.0f,2.5f}
@@ -179,14 +194,32 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController
             forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
-// Ask for animation block of child controller replacement
+// Ask for animation block of child controller replacement when pushed
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
-// Ask for completion block of child controller replacement
+// Ask for completion block of child controller replacement when pushed
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
+/*
+// Ask for a block with animation and completion of child controller replacement when pushed, please add the final block to your completion
+ 
+// Example:
+- (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock
+{
+    NSLog(@"blockForOperation");
+    void (^block)() = ^{
+        toViewController.view.alpha = 0.;
+        [UIView animateWithDuration:1. delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+            fromViewController.view.alpha = 0.;
+            toViewController.view.alpha = 1.;
+        } completion:^(BOOL finished) {
+            NSLog(@"Custom Completion");
+            finalBlock();
+        }];
+    };
+    return block;
+}
+*/
+- (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
 
 @end
-
-
-
 

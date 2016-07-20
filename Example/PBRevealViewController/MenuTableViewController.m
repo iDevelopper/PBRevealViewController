@@ -32,7 +32,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 5;
 }
 
 
@@ -53,6 +53,14 @@
             break;
             
         case 2:
+            cell.textLabel.text = @"Third";
+            break;
+            
+        case 3:
+            cell.textLabel.text = @"Fourth";
+            break;
+            
+        case 4:
             cell.textLabel.text = @"Map";
             break;
             
@@ -71,15 +79,34 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     switch (indexPath.row) {
         case 0:
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
             controller = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
             break;
             
         case 1:
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCrossDissolve;
             controller = [storyBoard instantiateViewControllerWithIdentifier:@"Second"];
             break;
             
         case 2:
         {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCustom;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Third"]];
+            controller = nc;
+        }
+            break;
+            
+        case 3:
+        {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Fourth"]];
+            controller = nc;
+        }
+            break;
+            
+        case 4:
+        {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCustom;
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Map"]];
             controller = nc;
         }
@@ -89,6 +116,7 @@
             break;
     }
     [self.revealViewController pushMainViewController:controller animated:YES];
+    self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
 }
 
 @end
