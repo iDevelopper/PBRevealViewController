@@ -337,7 +337,19 @@
                     <view key="view" contentMode="scaleToFill" id="y1V-2c-ByU">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PBRevealToggleAnimationTypePushSideView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GBG-do-jhR">
+                                <rect key="frame" x="128" y="289" width="344" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                        <constraints>
+                            <constraint firstItem="GBG-do-jhR" firstAttribute="centerY" secondItem="y1V-2c-ByU" secondAttribute="centerY" id="5cr-eh-Ins"/>
+                            <constraint firstItem="GBG-do-jhR" firstAttribute="centerX" secondItem="y1V-2c-ByU" secondAttribute="centerX" id="VUB-MD-ySK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Fourth" id="O2o-q6-7I8">
                         <barButtonItem key="leftBarButtonItem" image="Reveal" id="guh-6g-ni9"/>

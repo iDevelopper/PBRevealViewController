@@ -474,7 +474,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
 
         else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-            [UIView animateWithDuration:_replaceViewAnimationDuration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
                 fromViewController.view.alpha = 0.;
                 toViewController.view.alpha = 1.;
             } completion:^(BOOL finished) {
@@ -501,7 +501,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             sideFrame = sideViewController.view.frame;
             sideFrame.origin.x = (_isLeftViewOpen ? -(_leftViewRevealWidth) : +[UIScreen mainScreen].bounds.size.width);
             
-            [UIView animateWithDuration:_replaceViewAnimationDuration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
                 toViewController.view.frame = mainFrame;
                 sideViewController.view.frame = sideFrame;
             } completion:^(BOOL finished) {
@@ -532,7 +532,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 if (customBlock) customBlock();
             }
             else {
-                [UIView animateWithDuration:_replaceViewAnimationDuration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
                     if (customAnimation) customAnimation();
                 } completion:^(BOOL finished) {
                     completion();
