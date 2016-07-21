@@ -53,7 +53,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 @end
 
-#pragma mark - SWRevealViewControllerSeguePushController class
+#pragma mark - PBRevealViewControllerSeguePushController class
 
 @implementation PBRevealViewControllerSeguePushController
 
@@ -369,6 +369,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)_swapFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
     NSTimeInterval duration = animated ? _replaceViewAnimationDuration : 0.0;
+    CGFloat fromAlpha = fromViewController.view.alpha;
+    CGFloat toAlpha = toViewController.view.alpha;
     
     if (fromViewController != toViewController) {
         
@@ -409,13 +411,17 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:toViewController];
         [fromViewController willMoveToParentViewController:nil];
 
+        toViewController.view.alpha = 0.5;
         [self transitionFromViewController:fromViewController toViewController:toViewController duration:duration options:UIViewAnimationOptionTransitionNone animations:^{
-            
+            fromViewController.view.alpha = 0.;
+            toViewController.view.alpha = toAlpha;
         } completion:^(BOOL finished) {
             
             [fromViewController removeFromParentViewController];
             [toViewController didMoveToParentViewController:self];
             
+            fromViewController.view.alpha = fromAlpha;
+
             if ([_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)]) {
                 [_delegate revealController:self didAddViewController:toViewController forOperation:operation animated:animated];
             }
@@ -426,9 +432,19 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)_pushFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
     NSTimeInterval duration = animated ? _replaceViewAnimationDuration : 0.0;
+    CGFloat fromAlpha = fromViewController.view.alpha;
+    CGFloat toAlpha = toViewController.view.alpha;
     
-    if (fromViewController != toViewController) {
-        
+    if (fromViewController == toViewController) {
+        if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
+            [self hideLeftView];
+        }
+        if (operation == PBRevealControllerOperationPushMainControllerFromRight) {
+            [self hideRightView];
+        }
+        return;
+    }
+    
         toViewController.view.frame = fromViewController.view.frame;
         
         if ([_delegate respondsToSelector:@selector(revealController:willAddViewController:forOperation:animated:)]) {
@@ -476,9 +492,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
             [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
                 fromViewController.view.alpha = 0.;
-                toViewController.view.alpha = 1.;
+                toViewController.view.alpha = toAlpha;
             } completion:^(BOOL finished) {
                 completion();
+                fromViewController.view.alpha = fromAlpha;
             }];
         }
         
@@ -540,7 +557,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 }];
             }
         }
-    }
 }
 
 #pragma mark - Reveal and hide actions
@@ -777,7 +793,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     if (_rightViewController) {
         if (![self.childViewControllers containsObject:_rightViewController]) {
-            NSLog(@"------------> Add Right Child");
             [self addChildViewController:_rightViewController];
             _rightViewController.view.frame = CGRectMake([UIScreen mainScreen].bounds.size.width, 0, 0, [UIScreen mainScreen].bounds.size.height);
             [_contentView addSubview:_rightViewController.view];
