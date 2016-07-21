@@ -7,8 +7,12 @@
 //
 
 #import "MenuTableViewController.h"
+#import "MainViewController.h"
+#import "SecondViewController.h"
 
 @interface MenuTableViewController ()
+
+@property (strong, nonatomic) SecondViewController *secondViewController;
 
 @end
 
@@ -80,12 +84,18 @@
     switch (indexPath.row) {
         case 0:
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
-            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+            if (!_mainViewController) {
+                self.mainViewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+            }
+            controller = _mainViewController;
             break;
             
         case 1:
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCrossDissolve;
-            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Second"];
+            if (!_secondViewController) {
+                self.secondViewController = [storyBoard instantiateViewControllerWithIdentifier:@"Second"];
+            }
+            controller = _secondViewController;
             break;
             
         case 2:

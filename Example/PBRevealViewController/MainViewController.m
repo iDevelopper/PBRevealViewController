@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "MenuTableViewController.h"
-#import "MenuTableViewController2.h"
+//#import "MenuTableViewController2.h"
 #import "RightMenuTableViewController.h"
 
 @interface MainViewController ()
@@ -36,6 +36,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UINavigationController *nc = (UINavigationController *)self.revealViewController.leftViewController;
+    MenuTableViewController *menuTableViewController = (MenuTableViewController *)nc.topViewController;
+    menuTableViewController.mainViewController = self;
     
     _leftButton.target = self.revealViewController;
     _leftButton.action = @selector(revealLeftView);

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class MainViewController;
+
 @interface MenuTableViewController : UITableViewController
+
+@property (strong, nonatomic) MainViewController *mainViewController;
 
 @end

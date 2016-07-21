@@ -192,6 +192,7 @@
 {
     NSLog(@"blockForOperation");
     
+    CGFloat fromAlpha = fromViewController.view.alpha;
     if ([toViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *)toViewController;
         if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
@@ -203,6 +204,7 @@
                 } completion:^(BOOL finished) {
                     NSLog(@"Custom Completion");
                     finalBlock();
+                    fromViewController.view.alpha = fromAlpha;
                 }];
             };
             return block;
