@@ -116,7 +116,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 @interface PBRevealViewController() <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIView *contentView;
-
 @property (nonatomic) BOOL userInteractionStore;
 
 @end
