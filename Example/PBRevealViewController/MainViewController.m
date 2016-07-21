@@ -39,7 +39,7 @@
     
     UINavigationController *nc = (UINavigationController *)self.revealViewController.leftViewController;
     MenuTableViewController *menuTableViewController = (MenuTableViewController *)nc.topViewController;
-    menuTableViewController.mainViewController = self;
+    menuTableViewController.mainNavController = self.navigationController;
     
     _leftButton.target = self.revealViewController;
     _leftButton.action = @selector(revealLeftView);

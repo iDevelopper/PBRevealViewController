@@ -84,10 +84,10 @@
     switch (indexPath.row) {
         case 0:
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
-            if (!_mainViewController) {
-                self.mainViewController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+            if (!_mainNavController) {
+                self.mainNavController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
             }
-            controller = _mainViewController;
+            controller = _mainNavController;
             break;
             
         case 1:
