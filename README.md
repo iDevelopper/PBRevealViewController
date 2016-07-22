@@ -12,48 +12,48 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 
 ## Installation
 
-• To run the example project, clone the repo, and run `pod install` in Terminal from the Example directory first.
-• PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install
+* To run the example project, clone the repo, and run `pod install` in Terminal from the Example directory first.
+* PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Cocoa.png)
 
 ## Features
 
-• A Reveal view controller implemented using view controller containment.
-• A category method on UIViewController, `revealViewController`, to get the parent `PBRevealViewController` of any child controller, similar to the UIViewController's property `navigationController`.
-• Support for any combination of left/right/main view controllers.
-• Handling of rotations.
-• Can be embedded as a child view controller of other controllers or deployed as the rootViewController.
-• Plays nicely with any child view controllers or parent controllers.
-• Can be deployed as a child of itself to create cascade-like, hierarchical interfaces.
-• Seamless integration of tap and pan gesture recognizers.
-• Delegate methods for getting full state of the controller and implementing your own code hooks for customizing behavior.
-• Delegate methods to ask animation/completion block for main view controller when pushing.
-• Delegate methods to ask block for child controller when pushing.
+* A Reveal view controller implemented using view controller containment.
+* A category method on UIViewController, `revealViewController`, to get the parent `PBRevealViewController` of any child controller, similar to the UIViewController's property `navigationController`.
+* Support for any combination of left/right/main view controllers.
+* Handling of rotations.
+* Can be embedded as a child view controller of other controllers or deployed as the rootViewController.
+* Plays nicely with any child view controllers or parent controllers.
+* Can be deployed as a child of itself to create cascade-like, hierarchical interfaces.
+* Seamless integration of tap and pan gesture recognizers.
+* Delegate methods for getting full state of the controller and implementing your own code hooks for customizing behavior.
+* Delegate methods to ask animation/completion block for main view controller when pushing.
+* Delegate methods to ask block for child controller when pushing.
 
 ## Requirements
 
-• iOS 8.3 or later.
-• ARC memory management.
+* iOS 8.3 or later.
+* ARC memory management.
 
 ## Usage
 
 The easiest way to install it is by copying the following to your project:
 
-• PBRevealViewController.h
-• PBRevealViewController.m
+* PBRevealViewController.h
+* PBRevealViewController.m
 
 On your project:
 
-• Initialize an instance of a PBRevealViewController passing in a "left" (optinal), "main" (required) and "right" (optional) view controllers.
-• Use the PBRevealViewController instance in your code as you would use any view controller.
-• Deploy as the application window rootViewController, or as a child of other containment controllers.
-• You can leave panGestureRecognized and tapGestureRecognizer provided by the PBRevealViewController as they are for the default behavior or you can add them to a suitable view on your "main" view controller. For example add the panGestureRecognizer to a navigationBar on the viewDidLoad method of your main view controller.
-• Cancel the gestureRecoGnized provided by the PBRevealViewController:
+* Initialize an instance of a PBRevealViewController passing in a "left" (optinal), "main" (required) and "right" (optional) view controllers.
+* Use the PBRevealViewController instance in your code as you would use any view controller.
+* Deploy as the application window rootViewController, or as a child of other containment controllers.
+* You can leave panGestureRecognized and tapGestureRecognizer provided by the PBRevealViewController as they are for the default behavior or you can add them to a suitable view on your "main" view controller. For example add the panGestureRecognizer to a navigationBar on the viewDidLoad method of your main view controller.
+* Cancel the gestureRecoGnized provided by the PBRevealViewController:
     - (BOOL)revealControllerTapGestureShouldBegin:
     - (BOOL)revealControllerPanGestureShouldBegin:direction:
-• At any time, you can reveal, hide the "left" or "right" views or replace any of the view controllers, programmatically or based on user actions, with or without animations enabled
+* At any time, you can reveal, hide the "left" or "right" views or replace any of the view controllers, programmatically or based on user actions, with or without animations enabled
 
 ## Basic API Description
 
@@ -66,12 +66,12 @@ On your project:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Story.png)
 
-• Pushing a main view controller:
+* Pushing a main view controller:
 
 ```
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 ```
-• replace a view controller:
+* replace a view controller:
 
 ```
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated;
@@ -79,7 +79,7 @@ On your project:
 - (void)setRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated;
 ```
 
-• Other methods are documented in the PBRevealViewController.h header file. 
+* Other methods are documented in the PBRevealViewController.h header file. 
 
 
 ```ruby
