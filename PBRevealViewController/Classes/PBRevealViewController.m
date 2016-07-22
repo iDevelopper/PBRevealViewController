@@ -243,6 +243,28 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 #pragma mark - Public methods and property accessors
 
+- (void)setLeftViewRevealWidth:(CGFloat)leftViewRevealWidth
+{
+    _leftViewRevealWidth = leftViewRevealWidth;
+    if (_isLeftViewOpen) {
+        CGRect frame = _leftViewController.view.frame;
+        frame.origin.x = 0.;;
+        frame.size.width = _leftViewRevealWidth;
+        _leftViewController.view.frame = frame;
+    }
+}
+
+- (void)setRightViewRevealWidth:(CGFloat)rightViewRevealWidth
+{
+    _rightViewRevealWidth = rightViewRevealWidth;
+    if (_isRightViewOpen) {
+        CGRect frame = _rightViewController.view.frame;
+        frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+        frame.size.width = _rightViewRevealWidth;
+        _rightViewController.view.frame = frame;
+    }
+}
+
 - (void)setLeftViewShadowRadius:(CGFloat)leftViewShadowRadius
 {
     _leftViewShadowRadius = leftViewShadowRadius;
@@ -686,6 +708,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     {
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTapGesture:)];
         
+        _tapGestureRecognizer.cancelsTouchesInView = YES;
         _tapGestureRecognizer.delegate = self;
 
         [_mainViewController.view addGestureRecognizer:_tapGestureRecognizer];
@@ -970,11 +993,16 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
          
          frame = _leftViewController.view.frame;
          frame.size.width = _leftViewRevealWidth;
+         frame.size.height = [UIScreen mainScreen].bounds.size.height;
          _leftViewController.view.frame = frame;
          
          frame = _rightViewController.view.frame;
-         frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+         frame.origin.x = [UIScreen mainScreen].bounds.size.width;
+         if (_isRightViewOpen) {
+             frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+         }
          frame.size.width = _rightViewRevealWidth;
+         frame.size.height = [UIScreen mainScreen].bounds.size.height;
          _rightViewController.view.frame = frame;
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)

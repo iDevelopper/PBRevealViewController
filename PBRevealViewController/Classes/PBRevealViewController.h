@@ -54,6 +54,8 @@ PBRevealToggleAnimationType
 // If storyboard is not used
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 
+// Properties
+
 // Defines how much of the left view is shown, default is 260.0f
 @property (nonatomic) CGFloat           leftViewRevealWidth;
 // Defines how much of the right view is shown, default is 160.0f
