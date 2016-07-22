@@ -81,11 +81,6 @@ On your project:
 
 * Other methods are documented in the PBRevealViewController.h header file. 
 
-
-```ruby
-pod "PBRevealViewController"
-```
-
 ## Author
 
 iDevelopper, patrick.bodet4@wanadoo.fr
