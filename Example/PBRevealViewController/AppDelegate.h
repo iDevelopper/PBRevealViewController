@@ -11,7 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, PBRevealViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) UIViewController *mainController;
+@property (strong, nonatomic) UIViewController *mapController;
 
 @end
 

@@ -7,6 +7,8 @@
 //
 
 #import "RightMenuTableViewController.h"
+#import "PresentViewController.h"
+#import "PushViewController.h"
 
 @interface RightMenuTableViewController ()
 
@@ -32,7 +34,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,24 +56,88 @@
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     switch (indexPath.row) {
         case 0:
-            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+        {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCrossDissolve;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Third"]];
+            controller = nc;
+        }
             break;
             
         case 1:
-            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Second"];
+        {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Fourth"]];
+            controller = nc;
+        }
             break;
             
         case 2:
         {
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Map"]];
+            PresentViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"Present"];
+            vc.text = [[[tableView cellForRowAtIndexPath:indexPath] textLabel] text];
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:vc];
             controller = nc;
+        }
+            break;
+            
+        case 3:
+        {
+            PushViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"Push"];
+            vc.text = [[[tableView cellForRowAtIndexPath:indexPath] textLabel] text];
+            controller = vc;
         }
             break;
             
         default:
             break;
     }
-    [self.revealViewController pushMainViewController:controller animated:YES];
+    switch (indexPath.row) {
+        case 0:
+        case 1:
+            [self.revealViewController pushMainViewController:controller animated:YES];
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
+            break;
+        
+        case 2:
+        {
+            [self presentViewController:controller animated:YES completion:nil];
+        }
+            break;
+            
+        case 3:
+        {
+            
+            self.revealViewController.rightViewRevealWidth = 0.;
+            self.revealViewController.tapGestureRecognizer.cancelsTouchesInView = NO;
+            UINavigationController *nc = (UINavigationController *)self.revealViewController.mainViewController;
+            nc.delegate = self;
+            [nc pushViewController:controller animated:YES];
+            
+            // OR
+            
+            /*
+            self.revealViewController.rightViewRevealWidth = [UIScreen mainScreen].bounds.size.width;
+            self.navigationController.delegate = self;
+            [self.navigationController pushViewController:controller animated:YES];
+            */
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC
+{
+    if (operation == UINavigationControllerOperationPop) {
+        self.revealViewController.rightViewRevealWidth = 160.;
+        self.revealViewController.tapGestureRecognizer.cancelsTouchesInView = YES;
+    }
+    return nil;
 }
 
 @end

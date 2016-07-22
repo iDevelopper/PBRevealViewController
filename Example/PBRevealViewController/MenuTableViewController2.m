@@ -6,7 +6,9 @@
 //  Copyright © 2016 iDevelopper. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MenuTableViewController2.h"
+#import "MenuTableViewController.h"
 
 @interface MenuTableViewController2 ()
 
@@ -53,9 +55,13 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIViewController *controller;
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    
     switch (indexPath.row) {
         case 0:
-            controller = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
+        {
+            controller = appDelegate.mainController;
+        }
             break;
             
         case 1:

@@ -6,9 +6,11 @@
 //  Copyright © 2016 iDevelopper. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MenuTableViewController.h"
 #import "MainViewController.h"
 #import "SecondViewController.h"
+#import "MapViewController.h"
 
 @interface MenuTableViewController ()
 
@@ -81,13 +83,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     UIViewController *controller;
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+
     switch (indexPath.row) {
         case 0:
+        {
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeNone;
-            if (!_mainNavController) {
-                self.mainNavController = [storyBoard instantiateViewControllerWithIdentifier:@"Main"];
-            }
-            controller = _mainNavController;
+            controller = appDelegate.mainController;
+        }
             break;
             
         case 1:
@@ -117,8 +121,7 @@
         case 4:
         {
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCustom;
-            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Map"]];
-            controller = nc;
+            controller = appDelegate.mapController;
         }
             break;
             

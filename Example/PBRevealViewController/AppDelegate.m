@@ -198,7 +198,7 @@
         if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
             void (^block)() = ^{
                 toViewController.view.alpha = 0.;
-                [UIView animateWithDuration:1. delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                [UIView animateWithDuration:0.5 delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
                     fromViewController.view.alpha = 0.;
                     toViewController.view.alpha = 1.;
                 } completion:^(BOOL finished) {
