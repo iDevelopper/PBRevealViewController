@@ -1,0 +1,14 @@
+PODS:
+  - PBRevealViewController (0.1.0)
+
+DEPENDENCIES:
+  - PBRevealViewController (from `../`)
+
+EXTERNAL SOURCES:
+  PBRevealViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  PBRevealViewController: 0ecc3421b3a681f34e46091c72021caeec420da7
+
+COCOAPODS: 0.38.2
