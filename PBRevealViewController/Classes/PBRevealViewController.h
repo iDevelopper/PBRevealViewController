@@ -131,8 +131,8 @@ PBRevealToggleAnimationType
 - (IBAction)revealRightView;
 
 // Hide left/right view
-- (void)hideLeftView;
-- (void)hideRightView;
+- (void)hideLeftViewAnimated:(BOOL)animated;
+- (void)hideRightViewAnimated:(BOOL)animated;
 
 // Delegate
 @property (nonatomic,weak) id <PBRevealViewControllerDelegate> delegate;
@@ -205,32 +205,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 // Ask for a block with animation and completion of child controller replacement when pushed, please add the final block to your completion
  
 // Example:
-/*
-- (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock
-{
-    NSLog(@"blockForOperation");
-    
-    CGFloat fromAlpha = fromViewController.view.alpha;
-    if ([toViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *nc = (UINavigationController *)toViewController;
-        if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
-            void (^block)() = ^{
-                toViewController.view.alpha = 0.;
-                [UIView animateWithDuration:1. delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
-                    fromViewController.view.alpha = 0.;
-                    toViewController.view.alpha = 1.;
-                } completion:^(BOOL finished) {
-                    NSLog(@"Custom Completion");
-                    finalBlock();
-                    fromViewController.view.alpha = fromAlpha;
-                }];
-            };
-            return block;
-        }
-    }
-    return nil;
-}
-*/
+// See AppDelegate.m in example
+
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
 
 @end

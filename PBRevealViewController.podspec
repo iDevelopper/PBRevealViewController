@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '0.2.4'
+  s.version          = '0.2.5'
   s.summary          = 'A UIViewController subclass for revealing a left and/or right view controller above a main view controller.'
 
 # This description is used to generate tags and improve search results.
