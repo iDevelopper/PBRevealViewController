@@ -12,6 +12,7 @@
 		3289F1C01D3FE7C500302F5C /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289F1BF1D3FE7C500302F5C /* FourthViewController.m */; };
 		32BAE73E1D40DE320000CE06 /* PushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE73D1D40DE320000CE06 /* PushViewController.m */; };
 		32BAE7411D41FF690000CE06 /* PresentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE7401D41FF690000CE06 /* PresentViewController.m */; };
+		32BAE7441D4337030000CE06 /* FrontTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE7431D4337030000CE06 /* FrontTableViewController.m */; };
 		32F2D7D41D3A326000B295EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F2D7D21D3A326000B295EB /* LaunchScreen.storyboard */; };
 		32F2D7D51D3A326000B295EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32F2D7D31D3A326000B295EB /* Main.storyboard */; };
 		32F2D7E41D3A32D000B295EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7D71D3A32D000B295EB /* AppDelegate.m */; };
@@ -40,6 +41,8 @@
 		32BAE73D1D40DE320000CE06 /* PushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushViewController.m; sourceTree = "<group>"; };
 		32BAE73F1D41FF690000CE06 /* PresentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentViewController.h; sourceTree = "<group>"; };
 		32BAE7401D41FF690000CE06 /* PresentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentViewController.m; sourceTree = "<group>"; };
+		32BAE7421D4337030000CE06 /* FrontTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrontTableViewController.h; sourceTree = "<group>"; };
+		32BAE7431D4337030000CE06 /* FrontTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrontTableViewController.m; sourceTree = "<group>"; };
 		32F2D7D21D3A326000B295EB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32F2D7D31D3A326000B295EB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		32F2D7D61D3A32D000B295EB /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -156,6 +159,8 @@
 				32BAE73D1D40DE320000CE06 /* PushViewController.m */,
 				32BAE73F1D41FF690000CE06 /* PresentViewController.h */,
 				32BAE7401D41FF690000CE06 /* PresentViewController.m */,
+				32BAE7421D4337030000CE06 /* FrontTableViewController.h */,
+				32BAE7431D4337030000CE06 /* FrontTableViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -351,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32F2D7EA1D3A32D000B295EB /* SecondViewController.m in Sources */,
+				32BAE7441D4337030000CE06 /* FrontTableViewController.m in Sources */,
 				32BAE73E1D40DE320000CE06 /* PushViewController.m in Sources */,
 				32BAE7411D41FF690000CE06 /* PresentViewController.m in Sources */,
 				32F2D7E41D3A32D000B295EB /* AppDelegate.m in Sources */,

@@ -38,7 +38,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return 6;
 }
 
 
@@ -68,6 +68,10 @@
             
         case 4:
             cell.textLabel.text = @"Map";
+            break;
+            
+        case 5:
+            cell.textLabel.text = @"Table";
             break;
             
         default:
@@ -122,6 +126,14 @@
         {
             self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeCustom;
             controller = appDelegate.mapController;
+        }
+            break;
+            
+        case 5:
+        {
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
+            UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Table"]];
+            controller = nc;
         }
             break;
             

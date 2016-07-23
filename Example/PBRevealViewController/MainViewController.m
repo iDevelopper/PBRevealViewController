@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *leftButton;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightButton;
 
-//@property (nonatomic) MenuTableViewController *leftMenuController;
-
 @end
 
 @implementation MainViewController

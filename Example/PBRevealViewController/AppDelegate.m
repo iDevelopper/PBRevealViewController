@@ -191,7 +191,38 @@
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock
 {
     NSLog(@"blockForOperation");
-    
+
+    if ([toViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = (UINavigationController *)toViewController;
+        if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
+            void (^block)() = ^{
+                __block CGRect leftFrame = revealController.leftViewController.view.frame;
+                leftFrame.size.width += 50.;
+                __block CGRect mainFrame = toViewController.view.frame;
+                mainFrame.origin.x = revealController.leftViewRevealWidth + 50.;;
+                [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                    revealController.leftViewController.view.frame = leftFrame;
+                } completion:^(BOOL finished) {
+                    toViewController.view.frame = mainFrame;
+                    mainFrame.origin.x = 0.;
+                    
+                    leftFrame.origin.x = -(revealController.leftViewRevealWidth);
+                    leftFrame.size.width = revealController.leftViewRevealWidth;
+                    
+                    [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                        revealController.leftViewController.view.frame = leftFrame;
+                        toViewController.view.frame = mainFrame;
+                    } completion:^(BOOL finished) {
+                        NSLog(@"Custom Completion");
+                        finalBlock();
+                    }];
+                }];
+            };
+            return block;
+        }
+    }
+// OR
+    /*
     CGFloat fromAlpha = fromViewController.view.alpha;
     if ([toViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *)toViewController;
@@ -210,6 +241,7 @@
             return block;
         }
     }
+    */
     return nil;
 }
 

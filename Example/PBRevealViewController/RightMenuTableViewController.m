@@ -107,8 +107,7 @@
         case 3:
         {
             
-            self.revealViewController.rightViewRevealWidth = 0.;
-            self.revealViewController.tapGestureRecognizer.cancelsTouchesInView = NO;
+            [self.revealViewController hideRightViewAnimated:NO];
             UINavigationController *nc = (UINavigationController *)self.revealViewController.mainViewController;
             nc.delegate = self;
             [nc pushViewController:controller animated:YES];
@@ -134,8 +133,7 @@
                                                  toViewController:(UIViewController *)toVC
 {
     if (operation == UINavigationControllerOperationPop) {
-        self.revealViewController.rightViewRevealWidth = 160.;
-        self.revealViewController.tapGestureRecognizer.cancelsTouchesInView = YES;
+        toVC.revealViewController.rightViewRevealWidth = 160.;
     }
     return nil;
 }
