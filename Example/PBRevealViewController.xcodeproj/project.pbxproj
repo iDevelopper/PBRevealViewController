@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C36FC328EB45BD37549A414 /* Pods_PBRevealViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E7C2C314279805B625A522C /* Pods_PBRevealViewController_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3289F1BD1D3F829400302F5C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289F1BC1D3F829400302F5C /* ThirdViewController.m */; };
 		3289F1C01D3FE7C500302F5C /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289F1BF1D3FE7C500302F5C /* FourthViewController.m */; };
 		32BAE73E1D40DE320000CE06 /* PushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE73D1D40DE320000CE06 /* PushViewController.m */; };
@@ -29,6 +28,7 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
+		614566A8C51A1E068D09E937 /* Pods_PBRevealViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,10 +70,10 @@
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* PBRevealViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PBRevealViewController-Prefix.pch"; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8E7C2C314279805B625A522C /* Pods_PBRevealViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8FAE671CCB82291061C4C791 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		BAE15F0E43C00EE4A2E2F73B /* Pods-PBRevealViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
+		748D20AAB09FD2F121F5B3F0 /* Pods-PBRevealViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
+		BC0D3305A5BD0DAFCE179144 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C5B15792058643581984A5D1 /* PBRevealViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PBRevealViewController.podspec; path = ../PBRevealViewController.podspec; sourceTree = "<group>"; };
+		D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,18 +85,18 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				1C36FC328EB45BD37549A414 /* Pods_PBRevealViewController_Example.framework in Frameworks */,
+				614566A8C51A1E068D09E937 /* Pods_PBRevealViewController_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5EA6670618364689D38D9FB7 /* Pods */ = {
+		2A88A831DF5227DBA7162B80 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8FAE671CCB82291061C4C791 /* Pods-PBRevealViewController_Example.debug.xcconfig */,
-				BAE15F0E43C00EE4A2E2F73B /* Pods-PBRevealViewController_Example.release.xcconfig */,
+				BC0D3305A5BD0DAFCE179144 /* Pods-PBRevealViewController_Example.debug.xcconfig */,
+				748D20AAB09FD2F121F5B3F0 /* Pods-PBRevealViewController_Example.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 				6003F593195388D20070C39A /* Example for PBRevealViewController */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				5EA6670618364689D38D9FB7 /* Pods */,
+				2A88A831DF5227DBA7162B80 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -127,7 +127,7 @@
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
-				8E7C2C314279805B625A522C /* Pods_PBRevealViewController_Example.framework */,
+				D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -196,15 +196,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "PBRevealViewController_Example" */;
 			buildPhases = (
-				ADBB11F6D8129411603C2DBD /* Check Pods Manifest.lock */,
 				2F6BD95BC76DD1FC7E6E2ADC /* [CP] Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				4B90D2CBD9E75C8517B99221 /* [CP] Embed Pods Frameworks */,
 				3F924013723FC84151AA8274 /* [CP] Copy Pods Resources */,
-				A24AFE2BD1E6EF692BF36A56 /* Embed Pods Frameworks */,
-				7F29B35F2BC4978F3D326042 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -301,51 +298,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7F29B35F2BC4978F3D326042 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A24AFE2BD1E6EF692BF36A56 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		ADBB11F6D8129411603C2DBD /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -460,7 +412,7 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8FAE671CCB82291061C4C791 /* Pods-PBRevealViewController_Example.debug.xcconfig */;
+			baseConfigurationReference = BC0D3305A5BD0DAFCE179144 /* Pods-PBRevealViewController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -476,7 +428,7 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BAE15F0E43C00EE4A2E2F73B /* Pods-PBRevealViewController_Example.release.xcconfig */;
+			baseConfigurationReference = 748D20AAB09FD2F121F5B3F0 /* Pods-PBRevealViewController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
