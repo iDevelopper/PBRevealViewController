@@ -1,6 +1,0 @@
-framework module Pods_PBRevealViewController_Example {
-  umbrella header "Pods-PBRevealViewController_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module PBRevealViewController {
-  umbrella header "PBRevealViewController-umbrella.h"
-
-  export *
-  module * { export * }
-}
