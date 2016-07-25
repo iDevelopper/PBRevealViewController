@@ -12,15 +12,13 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 
 ## Installation
 
-* To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first or run `pod try PBRevealViewController`.
+To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first or run `pod try PBRevealViewController`.
 
-* The easiest way to install it is by copying the following to your project:
+The easiest way to install it is by copying the following to your project:
+* PBRevealViewController.h
+* PBRevealViewController.m
 
-- PBRevealViewController.h
-- PBRevealViewController.m
-
-* PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install
-the library to your project, simply copy to clipbooard the following as shown below and paste it in your Podfile:
+PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the the pod command as shown below and paste it in your Podfile:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Cocoa.png)
 
