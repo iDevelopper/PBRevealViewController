@@ -759,7 +759,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
         }
     }
-    
     return YES;
 }
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '0.2.5'
+  s.version          = '0.3.0'
   s.summary          = 'A UIViewController subclass for revealing a left and/or right view controller above a main view controller.'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ A category method on UIViewController, `revealViewController`, to get the parent
   s.source           = { :git => 'https://github.com/iDevelopper/PBRevealViewController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '8.3'
 
   s.source_files = 'PBRevealViewController/Classes/**/*'
   
