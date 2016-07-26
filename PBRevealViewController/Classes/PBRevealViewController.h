@@ -13,7 +13,9 @@
 
 #pragma mark - UIViewController(PBRevealViewController) Category
 
-// A category of UIViewController to let childViewControllers easily access their parent PBRevealViewController
+/**
+ *  A category of UIViewController to let childViewControllers easily access their parent PBRevealViewController.
+ */
 @interface UIViewController(PBRevealViewController)
 
 - (PBRevealViewController *)revealViewController;
@@ -22,192 +24,518 @@
 
 #pragma mark - StoryBoard support Classes
 
-// String identifiers to be applied to segues on a storyboard
+/**
+ *  String identifiers to be applied to segues on a storyboard.
+ */
 extern NSString* const PBSegueLeftIdentifier;   // this is @"pb_left"
 extern NSString* const PBSegueMainIdentifier;   // this is @"pb_main"
 extern NSString* const PBSegueRightIdentifier;  // this is @"pb_right"
 
-/* This will allow the class to be defined on a storyboard */
-
-// Use this along with one of the above segue identifiers to segue to the initial state
+/**
+ *  Use this to segue to the initial state. View controller segues are "pb_left", "pb_main" and "pb_right".
+ */
 @interface PBRevealViewControllerSegueSetController : UIStoryboardSegue
 
 @end
 
-// Use this to push a view controller
+/**
+ *  Use this to push a view controller from a storyboard.
+ */
 @interface PBRevealViewControllerSeguePushController : UIStoryboardSegue
 
 @end
 
-// Enum values for toggleAnimationType
-typedef enum
-PBRevealToggleAnimationType
-{
+/**
+ *  Constants for animating when a main view is pushed
+ */
+typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
+    /**
+     *  No anmmation
+     */
     PBRevealToggleAnimationTypeNone,
+    /**
+     *  A transition that dissolves from one view to the next
+     */
     PBRevealToggleAnimationTypeCrossDissolve,
+    /**
+     *  A transition that the main view push the left/right view until it is hidden
+     */
     PBRevealToggleAnimationTypePushSideView,
-    PBRevealToggleAnimationTypeCustom // See delegate methods
-    
-} PBRevealToggleAnimationType;
+    /**
+     *  A transition provided by the delegate methods.
+     *
+     @see
+     -revealController:willAddViewController:forOperation:animated:
+     -revealController:animationBlockForOperation:fromViewController:toViewController:
+     -revealController:completionBlockForOperation:fromViewController:toViewController:
+     -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
+     *
+     @warning If -revealController:blockForOperation:fromViewController:toViewController:finalBlock: is implemented, the others methods are ignored.
+     */
+    PBRevealToggleAnimationTypeCustom
+};
 
 @interface PBRevealViewController : UIViewController
 
-// If storyboard is not used
+/**
+ *  Instantiate a PBRevealViewController class programmatically
+ *
+ *  @param leftViewController  A subclass of UIViewController (optional).
+ *  @param mainViewController  A subclass of UIViewController (required).
+ *  @param rightViewController A subclass of UIViewController (optional).
+ *
+ *  @return PBRevealViewController instance.
+ */
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 
 // Properties
 
-// Defines how much of the left view is shown, default is 260.0f
+/**
+ *  Defines how much of the left view is shown, default is 260.0f
+ */
 @property (nonatomic) CGFloat           leftViewRevealWidth;
-// Defines how much of the right view is shown, default is 160.0f
+
+/**
+ *  Defines how much of the right view is shown, default is 160.0f
+ */
 @property (nonatomic) CGFloat           rightViewRevealWidth;
 
-// Animation type, default is PBRevealToggleAnimationTypeNone
+/**
+ *  Animation type, default is PBRevealToggleAnimationTypeNone.
+ */
 @property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
 
-// Duration for the left reveal animation, default is 0.5f
-// See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+/**
+ *  Duration for the left reveal animation, default is 0.5f.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
 @property (nonatomic) NSTimeInterval    leftToggleAnimationDuration;
+
+/**
+ *  The damping ratio for the spring animation.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
 @property (nonatomic) CGFloat           leftToggleSpringDampingRatio;
+
+/**
+ *  The initial spring velocity.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+*/
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
 
-// Duration for the right reveal animation, default is 0.5f
-// See animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+/**
+ *  Duration for the right reveal animation, default is 0.5f.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
 @property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
+
+/**
+ *  The damping ratio for the spring animation.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
 @property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
+
+/**
+ *  The initial spring velocity.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
 @property (nonatomic) CGFloat           rightToggleSpringVelocity;
 
-// Duration for animated replacement of view controllers, default is 0.25f
+/**
+ *  Duration for animated replacement of view controllers, default is 0.25f.
+ */
 @property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
 
-// Defines the radius of the left view's shadow, default is 5.0f
+/**
+ *  Defines the radius of the left view's shadow, default is 5.0f.
+ */
 @property (nonatomic) CGFloat           leftViewShadowRadius;
-// Defines the radius of the left view's shadow offset default is {0.0f,2.5f}
+
+/**
+ *  Defines the left view's shadow offset, default is {0.0f,2.5f}.
+ */
 @property (nonatomic) CGSize            leftViewShadowOffset;
-// Defines the left view's shadow opacity, default is 1.0f
+
+/**
+ *  Defines the left view's shadow opacity, default is 1.0f.
+ */
 @property (nonatomic) CGFloat           leftViewShadowOpacity;
-// Defines the left view's shadow color, default is blackColor
+
+/**
+ *  Defines the left view's shadow color, default is blackColor
+ */
 @property (nonatomic) UIColor           *leftViewShadowColor;
 
-// Defines the radius of the right view's shadow, default is 5.0f
+/**
+ *  Defines the radius of the lrighteft view's shadow, default is 5.0f.
+ */
 @property (nonatomic) CGFloat           rightViewShadowRadius;
-// Defines the radius of the right view's shadow offset default is {0.0f,2.5f}
+
+/**
+ *  Defines the right view's shadow offset, default is {0.0f,2.5f}.
+ */
 @property (nonatomic) CGSize            rightViewShadowOffset;
-// Defines the right view's shadow opacity, default is 1.0f
+
+/**
+ *  Defines the right view's shadow opacity, default is 1.0f.
+ */
 @property (nonatomic) CGFloat           rightViewShadowOpacity;
-// Defines the right view's shadow color, default is blackColor
+
+/**
+ *  Defines the right view's shadow color, default is blackColor
+ */
 @property (nonatomic) UIColor           *rightViewShadowColor;
 
-// Velocity required for the controller to toggle its state based on a swipe movement, default is 250.0f
+/**
+ *  Velocity required for the controller to toggle its state based on a swipe movement, default is 250.0f.
+ */
 @property (nonatomic) CGFloat           swipeVelocity;
 
-// YES if left or right view is completlely open
-@property (nonatomic) BOOL              isLeftViewOpen;
-@property (nonatomic) BOOL              isRightViewOpen;
+/**
+ *  YES if left view is completlely open (read only).
+ */
+@property (nonatomic, readonly) BOOL    isLeftViewOpen;
 
-// YES if left or right view is panning
-@property (nonatomic) BOOL              isLeftViewDragging;
-@property (nonatomic) BOOL              isRightViewDragging;
+/**
+ *  YES if right view is completlely open (read only).
+ */
+@property (nonatomic, readonly) BOOL    isRightViewOpen;
 
+/**
+ *  YES if left view is panning (read only).
+ */
+@property (nonatomic, readonly) BOOL    isLeftViewDragging;
+
+/**
+ *  YES if right view is panning (read only).
+ */
+@property (nonatomic, readonly) BOOL    isRightViewDragging;
+
+/**
+ *  The default tap gesture recognizer added to the main view. Default behavior will hide the left or right view.
+ */
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
+
+/**
+ *  The default pan gesture recognizer added to the main view. Default behavior will drag the left or right view
+ */
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
-// Optional left view controller, can be nil if not used
+/**
+ *  Optional left view controller, can be nil if not used.
+ */
 @property (nonatomic) UIViewController *leftViewController;
+
+/*!
+ *  Replace the left view controller.
+ *
+ *  @param leftViewController A subclass of UIViewController.
+ *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ */
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated;
 
-// Main view controller, cannot be nil
+/**
+ *  Main view controller, cannot be nil.
+ */
 @property (nonatomic) UIViewController *mainViewController;
+
+/**
+ *  Replace the main view controller.
+ *
+ *  @param mainViewController A subclass of UIViewController.
+ *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ */
 - (void)setMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 
-// Optional right view controller, can be nil if not used
+/**
+ *  Optional right view controller, can be nil if not used.
+ */
 @property (nonatomic) UIViewController *rightViewController;
+
+/*!
+ *  Replace the right view controller.
+ *
+ *  @param rightViewController A subclass of UIViewController.
+ *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ */
 - (void)setRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated;
 
-// Sets the mainViewController pushing it and hide left view controller
+/**
+ *  Sets the mainViewController pushing it and hide left view controller.
+ *
+ *  @param mainViewController A subclass of UIViewController.
+ *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ *
+ */
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 
-// Reveal left/right view
+/**
+ *  Reveal left view.
+ */
 - (IBAction)revealLeftView;
+
+/**
+ *  Reveal right view.
+ */
 - (IBAction)revealRightView;
 
-// Hide left/right view
+/**
+ *  Hide left view.
+ *
+ *  @param animated Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ */
 - (void)hideLeftViewAnimated:(BOOL)animated;
+
+/**
+ *  Hide right view.
+ *
+ *  @param animated Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ */
 - (void)hideRightViewAnimated:(BOOL)animated;
 
-// Delegate
+/**
+ *  The delegate of the PBRevealViewController object.
+ */
 @property (nonatomic,weak) id <PBRevealViewControllerDelegate> delegate;
 
 @end
 
 #pragma mark - PBRevealViewControllerDelegate Protocol
 
-typedef enum
-{
+/**
+ *  Constants for current operation.
+ */
+typedef NS_ENUM(NSInteger, PBRevealControllerOperation) {
+    /**
+     *  None.
+     */
     PBRevealControllerOperationNone,
+    /**
+     *  Replacement of left view controller.
+     */
     PBRevealControllerOperationReplaceLeftController,
+    /**
+     *  Replacement of main view controller.
+     */
     PBRevealControllerOperationReplaceMainController,
+    /**
+     *  Replacement of right view controller.
+     */
     PBRevealControllerOperationReplaceRightController,
+    /**
+     *  Pushing the main view controller from left view controller.
+     */
     PBRevealControllerOperationPushMainControllerFromLeft,
+    /**
+     *  Pushing the main view controller from right view controller.
+     */
     PBRevealControllerOperationPushMainControllerFromRight
-    
-} PBRevealControllerOperation;
+};
 
-typedef enum
-{
+/**
+ *  Direction constants when panning.
+ */
+typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
+    /**
+     *  Panning to left. Should open right view controller.
+     */
     PBRevealControllerPanDirectionLeft,
-    PBRevealControllerPanDirectionRight,
-    
-} PBRevealControllerPanDirection;
+    /**
+     *  Panning to right. Should open left view controller.
+     */
+    PBRevealControllerPanDirectionRight
+};
 
+/**
+ *  Use a reveal view controller delegate (a custom object that implements this protocol) to modify behavior when a view controller is pushed or replaced. All methods are optionals.
+ */
 @protocol PBRevealViewControllerDelegate<NSObject>
 
 @optional
 
-// The following delegate methods will be called before and after the left/right view will shon
+/**
+ *  Ask the delegate if the left view should be shown. Not called while a pan gesture.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The left view controller object.
+ *
+ *  @return YES if the left view controller should be shown, NO otherwise.
+ *
+ *  @see -revealControllerPanGestureShouldBegin:direction:
+ */
 - (BOOL)revealController:(PBRevealViewController *)revealController shouldShowLeftViewController:(UIViewController *)controller;
+
+/**
+ *  Called just before the left view controller is presented.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The left view controller object.
+ */
 - (void)revealController:(PBRevealViewController *)revealController willShowLeftViewController:(UIViewController *)controller;
+
+/**
+ *  Called just after the left view controller is presented.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The left view controller object.
+ */
 - (void)revealController:(PBRevealViewController *)revealController didShowLeftViewController:(UIViewController *)controller;
+
+/**
+ *  Ask the delegate if the right view should be shown. Not called while a pan gesture.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The right view controller object.
+ *
+ *  @return YES if the right view controller should be shown, NO otherwise.
+ *
+ *  @see -revealControllerPanGestureShouldBegin:direction:
+ */
 - (BOOL)revealController:(PBRevealViewController *)revealController shouldShowRightViewController:(UIViewController *)controller;
+
+/**
+ *  Called just before the right view controller is presented.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The right view controller object.
+ */
 - (void)revealController:(PBRevealViewController *)revealController willShowRightViewController:(UIViewController *)controller;
+
+/**
+ *  Called just after the right view controller is presented.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The right view controller object.
+ */
 - (void)revealController:(PBRevealViewController *)revealController didShowRightViewController:(UIViewController *)controller;
 
-// Implement this to return NO when you want the pan gesture recognizer to be ignored
+/**
+ *  Implement this to return NO when you want the pan gesture recognizer to be ignored.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param direction        The panning direction.
+ *
+ *  @return NO if you want the pan gesture recognizer to be ignored, YES otherwise.
+ */
 - (BOOL)revealControllerPanGestureShouldBegin:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
-// Implement this to return NO when you want the tap gesture recognizer to be ignored
+/**
+ *  Implement this to return NO when you want the tap gesture recognizer to be ignored.
+ *
+ *  @param revealController The reveal view controller object.
+ *
+ *  @return NO if you want the tap gesture recognizer to be ignored, YES otherwise.
+ */
 - (BOOL)revealControllerTapGestureShouldBegin:(PBRevealViewController *)revealController;
 
-// Implement this to return YES if you want other gesture recognizer to share touch events with the pan gesture
+/**
+ *  Implement this to return YES if you want other gesture recognizer to share touch events with the pan gesture.
+ *
+ *  @param revealController       The reveal view controller object.
+ *  @param otherGestureRecognizer The other gesture recognizer.
+ *
+ *  @return YES if you want other gesture recognizer to share touch events with the pan gesture.
+ */
 - (BOOL)revealController:(PBRevealViewController *)revealController
 panGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
 
-// Implement this to return YES if you want other gesture recognizer to share touch events with the tap gesture
+/**
+ *  Implement this to return YES if you want other gesture recognizer to share touch events with the tap gesture.
+ *
+ *  @param revealController       The reveal view controller object.
+ *  @param otherGestureRecognizer The other gesture recognizer.
+ *
+ *  @return YES if you want other gesture recognizer to share touch events with the tap gesture.
+ */
 - (BOOL)revealController:(PBRevealViewController *)revealController
 tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
 
 // Called when the gestureRecognizer began, moved and ended
+/**
+ *  Called when the gestureRecognizer began.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param direction        The panning direction.
+ */
 - (void)revealControllerPanGestureBegan:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
+
+/**
+ *  Called when the gestureRecognizer moved.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param direction        The panning direction.
+ */
 - (void)revealControllerPanGestureMoved:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
+
+/**
+ *  Called when the gestureRecognizer ended.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param direction        The panning direction.
+ */
 - (void)revealControllerPanGestureEnded:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
-// Notification of child controller replacement (left, main or right)
+/**
+ *  Called just before child controller replacement (left, main or right).
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param viewController   The child view controller.
+ *  @param operation        The current operation.
+ *  @param animated         YES if you want the replacement to be animated, NO otherwise.
+ */
 - (void)revealController:(PBRevealViewController *)revealController willAddViewController:(UIViewController *)viewController
             forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
+
+/**
+ *  Called just after child controller replacement (left, main or right).
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param viewController   The child view controller.
+ *  @param operation        The current operation.
+ *  @param animated         YES if you want the replacement to be animated, NO otherwise.
+ */
 - (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController
             forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
-// Ask for animation block of child controller replacement when pushed
+/**
+ *  Ask for animation block of child controller replacement when pushed.
+ *
+ *  @param revealController   The reveal view controller object.
+ *  @param operation          The current operation (push from left or push from right).
+ *  @param fromViewController The side view controller (left or right).
+ *  @param toViewController   The main view controller.
+ *
+ *  @return A block to be inserted in the view animation.
+ */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
-// Ask for completion block of child controller replacement when pushed
+/**
+ *  Ask for completion block of the main view controller replacement when pushed.
+ *
+ *  @param revealController   The reveal view controller object.
+ *  @param operation          The current operation (push from left or push from right).
+ *  @param fromViewController The side view controller (left or right).
+ *  @param toViewController   The main view controller.
+ *
+ *  @return A block to be inserted in the view animation completion.
+ */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
-// Ask for a block with animation and completion of child controller replacement when pushed, please add the final block to your completion
- 
-// Example:
-// See AppDelegate.m in example
-
+/**
+ *  Ask for a block with animation and completion of the main controller replacement when pushed, please add the final block to your completion
+ *
+ *  @param revealController   The reveal view controller object.
+ *  @param operation          The current operation (push from left or push from right).
+ *  @param fromViewController The side view controller (left or right).
+ *  @param toViewController   The main view controller.
+ *  @param finalBlock         The final block provided by the reveal view controller object. This block must be inserted in your completion block.
+ */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
 
 @end

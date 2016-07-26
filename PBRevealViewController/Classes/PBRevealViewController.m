@@ -153,36 +153,36 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)initDefaultProperties
 {
-    self.leftViewRevealWidth = 260.0f;
-    self.isLeftViewOpen = NO;
-    self.isRightViewOpen = NO;
-    self.isLeftViewDragging = NO;
-    self.isRightViewDragging = NO;
-    self.rightViewRevealWidth = 160.0f;
-    self.swipeVelocity = 250.0f;
+    _leftViewRevealWidth = 260.0f;
+    _isLeftViewOpen = NO;
+    _isRightViewOpen = NO;
+    _isLeftViewDragging = NO;
+    _isRightViewDragging = NO;
+    _rightViewRevealWidth = 160.0f;
+    _swipeVelocity = 250.0f;
     
-    self.toggleAnimationType = PBRevealToggleAnimationTypeNone;
+    _toggleAnimationType = PBRevealToggleAnimationTypeNone;
     
-    self.leftToggleAnimationDuration = 0.5f;
-    self.leftToggleSpringDampingRatio = 0.8f;
-    self.leftToggleSpringVelocity = 0.5f;
+    _leftToggleAnimationDuration = 0.5f;
+    _leftToggleSpringDampingRatio = 0.8f;
+    _leftToggleSpringVelocity = 0.5f;
     
-    self.rightToggleAnimationDuration = 0.5f;
-    self.rightToggleSpringDampingRatio = 0.8f;
-    self.rightToggleSpringVelocity = 0.5f;
-    self.replaceViewAnimationDuration = 0.25f;
+    _rightToggleAnimationDuration = 0.5f;
+    _rightToggleSpringDampingRatio = 0.8f;
+    _rightToggleSpringVelocity = 0.5f;
+    _replaceViewAnimationDuration = 0.25f;
     
-    self.leftViewShadowRadius = 5.0f;
-    self.leftViewShadowOffset = CGSizeMake(0.0f, 2.5f);
-    self.leftViewShadowOpacity = 1.0f;
-    self.leftViewShadowColor = [UIColor blackColor];
+    _leftViewShadowRadius = 5.0f;
+    _leftViewShadowOffset = CGSizeMake(0.0f, 2.5f);
+    _leftViewShadowOpacity = 1.0f;
+    _leftViewShadowColor = [UIColor blackColor];
 
-    self.rightViewShadowRadius = 5.0f;
-    self.rightViewShadowOffset = CGSizeMake(0.0f, 2.5f);
-    self.rightViewShadowOpacity = 1.0f;
-    self.rightViewShadowColor = [UIColor blackColor];
+    _rightViewShadowRadius = 5.0f;
+    _rightViewShadowOffset = CGSizeMake(0.0f, 2.5f);
+    _rightViewShadowOpacity = 1.0f;
+    _rightViewShadowColor = [UIColor blackColor];
     
-    self.userInteractionStore = YES;
+    _userInteractionStore = YES;
 }
 
 #pragma mark - View lifecycle
@@ -601,7 +601,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [_leftViewController didMoveToParentViewController:self];
         
         void (^completion)() = ^{
-            self.isLeftViewOpen = YES;
+            _isLeftViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             if ([_delegate respondsToSelector:@selector(revealController:didShowLeftViewController:)]) {
                 [_delegate revealController:self didShowLeftViewController:_leftViewController];
@@ -643,7 +643,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [_rightViewController didMoveToParentViewController:self];
         
         void (^completion)() = ^{
-            self.isRightViewOpen = YES;
+            _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             if ([_delegate respondsToSelector:@selector(revealController:didShowRightViewController:)]) {
                 [_delegate revealController:self didShowRightViewController:_rightViewController];
@@ -673,7 +673,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
             _leftViewController.view.frame = frame;
         } completion:^(BOOL finished) {
-            self.isLeftViewOpen = NO;
+            _isLeftViewOpen = NO;
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
             if (_isRightViewOpen) {
                 self.tapGestureRecognizer.cancelsTouchesInView = YES;
@@ -697,7 +697,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [UIView animateWithDuration:duration delay:0. usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
             _rightViewController.view.frame = frame;
         } completion:^(BOOL finished) {
-            self.isRightViewOpen = NO;
+            _isRightViewOpen = NO;
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
             if (_isLeftViewOpen) {
                 self.tapGestureRecognizer.cancelsTouchesInView = YES;
@@ -805,7 +805,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             if ([_delegate respondsToSelector:@selector(revealController:willShowLeftViewController:)]) {
                 [_delegate revealController:self willShowLeftViewController:_leftViewController];
             }
-            self.isLeftViewOpen = YES;
+            _isLeftViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             frame.size.width = _leftViewRevealWidth;
             
@@ -845,7 +845,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             if ([_delegate respondsToSelector:@selector(revealController:willShowRightViewController:)]) {
                 [_delegate revealController:self willShowRightViewController:_rightViewController];
             }
-            self.isRightViewOpen = YES;
+            _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
             frame.size.width = _rightViewRevealWidth;
@@ -899,10 +899,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         case UIGestureRecognizerStateBegan:
             [self notifyPanGestureBegan:position];
             if (velocity > 0 && _leftViewController && !_isRightViewDragging) {
-                self.isLeftViewDragging = YES;
+                _isLeftViewDragging = YES;
             }
             else if (_rightViewController) {
-                self.isRightViewDragging = YES;
+                _isRightViewDragging = YES;
             }
             [self disableUserInteraction];
             if (ABS(velocity) > _swipeVelocity) {
@@ -982,8 +982,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)notifyPanGestureEnded:(CGFloat)position
 {
-    self.isLeftViewDragging = NO;
-    self.isRightViewDragging = NO;
+    _isLeftViewDragging = NO;
+    _isRightViewDragging = NO;
     [self restoreUserInteraction];
     if ([_delegate respondsToSelector:@selector(revealControllerPanGestureEnded:direction:)]) {
         CGFloat velocity = [_panGestureRecognizer velocityInView:_mainViewController.view].x;
