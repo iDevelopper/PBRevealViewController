@@ -232,7 +232,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  */
 @property (nonatomic) UIViewController *leftViewController;
 
-/*!
+/**
  *  Replace the left view controller.
  *
  *  @param leftViewController A subclass of UIViewController.
@@ -258,7 +258,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  */
 @property (nonatomic) UIViewController *rightViewController;
 
-/*!
+/**
  *  Replace the right view controller.
  *
  *  @param rightViewController A subclass of UIViewController.
