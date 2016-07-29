@@ -115,9 +115,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 @interface PBRevealViewController() <UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) UIView *contentView;
-@property (nonatomic) BOOL userInteractionStore;
+@property (strong, nonatomic) UIView    *contentView;
+@property (nonatomic) BOOL              userInteractionStore;
 
+@property (nonatomic) UINavigationBar   *navigationBar;
+@property (nonatomic) CGFloat           leftViewHeight;
+@property (nonatomic) CGFloat           rightViewHeight;
 @end
 
 @implementation PBRevealViewController
@@ -153,34 +156,37 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)initDefaultProperties
 {
+    self.navigationBar = [[UINavigationBar alloc]init];
+
+    _leftPresentViewHierarchically = NO;
     _leftViewRevealWidth = 260.0f;
-    _isLeftViewOpen = NO;
-    _isRightViewOpen = NO;
-    _isLeftViewDragging = NO;
-    _isRightViewDragging = NO;
-    _rightViewRevealWidth = 160.0f;
-    _swipeVelocity = 250.0f;
-    
-    _toggleAnimationType = PBRevealToggleAnimationTypeNone;
-    
     _leftToggleAnimationDuration = 0.5f;
     _leftToggleSpringDampingRatio = 0.8f;
     _leftToggleSpringVelocity = 0.5f;
+    _leftViewShadowRadius = 5.0f;
+    _leftViewShadowOffset = CGSizeMake(0.0f, 5.0f);
+    _leftViewShadowOpacity = 1.0f;
+    _leftViewShadowColor = [UIColor blackColor];
     
+    _rightPresentViewHierarchically = NO;
+    _rightViewRevealWidth = 160.0f;
     _rightToggleAnimationDuration = 0.5f;
     _rightToggleSpringDampingRatio = 0.8f;
     _rightToggleSpringVelocity = 0.5f;
     _replaceViewAnimationDuration = 0.25f;
-    
-    _leftViewShadowRadius = 5.0f;
-    _leftViewShadowOffset = CGSizeMake(0.0f, 2.5f);
-    _leftViewShadowOpacity = 1.0f;
-    _leftViewShadowColor = [UIColor blackColor];
-
     _rightViewShadowRadius = 5.0f;
-    _rightViewShadowOffset = CGSizeMake(0.0f, 2.5f);
+    _rightViewShadowOffset = CGSizeMake(0.0f, 5.0f);
     _rightViewShadowOpacity = 1.0f;
     _rightViewShadowColor = [UIColor blackColor];
+    
+    _swipeVelocity = 250.0f;
+    _toggleAnimationType = PBRevealToggleAnimationTypeNone;
+    
+    _isLeftViewOpen = NO;
+    _isLeftViewDragging = NO;
+    
+    _isRightViewOpen = NO;
+    _isRightViewDragging = NO;
     
     _userInteractionStore = YES;
 }
@@ -243,6 +249,26 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 #pragma mark - Public methods and property accessors
 
+- (void)setLeftPresentViewHierarchically:(BOOL)leftPresentViewHierarchically
+{
+    _leftPresentViewHierarchically = leftPresentViewHierarchically;
+    if (_leftPresentViewHierarchically) {
+        self.leftViewHeight = _leftViewController.view.frame.size.height;
+        CGRect frame = [self adjustsLeftFrame];
+        _leftViewController.view.frame = frame;
+    }
+}
+
+- (void)setRightPresentViewHierarchically:(BOOL)rightPresentViewHierarchically
+{
+    _rightPresentViewHierarchically = rightPresentViewHierarchically;
+    if (_rightPresentViewHierarchically) {
+        self.rightViewHeight = _rightViewController.view.frame.size.height;
+        CGRect frame = [self adjustsRightFrame];
+        _rightViewController.view.frame = frame;
+    }
+}
+
 - (void)setLeftViewRevealWidth:(CGFloat)leftViewRevealWidth
 {
     _leftViewRevealWidth = leftViewRevealWidth;
@@ -292,6 +318,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)reloadLeftShadow
 {
     CALayer *layer = _leftViewController.view.layer;
+    layer.masksToBounds = NO;
     layer.shadowColor = _leftViewShadowColor.CGColor;
     layer.shadowOpacity = _leftViewShadowOpacity;
     layer.shadowOffset = _leftViewShadowOffset;
@@ -325,6 +352,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)reloadRightShadow
 {
     CALayer *layer = _rightViewController.view.layer;
+    layer.masksToBounds = NO;
     layer.shadowColor = _rightViewShadowColor.CGColor;
     layer.shadowOpacity = _rightViewShadowOpacity;
     layer.shadowOffset = _rightViewShadowOffset;
@@ -580,6 +608,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (IBAction)revealLeftView
 {
     if (_leftViewController) {
+        if (_isLeftViewOpen) {
+            return;
+        }
         if (_isRightViewOpen) {
             [self hideRightViewAnimated:YES];
         }
@@ -622,6 +653,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (IBAction)revealRightView
 {
     if (_rightViewController) {
+        if (_isRightViewOpen) {
+            return;
+        }
         if (_isLeftViewOpen) {
             [self hideLeftViewAnimated:YES];
         }
@@ -754,9 +788,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             if ([_delegate revealControllerPanGestureShouldBegin:self direction:velocity > 0 ? PBRevealControllerPanDirectionLeft : PBRevealControllerPanDirectionRight] == NO) {
                 return NO;
             }
-            if (_isLeftViewOpen || _isRightViewOpen) {
-                return NO;
-            }
+        }
+        if (_isLeftViewOpen || _isRightViewOpen) {
+            return NO;
         }
     }
     return YES;
@@ -785,7 +819,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_leftViewController) {
         if (![self.childViewControllers containsObject:_leftViewController]) {
             [self addChildViewController:_leftViewController];
-            _leftViewController.view.frame = CGRectMake(0, 0, 0, [UIScreen mainScreen].bounds.size.height);
+            CGRect frame = _leftViewController.view.frame;
+            frame.origin.x = -(_leftViewRevealWidth);
+            frame.size.width = 0;
+            _leftViewController.view.frame = frame;
             [_contentView addSubview:_leftViewController.view];
             [_leftViewController didMoveToParentViewController:self];
         }
@@ -825,7 +862,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_rightViewController) {
         if (![self.childViewControllers containsObject:_rightViewController]) {
             [self addChildViewController:_rightViewController];
-            _rightViewController.view.frame = CGRectMake([UIScreen mainScreen].bounds.size.width, 0, 0, [UIScreen mainScreen].bounds.size.height);
+            CGRect frame = _rightViewController.view.frame;
+            frame.origin.x = [UIScreen mainScreen].bounds.size.width;
+            frame.size.width = 0;
+            _rightViewController.view.frame = frame;
             [_contentView addSubview:_rightViewController.view];
             [_rightViewController didMoveToParentViewController:self];
         }
@@ -991,7 +1031,27 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
 }
 
-# pragma mark - override rotation
+# pragma mark - Adjusts frames
+
+- (CGRect)adjustsLeftFrame
+{
+    CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
+    CGRect frame = _leftViewController.view.frame;
+    frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
+    frame.size.height = _leftViewHeight - barHeight;
+    return frame;
+}
+
+- (CGRect)adjustsRightFrame
+{
+    CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
+    CGRect frame = _rightViewController.view.frame;
+    frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
+    frame.size.height = _rightViewHeight - barHeight;
+    return frame;
+}
+
+# pragma mark - Override rotation
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
@@ -1001,7 +1061,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
          
          frame = _leftViewController.view.frame;
          frame.size.width = _leftViewRevealWidth;
-         frame.size.height = [UIScreen mainScreen].bounds.size.height;
+         if ([_leftViewController isKindOfClass:[UITableViewController class]]) {
+             frame.size.height = [UIScreen mainScreen].bounds.size.height;
+         }
+         if (_leftPresentViewHierarchically) {
+             frame = [self adjustsLeftFrame];
+         }
          _leftViewController.view.frame = frame;
          
          frame = _rightViewController.view.frame;
@@ -1010,7 +1075,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
              frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
          }
          frame.size.width = _rightViewRevealWidth;
-         frame.size.height = [UIScreen mainScreen].bounds.size.height;
+         if ([_rightViewController isKindOfClass:[UITableViewController class]]) {
+             frame.size.height = [UIScreen mainScreen].bounds.size.height;
+         }
+         if (_rightPresentViewHierarchically) {
+             frame = [self adjustsRightFrame];
+         }
          _rightViewController.view.frame = frame;
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)

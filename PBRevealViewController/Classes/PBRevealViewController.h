@@ -64,11 +64,10 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
     /**
      *  A transition provided by the delegate methods.
      *
-     @see
-     -revealController:willAddViewController:forOperation:animated:
-     -revealController:animationBlockForOperation:fromViewController:toViewController:
-     -revealController:completionBlockForOperation:fromViewController:toViewController:
-     -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
+     @see -revealController:willAddViewController:forOperation:animated:
+     @see -revealController:animationBlockForOperation:fromViewController:toViewController:
+     @see -revealController:completionBlockForOperation:fromViewController:toViewController:
+     @see -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
      *
      @warning If -revealController:blockForOperation:fromViewController:toViewController:finalBlock: is implemented, the others methods are ignored.
      */
@@ -88,22 +87,15 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  */
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 
-// Properties
+/**
+ * If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
+ */
+@property (nonatomic) BOOL              leftPresentViewHierarchically;
 
 /**
  *  Defines how much of the left view is shown, default is 260.0f
  */
 @property (nonatomic) CGFloat           leftViewRevealWidth;
-
-/**
- *  Defines how much of the right view is shown, default is 160.0f
- */
-@property (nonatomic) CGFloat           rightViewRevealWidth;
-
-/**
- *  Animation type, default is PBRevealToggleAnimationTypeNone.
- */
-@property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
 
 /**
  *  Duration for the left reveal animation, default is 0.5f.
@@ -113,44 +105,18 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) NSTimeInterval    leftToggleAnimationDuration;
 
 /**
- *  The damping ratio for the spring animation.
+ *  The damping ratio for the spring animation, default is 0.8f.
  *
  *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) CGFloat           leftToggleSpringDampingRatio;
 
 /**
- *  The initial spring velocity.
+ *  The initial spring velocity, default is 0.5f.
  *
  *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 */
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
-
-/**
- *  Duration for the right reveal animation, default is 0.5f.
- *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
- */
-@property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
-
-/**
- *  The damping ratio for the spring animation.
- *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
- */
-@property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
-
-/**
- *  The initial spring velocity.
- *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
- */
-@property (nonatomic) CGFloat           rightToggleSpringVelocity;
-
-/**
- *  Duration for animated replacement of view controllers, default is 0.25f.
- */
-@property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
 
 /**
  *  Defines the radius of the left view's shadow, default is 5.0f.
@@ -158,7 +124,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) CGFloat           leftViewShadowRadius;
 
 /**
- *  Defines the left view's shadow offset, default is {0.0f,2.5f}.
+ *  Defines the left view's shadow offset, default is {0.0f,5.0f}.
  */
 @property (nonatomic) CGSize            leftViewShadowOffset;
 
@@ -173,12 +139,48 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) UIColor           *leftViewShadowColor;
 
 /**
+ * If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
+ */
+@property (nonatomic) BOOL              rightPresentViewHierarchically;
+
+/**
+ *  Defines how much of the right view is shown, default is 160.0f
+ */
+@property (nonatomic) CGFloat           rightViewRevealWidth;
+
+/**
+ *  Duration for the right reveal animation, default is 0.5f.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
+@property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
+
+/**
+ *  The damping ratio for the spring animation, default is 0.8f.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
+@property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
+
+/**
+ *  The initial spring velocity, default is 0.5f.
+ *
+ *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ */
+@property (nonatomic) CGFloat           rightToggleSpringVelocity;
+
+/**
+ *  Duration for animated replacement of view controllers, default is 0.25f.
+ */
+@property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
+
+/**
  *  Defines the radius of the lrighteft view's shadow, default is 5.0f.
  */
 @property (nonatomic) CGFloat           rightViewShadowRadius;
 
 /**
- *  Defines the right view's shadow offset, default is {0.0f,2.5f}.
+ *  Defines the right view's shadow offset, default is {0.0f,5.0f}.
  */
 @property (nonatomic) CGSize            rightViewShadowOffset;
 
@@ -191,6 +193,11 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  Defines the right view's shadow color, default is blackColor
  */
 @property (nonatomic) UIColor           *rightViewShadowColor;
+
+/**
+ *  Animation type, default is PBRevealToggleAnimationTypeNone.
+ */
+@property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
 
 /**
  *  Velocity required for the controller to toggle its state based on a swipe movement, default is 250.0f.
