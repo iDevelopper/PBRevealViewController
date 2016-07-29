@@ -12,11 +12,13 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 
 ## Installation
 
-To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first or run `pod try PBRevealViewController`.
+To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first.
+
+You can also run `pod try PBRevealViewController` in your Terminal from anywhere.
 
 The easiest way to install it is by copying the following to your project:
-* PBRevealViewController.h
-* PBRevealViewController.m
+- PBRevealViewController.h
+- PBRevealViewController.m
 
 PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the the pod command as shown below and paste it in your Podfile:
 
@@ -44,13 +46,11 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 ## Usage
 
 On your project:
-
 * Initialize an instance of a PBRevealViewController passing in a "left" (optinal), "main" (required) and "right" (optional) view controllers.
 * Use the PBRevealViewController instance in your code as you would use any view controller.
 * Deploy as the application window rootViewController, or as a child of other containment controllers.
 * You can leave panGestureRecognized and tapGestureRecognizer provided by the PBRevealViewController as they are for the default behavior or you can add them to a suitable view on your "main" view controller. For example add the panGestureRecognizer to a navigationBar on the viewDidLoad method of your main view controller.
 * Cancel the gestureRecoGnized provided by the PBRevealViewController:
-
 ```objective-c
 - (BOOL)revealControllerTapGestureShouldBegin:
 - (BOOL)revealControllerPanGestureShouldBegin:direction:
@@ -60,7 +60,6 @@ On your project:
 ## Basic API Description
 
 ### Initializing a PBRevealViewController programmatically:
-
 ```objective-c
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 ```
@@ -74,7 +73,6 @@ On your project:
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 ```
 * replace a view controller:
-
 ```objective-c
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated;
 - (void)setMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
