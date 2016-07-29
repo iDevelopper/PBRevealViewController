@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3289F1BD1D3F829400302F5C /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289F1BC1D3F829400302F5C /* ThirdViewController.m */; };
 		3289F1C01D3FE7C500302F5C /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3289F1BF1D3FE7C500302F5C /* FourthViewController.m */; };
+		32A5AEF41D4BA7D0005D6DB4 /* CHANGELOG.md in Sources */ = {isa = PBXBuildFile; fileRef = 32A5AEF31D4BA7D0005D6DB4 /* CHANGELOG.md */; };
 		32BAE73E1D40DE320000CE06 /* PushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE73D1D40DE320000CE06 /* PushViewController.m */; };
 		32BAE7411D41FF690000CE06 /* PresentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE7401D41FF690000CE06 /* PresentViewController.m */; };
 		32BAE7441D4337030000CE06 /* FrontTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BAE7431D4337030000CE06 /* FrontTableViewController.m */; };
@@ -37,6 +38,7 @@
 		3289F1BC1D3F829400302F5C /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
 		3289F1BE1D3FE7C500302F5C /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
 		3289F1BF1D3FE7C500302F5C /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
+		32A5AEF31D4BA7D0005D6DB4 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.md; path = ../CHANGELOG.md; sourceTree = "<group>"; };
 		32BAE73C1D40DE320000CE06 /* PushViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushViewController.h; sourceTree = "<group>"; };
 		32BAE73D1D40DE320000CE06 /* PushViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushViewController.m; sourceTree = "<group>"; };
 		32BAE73F1D41FF690000CE06 /* PresentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentViewController.h; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 			children = (
 				C5B15792058643581984A5D1 /* PBRevealViewController.podspec */,
 				208C2803DE3FE9DA0D156CDB /* README.md */,
+				32A5AEF31D4BA7D0005D6DB4 /* CHANGELOG.md */,
 				499AB3F78AC4DE8D8421DCDB /* LICENSE */,
 			);
 			name = "Podspec Metadata";
@@ -312,6 +315,7 @@
 				32BAE73E1D40DE320000CE06 /* PushViewController.m in Sources */,
 				32BAE7411D41FF690000CE06 /* PresentViewController.m in Sources */,
 				32F2D7E41D3A32D000B295EB /* AppDelegate.m in Sources */,
+				32A5AEF41D4BA7D0005D6DB4 /* CHANGELOG.md in Sources */,
 				32F2D7E81D3A32D000B295EB /* MenuTableViewController2.m in Sources */,
 				32F2D7E61D3A32D000B295EB /* MapViewController.m in Sources */,
 				32F2D7E91D3A32D000B295EB /* RightMenuTableViewController.m in Sources */,
