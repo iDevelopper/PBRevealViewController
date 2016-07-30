@@ -119,8 +119,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 @property (nonatomic) BOOL              userInteractionStore;
 
 @property (nonatomic) UINavigationBar   *navigationBar;
-@property (nonatomic) CGFloat           leftViewHeight;
-@property (nonatomic) CGFloat           rightViewHeight;
+
 @end
 
 @implementation PBRevealViewController
@@ -253,7 +252,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     _leftPresentViewHierarchically = leftPresentViewHierarchically;
     if (_leftPresentViewHierarchically) {
-        self.leftViewHeight = _leftViewController.view.frame.size.height;
         CGRect frame = [self adjustsLeftFrame];
         _leftViewController.view.frame = frame;
     }
@@ -263,7 +261,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     _rightPresentViewHierarchically = rightPresentViewHierarchically;
     if (_rightPresentViewHierarchically) {
-        self.rightViewHeight = _rightViewController.view.frame.size.height;
         CGRect frame = [self adjustsRightFrame];
         _rightViewController.view.frame = frame;
     }
@@ -1038,7 +1035,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
     CGRect frame = _leftViewController.view.frame;
     frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
-    frame.size.height = _leftViewHeight - barHeight;
+    frame.size.height = self.view.frame.size.height - barHeight - ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
     return frame;
 }
 
@@ -1047,7 +1044,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
     CGRect frame = _rightViewController.view.frame;
     frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
-    frame.size.height = _rightViewHeight - barHeight;
+    frame.size.height = self.view.frame.size.height - barHeight - ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
     return frame;
 }
 
@@ -1059,28 +1056,32 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
      {
          CGRect frame;
          
-         frame = _leftViewController.view.frame;
-         frame.size.width = _leftViewRevealWidth;
-         if ([_leftViewController isKindOfClass:[UITableViewController class]]) {
-             frame.size.height = [UIScreen mainScreen].bounds.size.height;
-         }
          if (_leftPresentViewHierarchically) {
              frame = [self adjustsLeftFrame];
          }
+         else {
+             frame = _leftViewController.view.frame;
+             frame.size.height = self.view.frame.size.height;
+         }
+         
+         frame.size.width = _leftViewRevealWidth;
+         
          _leftViewController.view.frame = frame;
          
-         frame = _rightViewController.view.frame;
+         if (_rightPresentViewHierarchically) {
+             frame = [self adjustsRightFrame];
+         }
+         else {
+             frame = _rightViewController.view.frame;
+             frame.size.height = self.view.frame.size.height;
+         }
+         
          frame.origin.x = [UIScreen mainScreen].bounds.size.width;
          if (_isRightViewOpen) {
              frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
          }
          frame.size.width = _rightViewRevealWidth;
-         if ([_rightViewController isKindOfClass:[UITableViewController class]]) {
-             frame.size.height = [UIScreen mainScreen].bounds.size.height;
-         }
-         if (_rightPresentViewHierarchically) {
-             frame = [self adjustsRightFrame];
-         }
+         
          _rightViewController.view.frame = frame;
          
      } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)

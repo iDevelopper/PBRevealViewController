@@ -12,15 +12,15 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 
 ## Installation
 
-To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first.
+### To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first.
 
 You can also run `pod try PBRevealViewController` in your Terminal from anywhere.
 
-The easiest way to install it is by copying the following to your project:
-- PBRevealViewController.h
-- PBRevealViewController.m
+### The easiest way to install it is by copying the following to your project:
+* PBRevealViewController.h
+* PBRevealViewController.m
 
-PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the the pod command as shown below and paste it in your Podfile:
+### PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the the pod command as shown below and paste it in your Podfile:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Cocoa.png)
 
@@ -68,7 +68,6 @@ On your project:
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Story.png)
 
 * Pushing a main view controller:
-
 ```objective-c
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 ```

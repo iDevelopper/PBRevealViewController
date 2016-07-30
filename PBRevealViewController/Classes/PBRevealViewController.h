@@ -64,12 +64,12 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
     /**
      *  A transition provided by the delegate methods.
      *
-     @see -revealController:willAddViewController:forOperation:animated:
-     @see -revealController:animationBlockForOperation:fromViewController:toViewController:
-     @see -revealController:completionBlockForOperation:fromViewController:toViewController:
-     @see -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
+     *  @see    -revealController:willAddViewController:forOperation:animated:
+     *  @see    -revealController:animationBlockForOperation:fromViewController:toViewController:
+     *  @see    -revealController:completionBlockForOperation:fromViewController:toViewController:
+     *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
      *
-     @warning If -revealController:blockForOperation:fromViewController:toViewController:finalBlock: is implemented, the others methods are ignored.
+     *  @warning    If -revealController:blockForOperation:fromViewController:toViewController:finalBlock: is implemented, the others methods are ignored.
      */
     PBRevealToggleAnimationTypeCustom
 };
@@ -100,21 +100,21 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 /**
  *  Duration for the left reveal animation, default is 0.5f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) NSTimeInterval    leftToggleAnimationDuration;
 
 /**
  *  The damping ratio for the spring animation, default is 0.8f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) CGFloat           leftToggleSpringDampingRatio;
 
 /**
  *  The initial spring velocity, default is 0.5f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
 */
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
 
@@ -151,21 +151,21 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 /**
  *  Duration for the right reveal animation, default is 0.5f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) NSTimeInterval    rightToggleAnimationDuration;
 
 /**
  *  The damping ratio for the spring animation, default is 0.8f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) CGFloat           rightToggleSpringDampingRatio;
 
 /**
  *  The initial spring velocity, default is 0.5f.
  *
- *  @see -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
+ *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) CGFloat           rightToggleSpringVelocity;
 
@@ -244,6 +244,8 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *
  *  @param leftViewController A subclass of UIViewController.
  *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ *
+ *  @see    -setRightViewController:animated:
  */
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated;
 
@@ -269,7 +271,9 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  Replace the right view controller.
  *
  *  @param rightViewController A subclass of UIViewController.
- *  @param animated           Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ *  @param animated            Specify YES to animate the replacement or NO if you do not want the replacement to be animated.
+ *
+ *  @see    -setLeftViewController:animated:
  */
 - (void)setRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated;
 
@@ -283,12 +287,12 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 
 /**
- *  Reveal left view.
+ *  Reveal left view. Does nothing if the left view is already open. Hide the right view if it is open and show the left view.
  */
 - (IBAction)revealLeftView;
 
 /**
- *  Reveal right view.
+ *  Reveal right view. Does nothing if the right view is already open. Hide the left view if it is open and show the right view.
  */
 - (IBAction)revealRightView;
 
@@ -374,7 +378,7 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *
  *  @return YES if the left view controller should be shown, NO otherwise.
  *
- *  @see -revealControllerPanGestureShouldBegin:direction:
+ *  @see    -revealControllerPanGestureShouldBegin:direction:
  */
 - (BOOL)revealController:(PBRevealViewController *)revealController shouldShowLeftViewController:(UIViewController *)controller;
 
@@ -402,7 +406,7 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *
  *  @return YES if the right view controller should be shown, NO otherwise.
  *
- *  @see -revealControllerPanGestureShouldBegin:direction:
+ *  @see    -revealControllerPanGestureShouldBegin:direction:
  */
 - (BOOL)revealController:(PBRevealViewController *)revealController shouldShowRightViewController:(UIViewController *)controller;
 
@@ -495,9 +499,10 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param viewController   The child view controller.
  *  @param operation        The current operation.
  *  @param animated         YES if you want the replacement to be animated, NO otherwise.
+ *
+ *  @see    -revealController:didAddViewController:forOperation:animated:
  */
-- (void)revealController:(PBRevealViewController *)revealController willAddViewController:(UIViewController *)viewController
-            forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
+- (void)revealController:(PBRevealViewController *)revealController willAddViewController:(UIViewController *)viewController forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
 /**
  *  Called just after child controller replacement (left, main or right).
@@ -506,9 +511,10 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param viewController   The child view controller.
  *  @param operation        The current operation.
  *  @param animated         YES if you want the replacement to be animated, NO otherwise.
+ *
+ *  @see    -revealController:willAddViewController:forOperation:animated:
  */
-- (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController
-            forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
+- (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
 /**
  *  Ask for animation block of child controller replacement when pushed.
@@ -519,6 +525,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param toViewController   The main view controller.
  *
  *  @return A block to be inserted in the view animation.
+ *
+ *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:(void(^)(void))finalBlock:
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
@@ -531,6 +539,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param toViewController   The main view controller.
  *
  *  @return A block to be inserted in the view animation completion.
+ *
+ *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:(void(^)(void))finalBlock:
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
@@ -542,6 +552,9 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param fromViewController The side view controller (left or right).
  *  @param toViewController   The main view controller.
  *  @param finalBlock         The final block provided by the reveal view controller object. This block must be inserted in your completion block.
+ *
+ *  @see    -revealController:animationBlockForOperation:fromViewController:toViewController:
+ *  @see    -revealController:completionBlockForOperation:fromViewController:toViewController:
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
 
