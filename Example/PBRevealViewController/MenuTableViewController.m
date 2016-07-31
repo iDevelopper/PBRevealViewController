@@ -41,7 +41,6 @@
     return 6;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
@@ -77,7 +76,6 @@
         default:
             break;
     }
-    
     return cell;
 }
 
@@ -116,7 +114,7 @@
             
         case 3:
         {
-            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeSpring;
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Fourth"]];
             controller = nc;
         }
@@ -131,7 +129,7 @@
             
         case 5:
         {
-            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeSpring;
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Table"]];
             controller = nc;
         }
