@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.5
+
+* Git update
+
 ## 0.3.4
 
 * Add a toggle animation type: PBRevealToggleAnimationTypeSpring.

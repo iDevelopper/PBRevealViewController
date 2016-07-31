@@ -54,13 +54,19 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
      */
     PBRevealToggleAnimationTypeNone,
     /**
-     *  A transition that dissolves from one view to the next
+     *  A transition that dissolves from one view to the next.
      */
     PBRevealToggleAnimationTypeCrossDissolve,
     /**
-     *  A transition that the main view push the left/right view until it is hidden
+     *  A transition that the main view push the left/right view until it is hidden.
      */
     PBRevealToggleAnimationTypePushSideView,
+    /**
+     *  A transition that the side view move a little to right or left by the value of leftRevealOverdraw or rightRevealOverdraw before the main view push the left/right view until it is hidden.
+     *
+     *  @see 
+     */
+    PBRevealToggleAnimationTypeSpring,
     /**
      *  A transition provided by the delegate methods.
      *
@@ -198,6 +204,16 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  Animation type, default is PBRevealToggleAnimationTypeNone.
  */
 @property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
+
+/**
+ *  Defines how much of an overdraw can occur when pushing further than leftViewRevealWidth, default is 60.
+ */
+@property (nonatomic) CGFloat leftViewRevealOverdraw;
+
+/**
+ *  Defines how much of an overdraw can occur when pushing further than rightViewRevealWidth, default is 60.
+ */
+@property (nonatomic) CGFloat rightViewRevealOverdraw;
 
 /**
  *  Velocity required for the controller to toggle its state based on a swipe movement, default is 250.0f.
@@ -526,7 +542,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @return A block to be inserted in the view animation.
  *
- *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:(void(^)(void))finalBlock:
+ *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
@@ -540,7 +556,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @return A block to be inserted in the view animation completion.
  *
- *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:(void(^)(void))finalBlock:
+ *  @see    -revealController:blockForOperation:fromViewController:toViewController:finalBlock:
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 

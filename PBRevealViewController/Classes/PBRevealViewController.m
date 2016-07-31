@@ -181,6 +181,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _swipeVelocity = 250.0f;
     _toggleAnimationType = PBRevealToggleAnimationTypeNone;
     
+    _leftViewRevealOverdraw = 60.0f;
+    _rightViewRevealOverdraw = 60.0f;
+    
     _isLeftViewOpen = NO;
     _isLeftViewDragging = NO;
     
@@ -559,11 +562,46 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         sideFrame = sideViewController.view.frame;
         sideFrame.origin.x = (_isLeftViewOpen ? -(_leftViewRevealWidth) : +[UIScreen mainScreen].bounds.size.width);
         
-        [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+        [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
             toViewController.view.frame = mainFrame;
             sideViewController.view.frame = sideFrame;
         } completion:^(BOOL finished) {
             completion();
+        }];
+    }
+    
+    else if (_toggleAnimationType == PBRevealToggleAnimationTypeSpring) {
+        UIViewController *sideViewController;
+        __block CGRect mainFrame;
+        __block CGRect sideFrame;
+        
+        sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
+
+        sideFrame = sideViewController.view.frame;
+        sideFrame.origin.x += (_isLeftViewOpen ? 0. : -(_rightViewRevealOverdraw));
+        sideFrame.size.width += (_isLeftViewOpen ? _leftViewRevealOverdraw : _rightViewRevealOverdraw);
+        
+        mainFrame = toViewController.view.frame;
+        mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth + _leftViewRevealOverdraw : - (_rightViewRevealWidth) - _rightViewRevealOverdraw);
+        
+        toViewController.view.hidden = YES;
+        [UIView animateWithDuration:(duration / 2) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+            sideViewController.view.frame = sideFrame;
+        } completion:^(BOOL finished) {
+            toViewController.view.frame = mainFrame;
+            mainFrame.origin.x = 0.;
+            
+            sideFrame.origin.x = (_isLeftViewOpen ? -(_leftViewRevealWidth) : +[UIScreen mainScreen].bounds.size.width);
+            sideFrame.size.width = (_isLeftViewOpen ? _leftViewRevealWidth : _rightViewRevealWidth);
+            
+            toViewController.view.hidden = NO;
+            [UIView animateWithDuration:(duration / 2) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+                sideViewController.view.frame = sideFrame;
+                toViewController.view.frame = mainFrame;
+            } completion:^(BOOL finished) {
+                NSLog(@"Custom Completion");
+                completion();
+            }];
         }];
     }
     
@@ -590,7 +628,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             if (customBlock) customBlock();
         }
         else {
-            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 if (customAnimation) customAnimation();
             } completion:^(BOOL finished) {
                 completion();
@@ -639,7 +677,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         frame.origin.x = 0;
         frame.size.width = _leftViewRevealWidth;
     
-        [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
+        [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
             _leftViewController.view.frame = frame;
         } completion:^(BOOL finished) {
             completion();
@@ -684,7 +722,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
         frame.size.width = _rightViewRevealWidth;
 
-        [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options: UIViewAnimationOptionTransitionNone animations:^{
+        [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options: UIViewAnimationOptionLayoutSubviews animations:^{
             _rightViewController.view.frame = frame;
         } completion:^(BOOL finished) {
             completion();
@@ -701,7 +739,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         frame.origin.x = -(_leftViewRevealWidth);
         frame.size.width = _leftViewRevealWidth;
         
-        [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
+        [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
             _leftViewController.view.frame = frame;
         } completion:^(BOOL finished) {
             _isLeftViewOpen = NO;
@@ -725,7 +763,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         frame.origin.x = +[UIScreen mainScreen].bounds.size.width;
         frame.size.width = _rightViewRevealWidth;
         
-        [UIView animateWithDuration:duration delay:0. usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
+        [UIView animateWithDuration:duration delay:0. usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
             _rightViewController.view.frame = frame;
         } completion:^(BOOL finished) {
             _isRightViewOpen = NO;
@@ -1076,9 +1114,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
              frame.size.height = self.view.frame.size.height;
          }
          
-         frame.origin.x = [UIScreen mainScreen].bounds.size.width;
+         frame.origin.x = size.width;
          if (_isRightViewOpen) {
-             frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+             frame.origin.x = size.width - _rightViewRevealWidth;
          }
          frame.size.width = _rightViewRevealWidth;
          
