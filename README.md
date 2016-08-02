@@ -10,6 +10,8 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif)
 
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
+
 ## Installation
 
 To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first.
@@ -20,7 +22,7 @@ The easiest way to install it is by copying the following to your project:
 * PBRevealViewController.h
 * PBRevealViewController.m
 
-PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the the pod command as shown below and paste it in your Podfile:
+PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the pod command as shown below and paste it in your Podfile:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Cocoa.png)
 
@@ -59,11 +61,11 @@ On your project:
 
 ## Basic API Description
 
-### Initializing a PBRevealViewController programmatically:
+* Initializing a PBRevealViewController programmatically:
 ```objective-c
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 ```
-### Initializing a PBRevealViewController with Storyboard:
+* Initializing a PBRevealViewController with Storyboard:
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Story.png)
 

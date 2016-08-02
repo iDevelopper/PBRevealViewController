@@ -583,9 +583,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         mainFrame = toViewController.view.frame;
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth + _leftViewRevealOverdraw : - (_rightViewRevealWidth) - _rightViewRevealOverdraw);
-        
+
         toViewController.view.hidden = YES;
-        [UIView animateWithDuration:(duration / 2) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [UIView animateWithDuration:(duration) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
             sideViewController.view.frame = sideFrame;
         } completion:^(BOOL finished) {
             toViewController.view.frame = mainFrame;
@@ -595,11 +595,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             sideFrame.size.width = (_isLeftViewOpen ? _leftViewRevealWidth : _rightViewRevealWidth);
             
             toViewController.view.hidden = NO;
-            [UIView animateWithDuration:(duration / 2) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+            [UIView animateWithDuration:(duration) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 sideViewController.view.frame = sideFrame;
                 toViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
-                NSLog(@"Custom Completion");
                 completion();
             }];
         }];
