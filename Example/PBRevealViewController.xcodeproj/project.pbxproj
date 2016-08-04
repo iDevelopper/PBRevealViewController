@@ -22,13 +22,13 @@
 		32F2D7E91D3A32D000B295EB /* RightMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7E11D3A32D000B295EB /* RightMenuTableViewController.m */; };
 		32F2D7EA1D3A32D000B295EB /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32F2D7E31D3A32D000B295EB /* SecondViewController.m */; };
 		32F2D7EC1D3A34EA00B295EB /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F2D7EB1D3A34EA00B295EB /* MapKit.framework */; };
+		4504AA94C55FBFA90491C3B4 /* libPods-PBRevealViewController_Example.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 701AD51B0E87DEF4F4EC44BC /* libPods-PBRevealViewController_Example.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
-		614566A8C51A1E068D09E937 /* Pods_PBRevealViewController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,10 +71,10 @@
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* PBRevealViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PBRevealViewController-Prefix.pch"; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		701AD51B0E87DEF4F4EC44BC /* libPods-PBRevealViewController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PBRevealViewController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		748D20AAB09FD2F121F5B3F0 /* Pods-PBRevealViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BC0D3305A5BD0DAFCE179144 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		C5B15792058643581984A5D1 /* PBRevealViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PBRevealViewController.podspec; path = ../PBRevealViewController.podspec; sourceTree = "<group>"; };
-		D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PBRevealViewController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +86,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				614566A8C51A1E068D09E937 /* Pods_PBRevealViewController_Example.framework in Frameworks */,
+				4504AA94C55FBFA90491C3B4 /* libPods-PBRevealViewController_Example.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +128,7 @@
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
-				D6C2BB1B90E8CF42C31FF468 /* Pods_PBRevealViewController_Example.framework */,
+				701AD51B0E87DEF4F4EC44BC /* libPods-PBRevealViewController_Example.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -1,7 +1,14 @@
-use_frameworks!
+#use_frameworks!
+
+workspace 'PBRevealViewController.xcworkspace'
 
 target 'PBRevealViewController_Example' do
   pod 'PBRevealViewController', :path => '../'
 
 end
 
+target 'Example2' do
+    project '../Example2/Example2'
+    pod 'PBRevealViewController', :path => '../'
+    
+end
