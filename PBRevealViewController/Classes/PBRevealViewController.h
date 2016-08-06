@@ -104,7 +104,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) CGFloat           leftViewRevealWidth;
 
 /**
- *  Duration for the left reveal animation, default is 0.5f.
+ *  Duration for the left reveal/push animation, default is 0.5f.
  *
  *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
@@ -155,7 +155,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) CGFloat           rightViewRevealWidth;
 
 /**
- *  Duration for the right reveal animation, default is 0.5f.
+ *  Duration for the right reveal/push animation, default is 0.5f.
  *
  *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
@@ -174,11 +174,6 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  @see    -animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:
  */
 @property (nonatomic) CGFloat           rightToggleSpringVelocity;
-
-/**
- *  Duration for animated replacement of view controllers, default is 0.25f.
- */
-@property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
 
 /**
  *  Defines the radius of the lrighteft view's shadow, default is 5.0f.
@@ -206,14 +201,19 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) PBRevealToggleAnimationType toggleAnimationType;
 
 /**
- *  Defines how much of an overdraw can occur when pushing further than leftViewRevealWidth, default is 60.
+ *  Defines how much of an overdraw can occur when pushing further than leftViewRevealWidth, default is 60.0f.
  */
 @property (nonatomic) CGFloat leftViewRevealOverdraw;
 
 /**
- *  Defines how much of an overdraw can occur when pushing further than rightViewRevealWidth, default is 60.
+ *  Defines how much of an overdraw can occur when pushing further than rightViewRevealWidth, default is 60.0f.
  */
 @property (nonatomic) CGFloat rightViewRevealOverdraw;
+
+/**
+ *  Duration for animated replacement of view controllers, default is 0.25f.
+ */
+@property (nonatomic) NSTimeInterval    replaceViewAnimationDuration;
 
 /**
  *  Velocity required for the controller to toggle its state based on a swipe movement, default is 250.0f.

@@ -172,11 +172,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _rightToggleAnimationDuration = 0.5f;
     _rightToggleSpringDampingRatio = 0.8f;
     _rightToggleSpringVelocity = 0.5f;
-    _replaceViewAnimationDuration = 0.25f;
     _rightViewShadowRadius = 5.0f;
     _rightViewShadowOffset = CGSizeMake(0.0f, 5.0f);
     _rightViewShadowOpacity = 1.0f;
     _rightViewShadowColor = [UIColor blackColor];
+    
+    _replaceViewAnimationDuration = 0.25f;
     
     _swipeVelocity = 250.0f;
     _toggleAnimationType = PBRevealToggleAnimationTypeNone;
@@ -479,7 +480,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)_pushFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
-    NSTimeInterval duration = animated ? _replaceViewAnimationDuration : 0.0;
+    NSTimeInterval duration = animated ? (_isLeftViewOpen ? _leftToggleAnimationDuration : _rightToggleAnimationDuration) : 0.0;
     CGFloat fromAlpha = fromViewController.view.alpha;
     CGFloat toAlpha = toViewController.view.alpha;
     
@@ -520,7 +521,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     };
     
     if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-        toViewController.view.alpha = 0.;
+        toViewController.view.alpha = 0.5;
     }
     
     if (_isLeftViewOpen) {
@@ -585,7 +586,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth + _leftViewRevealOverdraw : - (_rightViewRevealWidth) - _rightViewRevealOverdraw);
 
         toViewController.view.hidden = YES;
-        [UIView animateWithDuration:(duration) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+        [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
             sideViewController.view.frame = sideFrame;
         } completion:^(BOOL finished) {
             toViewController.view.frame = mainFrame;
@@ -595,7 +596,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             sideFrame.size.width = (_isLeftViewOpen ? _leftViewRevealWidth : _rightViewRevealWidth);
             
             toViewController.view.hidden = NO;
-            [UIView animateWithDuration:(duration) delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
+            [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 sideViewController.view.frame = sideFrame;
                 toViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -656,12 +657,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowLeftViewController:_leftViewController];
         }
         
-        [self addChildViewController:_leftViewController];
         CGRect frame = _leftViewController.view.frame;
         frame.origin.x = -(_leftViewRevealWidth);
         frame.size.width = _leftViewRevealWidth;
         _leftViewController.view.frame = frame;
         
+        [self addChildViewController:_leftViewController];
         [_contentView addSubview:_leftViewController.view];
         [_leftViewController didMoveToParentViewController:self];
         
@@ -701,12 +702,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowRightViewController:_rightViewController];
         }
         
-        [self addChildViewController:_rightViewController];
         CGRect frame = _rightViewController.view.frame;
         frame.origin.x = +[UIScreen mainScreen].bounds.size.width;
         frame.size.width = _rightViewRevealWidth;
         _rightViewController.view.frame = frame;
         
+        [self addChildViewController:_rightViewController];
         [_contentView addSubview:_rightViewController.view];
         [_rightViewController didMoveToParentViewController:self];
         

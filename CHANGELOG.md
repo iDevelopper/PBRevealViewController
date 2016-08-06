@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.7
+
+* Git update.
+* Bug fixes.
+
 ## 0.3.6
 
 * Git update and add a example.
