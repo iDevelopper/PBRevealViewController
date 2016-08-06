@@ -30,7 +30,7 @@
     self.revealViewController.leftPresentViewHierarchically = YES;
     self.revealViewController.rightPresentViewHierarchically = YES;
     
-    self.revealViewController.leftToggleAnimationDuration = 0.8;
+    //self.revealViewController.leftToggleAnimationDuration = 0.8;
     self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeSpring;
 
     // Set a random -not too dark- background color.
