@@ -197,11 +197,11 @@
         if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
             void (^block)() = ^{
                 __block CGRect leftFrame = revealController.leftViewController.view.frame;
-                leftFrame.size.width += 50.;
+                leftFrame.size.width += 100.;
                 __block CGRect mainFrame = toViewController.view.frame;
-                mainFrame.origin.x = revealController.leftViewRevealWidth + 50.;
+                mainFrame.origin.x = revealController.leftViewRevealWidth + 100.;
                 toViewController.view.hidden = YES;
-                [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                     revealController.leftViewController.view.frame = leftFrame;
                 } completion:^(BOOL finished) {
                     toViewController.view.frame = mainFrame;
@@ -211,7 +211,7 @@
                     leftFrame.size.width = revealController.leftViewRevealWidth;
                     
                     toViewController.view.hidden = NO;
-                    [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                    [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                         revealController.leftViewController.view.frame = leftFrame;
                         toViewController.view.frame = mainFrame;
                     } completion:^(BOOL finished) {
