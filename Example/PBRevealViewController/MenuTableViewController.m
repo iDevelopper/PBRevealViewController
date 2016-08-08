@@ -114,7 +114,7 @@
             
         case 3:
         {
-            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypeSpring;
+            self.revealViewController.toggleAnimationType = PBRevealToggleAnimationTypePushSideView;
             UINavigationController *nc = [[UINavigationController alloc] initWithRootViewController:[storyBoard instantiateViewControllerWithIdentifier:@"Fourth"]];
             controller = nc;
         }

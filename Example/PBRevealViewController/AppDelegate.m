@@ -105,7 +105,7 @@
     if ([revealController.mainViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *)revealController.mainViewController;
         if ([nc.topViewController isKindOfClass:[MapViewController class]]) {
-            if (direction ==  PBRevealControllerPanDirectionRight) {
+            if (direction ==  PBRevealControllerPanDirectionLeft) {
                 return NO;
             }
         }
@@ -200,7 +200,7 @@
                 leftFrame.size.width += 100.;
                 __block CGRect mainFrame = toViewController.view.frame;
                 mainFrame.origin.x = revealController.leftViewRevealWidth + 100.;
-                toViewController.view.hidden = YES;
+                
                 [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                     revealController.leftViewController.view.frame = leftFrame;
                 } completion:^(BOOL finished) {
@@ -210,7 +210,8 @@
                     leftFrame.origin.x = -(revealController.leftViewRevealWidth);
                     leftFrame.size.width = revealController.leftViewRevealWidth;
                     
-                    toViewController.view.hidden = NO;
+                    [revealController.view insertSubview:toViewController.view belowSubview:revealController.leftViewController.view];
+                    
                     [UIView animateWithDuration:0.3 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                         revealController.leftViewController.view.frame = leftFrame;
                         toViewController.view.frame = mainFrame;
