@@ -9,10 +9,11 @@ A UIViewController subclass for revealing a left and/or right view controller ab
 ## Example
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif) ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif)
 
 ## Installation
 
-To run the example project, clone the repo, and run `pod install` in your Terminal from the Example directory first.
+To run the example projects, clone the repo, and run `pod install` in your Terminal from the Example directory first.
 
 You can also run `pod try PBRevealViewController` in your Terminal from anywhere.
 

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.3.8
+
+* Add an example written in swift showing all animations plus a simple custom one (see AppDelegate).
+* Minor changes in behavior. For animations toViewController is added below fromViewController instead below the side view controller.
+
 ## 0.3.7
 
 * Git update.
