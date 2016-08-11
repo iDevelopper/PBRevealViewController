@@ -1,9 +1,64 @@
 # CHANGELOG
 
+## 0.4.0
+
+#### PBRevealViewController now can present the side views (left/right) below or above (default) the main view.
+
+For this, some properties have been added:
+
+If NO (default is YES) the left view controller will be presented below the main view controller.
+
+```
+@property (nonatomic) BOOL              leftPresentViewOnTop;
+```
+
+Defines how much displacement is applied to the left view when animating or dragging the main view, default is 40.0f.
+
+```
+@property (nonatomic) CGFloat           leftViewRevealDisplacement;
+```
+If NO (default is YES) the right view controller will be presented below the main view controller.
+
+```
+@property (nonatomic) BOOL              rightPresentViewOnTop;
+```
+
+Defines how much displacement is applied to the right view when animating or dragging the main view, default is 40.0f.
+
+```
+@property (nonatomic) CGFloat           rightViewRevealDisplacement;
+```
+
+Defines the radius of the main view's shadow, default is 5.0f.
+
+```
+@property (nonatomic) CGFloat           mainViewShadowRadius;
+```
+
+Defines the main view's shadow offset, default is {0.0f,5.0f}.
+
+```
+@property (nonatomic) CGSize            mainViewShadowOffset;
+```
+
+Defines the main view's shadow opacity, default is 1.0f.
+
+```
+@property (nonatomic) CGFloat           mainViewShadowOpacity;
+```
+
+Defines the main view's shadow color, default is blackColor
+
+```
+@property (nonatomic) UIColor           *mainViewShadowColor;
+```
+
+#### Add an example written in Swift.
+
 ## 0.3.8
 
 * Add an example written in swift showing all animations plus a simple custom one (see AppDelegate).
-* Minor changes in behavior. For animations toViewController is added below fromViewController instead below the side view controller.
+* Minor changes in behavior. For animations toViewController is added below fromViewController instead below side view controller.
 
 ## 0.3.7
 

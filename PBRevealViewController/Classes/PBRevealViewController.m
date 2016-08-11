@@ -149,6 +149,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         [self reloadLeftShadow];
         [self reloadRightShadow];
+        [self reloadMainShadow];
     }
     return self;
 }
@@ -157,7 +158,16 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     self.navigationBar = [[UINavigationBar alloc]init];
     
+    _mainViewShadowRadius = 5.0f;
+    _mainViewShadowOffset = CGSizeMake(0.0f, 5.0f);
+    _mainViewShadowOpacity = 1.0f;
+    _mainViewShadowColor = [UIColor blackColor];
+    
     _leftPresentViewHierarchically = NO;
+
+    _leftPresentViewOnTop = YES;
+    _leftViewRevealDisplacement = 40.0f;
+    
     _leftViewRevealWidth = 260.0f;
     _leftToggleAnimationDuration = 0.5f;
     _leftToggleSpringDampingRatio = 0.8f;
@@ -168,6 +178,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _leftViewShadowColor = [UIColor blackColor];
     
     _rightPresentViewHierarchically = NO;
+
+    _rightPresentViewOnTop = YES;
+    _rightViewRevealDisplacement = 40.0f;
+    
     _rightViewRevealWidth = 160.0f;
     _rightToggleAnimationDuration = 0.5f;
     _rightToggleSpringDampingRatio = 0.8f;
@@ -279,6 +293,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             frame.origin.x = 0.;
             frame.size.width = _leftViewRevealWidth;
             _leftViewController.view.frame = frame;
+            if (!_leftPresentViewOnTop) {
+                frame = _mainViewController.view.frame;
+                frame.origin.x = _leftViewRevealWidth;
+                _mainViewController.view.frame = frame;
+            }
         }
     }
 }
@@ -292,8 +311,47 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
             frame.size.width = _rightViewRevealWidth;
             _rightViewController.view.frame = frame;
+            if (!_rightPresentViewOnTop) {
+                frame = _mainViewController.view.frame;
+                frame.origin.x = -(_rightViewRevealWidth);
+                _mainViewController.view.frame = frame;
+            }
         }
     }
+}
+
+- (void)setMainViewShadowRadius:(CGFloat)mainViewShadowRadius
+{
+    _mainViewShadowRadius = mainViewShadowRadius;
+    [self reloadMainShadow];
+}
+
+- (void)setMainViewShadowOffset:(CGSize)mainViewShadowOffset
+{
+    _mainViewShadowOffset = mainViewShadowOffset;
+    [self reloadMainShadow];
+}
+
+- (void)setMainViewShadowOpacity:(CGFloat)mainViewShadowOpacity
+{
+    _mainViewShadowOpacity = mainViewShadowOpacity;
+    [self reloadMainShadow];
+}
+
+- (void)setMainViewShadowColor:(UIColor *)mainViewShadowColor
+{
+    _mainViewShadowColor = mainViewShadowColor;
+    [self reloadMainShadow];
+}
+
+- (void)reloadMainShadow
+{
+    CALayer *layer = _mainViewController.view.layer;
+    layer.masksToBounds = NO;
+    layer.shadowColor = _mainViewShadowColor.CGColor;
+    layer.shadowOpacity = _mainViewShadowOpacity;
+    layer.shadowOffset = _mainViewShadowOffset;
+    layer.shadowRadius = _mainViewShadowRadius;
 }
 
 - (void)setLeftViewShadowRadius:(CGFloat)leftViewShadowRadius
@@ -385,10 +443,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)setMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated
 {
-    if (_mainViewController) {
+    if (_mainViewController && animated) {
         [self _swapFromViewController:_mainViewController toViewController:mainViewController operation:PBRevealControllerOperationReplaceMainController animated:animated];
     }
     _mainViewController = mainViewController;
+    [self reloadMainShadow];
 }
 
 - (void)setRightViewController:(UIViewController *)rightViewController
@@ -416,8 +475,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     else {
         return;
     }
-    [self _pushFromViewController:_mainViewController toViewController:mainViewController operation:operation animated:animated];
-    _mainViewController = mainViewController;
+    UIViewController *fromViewController = _mainViewController;
+    [self setMainViewController:mainViewController];
+    [self _pushFromViewController:fromViewController toViewController:mainViewController operation:operation animated:animated];
 }
 
 - (void)_swapFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
@@ -437,19 +497,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         switch (operation) {
             case PBRevealControllerOperationReplaceLeftController:
             case PBRevealControllerOperationReplaceRightController:
-                [_contentView addSubview:toViewController.view];
+                [_contentView insertSubview:toViewController.view belowSubview:fromViewController.view];
                 break;
                 
             case PBRevealControllerOperationReplaceMainController:
-                if (_isLeftViewOpen) {
-                    [_contentView insertSubview:toViewController.view belowSubview:_leftViewController.view];
-                }
-                else if (_isRightViewOpen) {
-                    [_contentView insertSubview:toViewController.view belowSubview:_rightViewController.view];
-                }
-                else {
-                    [_contentView addSubview:toViewController.view];
-                }
+                [_contentView insertSubview:toViewController.view belowSubview:fromViewController.view];
                 // XXXX
                 [toViewController.view addGestureRecognizer:_tapGestureRecognizer];
                 [toViewController.view addGestureRecognizer:_panGestureRecognizer];
@@ -463,8 +515,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:toViewController];
         [fromViewController willMoveToParentViewController:nil];
         
-        toViewController.view.alpha = 0.5;
-        
+        toViewController.view.alpha = 0.8;
         [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
             fromViewController.view.alpha = 0.;
             toViewController.view.alpha = toAlpha;
@@ -524,10 +575,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
     };
     
-    if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-        toViewController.view.alpha = 0.5;
-    }
-    
     [_contentView insertSubview:toViewController.view belowSubview:fromViewController.view];
     
     [self addChildViewController:toViewController];
@@ -538,6 +585,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
+        toViewController.view.alpha = 0.8;
         [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
             fromViewController.view.alpha = 0.;
             toViewController.view.alpha = toAlpha;
@@ -552,7 +600,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         CGRect mainFrame, sideFrame;
         
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
-        [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
+
+        [fromViewController.view removeFromSuperview];
         
         mainFrame = toViewController.view.frame;
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth : -(_rightViewRevealWidth));
@@ -573,10 +622,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeSpring) {
         UIViewController *sideViewController;
+        BOOL sidePresentViewOnTop;
         __block CGRect mainFrame;
         __block CGRect sideFrame;
         
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
+        sidePresentViewOnTop = (_isLeftViewOpen ? _leftPresentViewOnTop : _rightPresentViewOnTop);
         
         sideFrame = sideViewController.view.frame;
         sideFrame.origin.x += (_isLeftViewOpen ? 0. : -(_rightViewRevealOverdraw));
@@ -587,6 +638,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
             sideViewController.view.frame = sideFrame;
+            if (!sidePresentViewOnTop) {
+                fromViewController.view.frame = mainFrame;
+                toViewController.view.frame = mainFrame;
+            }
         } completion:^(BOOL finished) {
             toViewController.view.frame = mainFrame;
             mainFrame.origin.x = 0.;
@@ -594,7 +649,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             sideFrame.origin.x = (_isLeftViewOpen ? -(_leftViewRevealWidth) : +[UIScreen mainScreen].bounds.size.width);
             sideFrame.size.width = (_isLeftViewOpen ? _leftViewRevealWidth : _rightViewRevealWidth);
             
-            [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
+            [fromViewController.view removeFromSuperview];
             
             [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 sideViewController.view.frame = sideFrame;
@@ -644,6 +699,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     if (_leftViewController) {
         if (_isLeftViewOpen) {
+            [self hideLeftViewAnimated:YES];
             return;
         }
         if (_isRightViewOpen) {
@@ -657,12 +713,23 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowLeftViewController:_leftViewController];
         }
         
-        CGRect frame = _leftViewController.view.frame;
-        frame.origin.x = -(_leftViewRevealWidth);
-        frame.size.width = _leftViewRevealWidth;
-        _leftViewController.view.frame = frame;
+        CGRect leftFrame = _leftViewController.view.frame;
         
-        [_contentView addSubview:_leftViewController.view];
+        if (_leftPresentViewOnTop) {
+            leftFrame.origin.x = -(_leftViewRevealWidth);
+        }
+        else {
+            leftFrame.origin.x = -(_leftViewRevealDisplacement);
+        }
+        leftFrame.size.width = _leftViewRevealWidth;
+        _leftViewController.view.frame = leftFrame;
+
+        if (_leftPresentViewOnTop) {
+            [_contentView addSubview:_leftViewController.view];
+        }
+        else {
+            [_contentView insertSubview:_leftViewController.view belowSubview:_mainViewController.view];
+        }
         [self addChildViewController:_leftViewController];
         [_leftViewController didMoveToParentViewController:self];
         
@@ -674,11 +741,17 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
         };
         
-        frame.origin.x = 0;
-        frame.size.width = _leftViewRevealWidth;
+        leftFrame.origin.x = 0;
+        leftFrame.size.width = _leftViewRevealWidth;
+
+        CGRect mainFrame = _mainViewController.view.frame;
+        if (!_leftPresentViewOnTop) {
+            mainFrame.origin.x = _leftViewRevealWidth;
+        }
         
         [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
-            _leftViewController.view.frame = frame;
+            _leftViewController.view.frame = leftFrame;
+            _mainViewController.view.frame = mainFrame;
         } completion:^(BOOL finished) {
             completion();
         }];
@@ -689,6 +762,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     if (_rightViewController) {
         if (_isRightViewOpen) {
+            [self hideRightViewAnimated:YES];
             return;
         }
         if (_isLeftViewOpen) {
@@ -702,12 +776,22 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowRightViewController:_rightViewController];
         }
         
-        CGRect frame = _rightViewController.view.frame;
-        frame.origin.x = +[UIScreen mainScreen].bounds.size.width;
-        frame.size.width = _rightViewRevealWidth;
-        _rightViewController.view.frame = frame;
+        CGRect rightFrame = _rightViewController.view.frame;
+        if (_rightPresentViewOnTop) {
+            rightFrame.origin.x = +[UIScreen mainScreen].bounds.size.width;
+        }
+        else {
+            rightFrame.origin.x = +[UIScreen mainScreen].bounds.size.width -(_rightViewRevealWidth) + _rightViewRevealDisplacement;
+        }
+        rightFrame.size.width = _rightViewRevealWidth;
+        _rightViewController.view.frame = rightFrame;
         
-        [_contentView addSubview:_rightViewController.view];
+        if (_rightPresentViewOnTop) {
+            [_contentView addSubview:_rightViewController.view];
+        }
+        else {
+            [_contentView insertSubview:_rightViewController.view belowSubview:_mainViewController.view];
+        }
         [self addChildViewController:_rightViewController];
         [_rightViewController didMoveToParentViewController:self];
         
@@ -719,11 +803,17 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
         };
         
-        frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
-        frame.size.width = _rightViewRevealWidth;
+        rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+        rightFrame.size.width = _rightViewRevealWidth;
         
+        CGRect mainFrame = _mainViewController.view.frame;
+        if (!_rightPresentViewOnTop) {
+            mainFrame.origin.x = -(_rightViewRevealWidth);
+        }
+
         [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options: UIViewAnimationOptionLayoutSubviews animations:^{
-            _rightViewController.view.frame = frame;
+            _rightViewController.view.frame = rightFrame;
+            _mainViewController.view.frame = mainFrame;
         } completion:^(BOOL finished) {
             completion();
         }];
@@ -735,12 +825,21 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_leftViewController) {
         NSTimeInterval duration = animated ? _leftToggleAnimationDuration : 0.;
         
-        CGRect frame = _leftViewController.view.frame;
-        frame.origin.x = -(_leftViewRevealWidth);
-        frame.size.width = _leftViewRevealWidth;
+        CGRect leftFrame = _leftViewController.view.frame;
+        if (_leftPresentViewOnTop) {
+            leftFrame.origin.x = -(_leftViewRevealWidth);
+        }
+        else {
+            leftFrame.origin.x = -(_leftViewRevealDisplacement);
+        }
+        leftFrame.size.width = _leftViewRevealWidth;
+        
+        CGRect mainFrame = _mainViewController.view.frame;
+        mainFrame.origin.x = 0;
         
         [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
-            _leftViewController.view.frame = frame;
+            _leftViewController.view.frame = leftFrame;
+            _mainViewController.view.frame = mainFrame;
         } completion:^(BOOL finished) {
             _isLeftViewOpen = NO;
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -759,12 +858,22 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_rightViewController) {
         NSTimeInterval duration = animated ? _rightToggleAnimationDuration : 0.;
         
-        CGRect frame = _rightViewController.view.frame;
-        frame.origin.x = +[UIScreen mainScreen].bounds.size.width;
-        frame.size.width = _rightViewRevealWidth;
+        CGRect rightFrame = _rightViewController.view.frame;
+        
+        if (_rightPresentViewOnTop) {
+            rightFrame.origin.x = +[UIScreen mainScreen].bounds.size.width;
+        }
+        else {
+            rightFrame.origin.x = +[UIScreen mainScreen].bounds.size.width -(_rightViewRevealWidth) + _rightViewRevealDisplacement;
+        }
+        rightFrame.size.width = _rightViewRevealWidth;
+        
+        CGRect mainFrame = _mainViewController.view.frame;
+        mainFrame.origin.x = 0;
         
         [UIView animateWithDuration:duration delay:0. usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
-            _rightViewController.view.frame = frame;
+            _rightViewController.view.frame = rightFrame;
+            _mainViewController.view.frame = mainFrame;
         } completion:^(BOOL finished) {
             _isRightViewOpen = NO;
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -854,24 +963,46 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_leftViewController) {
         if (![self.childViewControllers containsObject:_leftViewController]) {
             CGRect frame = _leftViewController.view.frame;
-            frame.origin.x = -(_leftViewRevealWidth);
-            frame.size.width = 0;
+            if (_leftPresentViewOnTop) {
+                frame.origin.x = -(_leftViewRevealWidth);
+                frame.size.width = 0;
+            }
+            else {
+                frame.origin.x = -(_leftViewRevealDisplacement);
+                frame.size.width = _leftViewRevealWidth;
+            }
             _leftViewController.view.frame = frame;
-            [_contentView addSubview:_leftViewController.view];
+            if (_leftPresentViewOnTop) {
+                [_contentView addSubview:_leftViewController.view];
+            }
+            else {
+                [_contentView insertSubview:_leftViewController.view belowSubview:_mainViewController.view];
+            }
             [self addChildViewController:_leftViewController];
             [_leftViewController didMoveToParentViewController:self];
         }
         
-        CGRect frame = _leftViewController.view.frame;
-        frame.origin.x = 0;
+        CGRect leftFrame = _leftViewController.view.frame;
+        if (_leftPresentViewOnTop) {
+            leftFrame.origin.x = 0;
+        }
+        
+        CGRect mainFrame = _mainViewController.view.frame;
         
         if (position <= 0) {
             [self hideLeftViewAnimated:YES];
             self.panGestureRecognizer.state = UIGestureRecognizerStateCancelled;
         }
         else if (position < _leftViewRevealWidth) {
-            frame.size.width = position;
-            _leftViewController.view.frame = frame;
+            if (_leftPresentViewOnTop) {
+                leftFrame.size.width = position;
+            }
+            else {
+                leftFrame.origin.x = -(_leftViewRevealDisplacement - (position * _leftViewRevealDisplacement / _leftViewRevealWidth));
+                mainFrame.origin.x = position;
+                _mainViewController.view.frame = mainFrame;
+            }
+            _leftViewController.view.frame = leftFrame;
         }
         else {
             if ([_delegate respondsToSelector:@selector(revealController:willShowLeftViewController:)]) {
@@ -879,10 +1010,17 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
             _isLeftViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
-            frame.size.width = _leftViewRevealWidth;
+            
+            leftFrame.origin.x = 0.;
+            leftFrame.size.width = _leftViewRevealWidth;
+            
+            if (!_leftPresentViewOnTop) {
+                mainFrame.origin.x = _leftViewRevealWidth;
+            }
             
             [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
-                _leftViewController.view.frame = frame;
+                _leftViewController.view.frame = leftFrame;
+                _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
                 if ([_delegate respondsToSelector:@selector(revealController:didShowLeftViewController:)]) {
                     [_delegate revealController:self didShowLeftViewController:_leftViewController];
@@ -897,24 +1035,43 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_rightViewController) {
         if (![self.childViewControllers containsObject:_rightViewController]) {
             CGRect frame = _rightViewController.view.frame;
-            frame.origin.x = [UIScreen mainScreen].bounds.size.width;
-            frame.size.width = 0;
+            if (_rightPresentViewOnTop) {
+                frame.origin.x = [UIScreen mainScreen].bounds.size.width;
+                frame.size.width = _rightViewRevealWidth;
+            }
+            else {
+                frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealDisplacement;
+                frame.size.width = _rightViewRevealWidth;
+            }
             _rightViewController.view.frame = frame;
-            [_contentView addSubview:_rightViewController.view];
+            if (_rightPresentViewOnTop) {
+                [_contentView addSubview:_rightViewController.view];
+            }
+            else {
+                [_contentView insertSubview:_rightViewController.view belowSubview:_mainViewController.view];
+            }
             [self addChildViewController:_rightViewController];
             [_rightViewController didMoveToParentViewController:self];
         }
+
+        CGRect rightFrame = _rightViewController.view.frame;
         
-        CGRect frame = _rightViewController.view.frame;
-        frame.origin.x = [UIScreen mainScreen].bounds.size.width - ABS(position);
+        CGRect mainFrame = _mainViewController.view.frame;
         
         if (position >= 0) {
             [self hideRightViewAnimated:YES];
             self.panGestureRecognizer.state = UIGestureRecognizerStateCancelled;
         }
         else if (ABS(position) < _rightViewRevealWidth) {
-            frame.size.width = ABS(position);
-            _rightViewController.view.frame = frame;
+            if (_rightPresentViewOnTop) {
+                rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - ABS(position);
+            }
+            else {
+                rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - ABS(position) - _rightViewRevealDisplacement + (ABS(position) * _rightViewRevealDisplacement / _rightViewRevealWidth);
+                mainFrame.origin.x = position;
+                _mainViewController.view.frame = mainFrame;
+            }
+            _rightViewController.view.frame = rightFrame;
         }
         else {
             if ([_delegate respondsToSelector:@selector(revealController:willShowRightViewController:)]) {
@@ -922,11 +1079,16 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
             _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
-            frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
-            frame.size.width = _rightViewRevealWidth;
+            
+            rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
+            rightFrame.size.width = _rightViewRevealWidth;
+            if (!_rightPresentViewOnTop) {
+                mainFrame.origin.x = - (_rightViewRevealWidth);
+            }
             
             [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
-                _rightViewController.view.frame = frame;
+                _rightViewController.view.frame = rightFrame;
+                _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
                 if ([_delegate respondsToSelector:@selector(revealController:didShowRightViewController:)]) {
                     [_delegate revealController:self didShowRightViewController:_rightViewController];
@@ -938,17 +1100,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 #pragma mark - UserInteractionEnabling
 
-// disable userInteraction on the entire control
 - (void)disableUserInteraction
 {
     [_contentView setUserInteractionEnabled:NO];
 }
 
-// restore userInteraction on the control
 - (void)restoreUserInteraction
 {
-    // we use the stored userInteraction state just in case a developer decided
-    // to have our view interaction disabled beforehand
+    // we use the stored userInteraction state just in case a developer decided to have our view interaction disabled before handle
     [_contentView setUserInteractionEnabled:_userInteractionStore];
 }
 

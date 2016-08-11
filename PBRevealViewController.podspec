@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '0.3.8'
-  s.summary          = 'A UIViewController subclass for revealing a left and/or right view controller above a main view controller.'
+  s.version          = '0.4.0'
+  s.summary          = 'A UIViewController subclass for revealing a left and/or right view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-A UIViewController subclass for revealing a left and/or right view controller above a main view controller.
+A UIViewController subclass for revealing a left and/or right view controller above or below a main view controller.
 A category method on UIViewController, `revealViewController`, to get the parent `PBRevealViewController` of any child controller, similar to the UIViewController's property `navigationController`.
                        DESC
 

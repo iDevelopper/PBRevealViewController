@@ -94,9 +94,39 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 
 /**
- * If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
+ *  Defines the radius of the main view's shadow, default is 5.0f.
+ */
+@property (nonatomic) CGFloat           mainViewShadowRadius;
+
+/**
+ *  Defines the main view's shadow offset, default is {0.0f,5.0f}.
+ */
+@property (nonatomic) CGSize            mainViewShadowOffset;
+
+/**
+ *  Defines the main view's shadow opacity, default is 1.0f.
+ */
+@property (nonatomic) CGFloat           mainViewShadowOpacity;
+
+/**
+ *  Defines the main view's shadow color, default is blackColor
+ */
+@property (nonatomic) UIColor           *mainViewShadowColor;
+
+/**
+ *  If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
  */
 @property (nonatomic) BOOL              leftPresentViewHierarchically;
+
+/**
+ *  If NO (default is YES) the left view controller will be presented below the main view controller.
+ */
+@property (nonatomic) BOOL              leftPresentViewOnTop;
+
+/**
+ *  Defines how much displacement is applied to the left view when animating or dragging the main view, default is 40.0f.
+ */
+@property (nonatomic) CGFloat           leftViewRevealDisplacement;
 
 /**
  *  Defines how much of the left view is shown, default is 260.0f
@@ -148,6 +178,16 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  * If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
  */
 @property (nonatomic) BOOL              rightPresentViewHierarchically;
+
+/**
+ *  If NO (default is YES) the right view controller will be presented below the main view controller.
+ */
+@property (nonatomic) BOOL              rightPresentViewOnTop;
+
+/**
+ *  Defines how much displacement is applied to the right view when animating or dragging the main view, default is 40.0f.
+ */
+@property (nonatomic) CGFloat           rightViewRevealDisplacement;
 
 /**
  *  Defines how much of the right view is shown, default is 160.0f
@@ -303,12 +343,12 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 - (void)pushMainViewController:(UIViewController *)mainViewController animated:(BOOL)animated;
 
 /**
- *  Reveal left view. Does nothing if the left view is already open. Hide the right view if it is open and show the left view.
+ *  Reveal left view or hide it if shown. Hide the right view if it is open and show the left view.
  */
 - (IBAction)revealLeftView;
 
 /**
- *  Reveal right view. Does nothing if the right view is already open. Hide the left view if it is open and show the right view.
+ *  Reveal right view or hide it if shown.  Hide the left view if it is open and show the right view.
  */
 - (IBAction)revealRightView;
 

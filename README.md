@@ -4,12 +4,12 @@
 [![License](https://img.shields.io/cocoapods/l/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 [![Platform](https://img.shields.io/cocoapods/p/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 
-A UIViewController subclass for revealing a left and/or right view controller above a main view controller.
+A UIViewController subclass for revealing a left and/or right view controller above or below a main view controller.
 
-## Example
+## Examples
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif) ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif) ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video4.gif)
 
 ## Installation
 
