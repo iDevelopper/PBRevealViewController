@@ -20,8 +20,8 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         //self.toggleAnimationType = PBRevealToggleAnimationType.None
         //self.toggleAnimationType = PBRevealToggleAnimationType.CrossDissolve
         //self.toggleAnimationType = PBRevealToggleAnimationType.PushSideView
-        self.toggleAnimationType = PBRevealToggleAnimationType.Spring
-        //self.toggleAnimationType = PBRevealToggleAnimationType.Custom
+        //self.toggleAnimationType = PBRevealToggleAnimationType.Spring
+        self.toggleAnimationType = PBRevealToggleAnimationType.Custom
         
         self.leftPresentViewOnTop = false
         //self.rightPresentViewOnTop = false
@@ -35,16 +35,36 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         // Dispose of any resources that can be recreated.
     }
     
-    func revealController(revealController: PBRevealViewController!, blockForOperation operation: PBRevealControllerOperation, fromViewController: UIViewController!, toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
+    func revealController(revealController: PBRevealViewController!, blockForOperation operation: PBRevealControllerOperation, fromViewController: UIViewController!, toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)!
+    {
         let block = {
             () -> Void in
-        
-            UIView.transitionFromView(fromViewController.view, toView: toViewController.view, duration: 0.8, options: .TransitionCurlUp, completion: { (finished) in
-                print("Custom completion")
-                finalBlock()
-            })
             
+            UIView.transitionWithView(fromViewController.view, duration: 0.8, options: [.TransitionFlipFromRight, .ShowHideTransitionViews], animations: {
+                fromViewController.view.hidden = true
+                }, completion: { (finished) in
+                    print("Custom completion")
+                    finalBlock()
+            })
         }
         return block;
     }
+    
+    func revealController(revealController: PBRevealViewController!, animationControllerForTransitionFromViewController fromViewController: UIViewController!, toViewController: UIViewController!, forOperation operation: PBRevealControllerOperation) -> UIViewControllerAnimatedTransitioning!
+    {
+        if operation == PBRevealControllerOperation.ReplaceMainController {
+            return AnimationControllerForReplace()
+        }
+        if operation == PBRevealControllerOperation.ReplaceRightController {
+            return AnimationControllerForReplace()
+        }
+        if operation == PBRevealControllerOperation.PushMainControllerFromLeft {
+            let nc = toViewController as! UINavigationController
+            if nc.topViewController is SecondViewController {
+                return AnimationControllerForPush()
+            }
+        }
+        return nil
+    }
+    
 }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		21FC8F825F86781A6012C228 /* libPods-Example4Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 185AA8F6E0B4A52BF1013DCB /* libPods-Example4Swift.a */; };
+		320451C11D634FA4001FDFD3 /* AnimationControllerForReplace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320451C01D634FA4001FDFD3 /* AnimationControllerForReplace.swift */; };
+		320451C31D634FBF001FDFD3 /* AnimationControllerForPush.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320451C21D634FBF001FDFD3 /* AnimationControllerForPush.swift */; };
 		327FA8411D5C9C900055168A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 327FA8401D5C9C900055168A /* AppDelegate.swift */; };
 		327FA8461D5C9C900055168A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 327FA8441D5C9C900055168A /* Main.storyboard */; };
 		327FA8481D5C9C900055168A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 327FA8471D5C9C900055168A /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		185AA8F6E0B4A52BF1013DCB /* libPods-Example4Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example4Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		320451C01D634FA4001FDFD3 /* AnimationControllerForReplace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationControllerForReplace.swift; sourceTree = "<group>"; };
+		320451C21D634FBF001FDFD3 /* AnimationControllerForPush.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationControllerForPush.swift; sourceTree = "<group>"; };
 		327FA83D1D5C9C900055168A /* Example4Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example4Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		327FA8401D5C9C900055168A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		327FA8451D5C9C900055168A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,6 +80,8 @@
 				327FA8561D5C9D690055168A /* RightMenuTableViewController.swift */,
 				327FA8531D5C9D690055168A /* MainViewController.swift */,
 				327FA85B1D5C9D770055168A /* SecondViewController.swift */,
+				320451C01D634FA4001FDFD3 /* AnimationControllerForReplace.swift */,
+				320451C21D634FBF001FDFD3 /* AnimationControllerForPush.swift */,
 				327FA8521D5C9D690055168A /* Example4Swift-Bridging-Header.h */,
 				327FA8441D5C9C900055168A /* Main.storyboard */,
 				327FA8471D5C9C900055168A /* Assets.xcassets */,
@@ -227,6 +233,8 @@
 				327FA85C1D5C9D770055168A /* SecondViewController.swift in Sources */,
 				327FA85A1D5C9D690055168A /* RightMenuTableViewController.swift in Sources */,
 				327FA8411D5C9C900055168A /* AppDelegate.swift in Sources */,
+				320451C11D634FA4001FDFD3 /* AnimationControllerForReplace.swift in Sources */,
+				320451C31D634FBF001FDFD3 /* AnimationControllerForPush.swift in Sources */,
 				327FA8571D5C9D690055168A /* MainViewController.swift in Sources */,
 				327FA8581D5C9D690055168A /* MenuTableViewController.swift in Sources */,
 				327FA8591D5C9D690055168A /* RevealViewController.swift in Sources */,

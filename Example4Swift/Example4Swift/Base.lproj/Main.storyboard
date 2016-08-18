@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="257" y="364"/>
         </scene>
-        <!--Right-->
+        <!--Menu-->
         <scene sceneID="un0-Uw-DpZ">
             <objects>
                 <tableViewController storyboardIdentifier="RightMenuTableViewController" id="WqH-Bh-LvA" customClass="RightMenuTableViewController" customModule="Example4Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,7 +51,7 @@
                             <outlet property="delegate" destination="WqH-Bh-LvA" id="DT4-VW-nKa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Right" id="30r-a1-JMt"/>
+                    <navigationItem key="navigationItem" title="Menu" id="30r-a1-JMt"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XTW-UE-v6X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

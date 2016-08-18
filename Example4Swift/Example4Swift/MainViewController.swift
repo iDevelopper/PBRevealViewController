@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().leftViewController as! UINavigationController
         
-        if nc.topViewController!.isKindOfClass(MenuTableViewController.classForCoder()) {
+        if nc.topViewController! is MenuTableViewController {
             controller = storyboard.instantiateViewControllerWithIdentifier("RightMenuTableViewController")
         }
         else {
@@ -58,7 +58,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().mainViewController as! UINavigationController
         
-        if nc.topViewController!.isKindOfClass(MainViewController.classForCoder()) {
+        if nc.topViewController! is MainViewController {
             controller = storyboard.instantiateViewControllerWithIdentifier("SecondViewController")
         }
         else {
@@ -74,7 +74,7 @@ class MainViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().rightViewController as! UINavigationController
         
-        if nc.topViewController!.isKindOfClass(RightMenuTableViewController.classForCoder()) {
+        if nc.topViewController! is RightMenuTableViewController {
             controller = storyboard.instantiateViewControllerWithIdentifier("MenuTableViewController")
         }
         else {
