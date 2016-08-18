@@ -80,6 +80,8 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
     PBRevealToggleAnimationTypeCustom
 };
 
+#pragma mark - PBRevealViewController
+
 @interface PBRevealViewController : UIViewController
 
 /**
@@ -243,12 +245,12 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 /**
  *  Defines how much of an overdraw can occur when pushing further than leftViewRevealWidth, default is 60.0f.
  */
-@property (nonatomic) CGFloat leftViewRevealOverdraw;
+@property (nonatomic) CGFloat           leftViewRevealOverdraw;
 
 /**
  *  Defines how much of an overdraw can occur when pushing further than rightViewRevealWidth, default is 60.0f.
  */
-@property (nonatomic) CGFloat rightViewRevealOverdraw;
+@property (nonatomic) CGFloat           rightViewRevealOverdraw;
 
 /**
  *  Duration for animated replacement of view controllers, default is 0.25f.
@@ -261,12 +263,12 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) CGFloat           swipeVelocity;
 
 /**
- *  YES if left view is completlely open (read only).
+ *  YES if left view is completely open (read only).
  */
 @property (nonatomic, readonly) BOOL    isLeftViewOpen;
 
 /**
- *  YES if right view is completlely open (read only).
+ *  YES if right view is completely open (read only).
  */
 @property (nonatomic, readonly) BOOL    isRightViewOpen;
 
@@ -489,6 +491,8 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *  @param direction        The panning direction.
  *
  *  @return NO if you want the pan gesture recognizer to be ignored, YES otherwise.
+ *
+ *  @see    -panGestureRecognizer
  */
 - (BOOL)revealControllerPanGestureShouldBegin:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
@@ -498,6 +502,8 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *  @param revealController The reveal view controller object.
  *
  *  @return NO if you want the tap gesture recognizer to be ignored, YES otherwise.
+ *
+ *  @see    -tapGestureRecognizer
  */
 - (BOOL)revealControllerTapGestureShouldBegin:(PBRevealViewController *)revealController;
 
@@ -508,6 +514,8 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *  @param otherGestureRecognizer The other gesture recognizer.
  *
  *  @return YES if you want other gesture recognizer to share touch events with the pan gesture.
+ *
+ *  @see    -panGestureRecognizer
  */
 - (BOOL)revealController:(PBRevealViewController *)revealController
 panGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
@@ -519,16 +527,19 @@ panGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *  @param otherGestureRecognizer The other gesture recognizer.
  *
  *  @return YES if you want other gesture recognizer to share touch events with the tap gesture.
+ *
+ *  @see    -tapGestureRecognizer
  */
 - (BOOL)revealController:(PBRevealViewController *)revealController
 tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer;
 
-// Called when the gestureRecognizer began, moved and ended
 /**
  *  Called when the gestureRecognizer began.
  *
  *  @param revealController The reveal view controller object.
  *  @param direction        The panning direction.
+ *
+ *  @see    -panGestureRecognizer
  */
 - (void)revealControllerPanGestureBegan:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
@@ -537,6 +548,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @param revealController The reveal view controller object.
  *  @param direction        The panning direction.
+ *
+ *  @see    -panGestureRecognizer
  */
 - (void)revealControllerPanGestureMoved:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
@@ -545,6 +558,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @param revealController The reveal view controller object.
  *  @param direction        The panning direction.
+ *
+ *  @see    -panGestureRecognizer
  */
 - (void)revealControllerPanGestureEnded:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction;
 
@@ -577,8 +592,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
- *  @param fromViewController The side view controller (left or right).
- *  @param toViewController   The main view controller.
+ *  @param fromViewController The main view controller.
+ *  @param toViewController   The new main view controller. When called the toViewController's view is behind the fromViewController's view.
  *
  *  @return A block to be inserted in the view animation.
  *
@@ -591,8 +606,8 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
- *  @param fromViewController The side view controller (left or right).
- *  @param toViewController   The main view controller.
+ *  @param fromViewController The main view controller.
+ *  @param toViewController   The new main view controller. When called the toViewController's view is behind the fromViewController's view.
  *
  *  @return A block to be inserted in the view animation completion.
  *
@@ -605,14 +620,28 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
- *  @param fromViewController The side view controller (left or right).
- *  @param toViewController   The main view controller.
+ *  @param fromViewController The main view controller.
+ *  @param toViewController   The new main view controller. When called the toViewController's view is behind the fromViewController's view.
  *  @param finalBlock         The final block provided by the reveal view controller object. This block must be inserted in your completion block.
  *
  *  @see    -revealController:animationBlockForOperation:fromViewController:toViewController:
  *  @see    -revealController:completionBlockForOperation:fromViewController:toViewController:
+ *  @see    -revealController:animationControllerForTransitionFromViewController:toViewController:forOperation:
+
  */
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
+
+/**
+ *  Ask for custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller.
+ *
+ *  @param revealController   The reveal view controller object.
+ *  @param fromViewController The child view controller to replace.
+ *  @param toViewController   The new child view controller.
+ *  @param operation          The current operation (push from left, push from right, or replace).
+ *
+ *  @return The animator object adopting the UIViewControllerAnimatedTransitioning protocol.
+ */
+- (id <UIViewControllerAnimatedTransitioning>)revealController:(PBRevealViewController *)revealController animationControllerForTransitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController forOperation:(PBRevealControllerOperation)operation;
 
 @end
 

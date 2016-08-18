@@ -111,6 +111,99 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 @end
 
+#pragma mark - PBContextTransitioningObject
+
+@interface PBContextTransitionObject : NSObject<UIViewControllerContextTransitioning>
+@end
+
+@implementation PBContextTransitionObject
+{
+    __weak PBRevealViewController *_revealController;
+    UIView *_containerView;
+    UIViewController *_toViewController;
+    UIViewController *_fromViewController;
+    void (^_completion)(void);
+}
+
+
+- (id)initWithRevealController:(PBRevealViewController*)revealController containerView:(UIView *)containerView fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController*)toViewController completion:(void (^)(void))completion
+{
+    self = [super init];
+    if ( self )
+    {
+        _revealController = revealController;
+        _containerView = containerView;
+        _fromViewController = fromViewController;
+        _toViewController = toViewController;
+        _completion = completion;
+    }
+    return self;
+}
+
+- (UIView *)containerView {
+    return _containerView;
+}
+
+- (BOOL)isAnimated {
+    return YES;
+}
+
+- (BOOL)isInteractive {
+    return NO;  // not supported
+}
+
+- (BOOL)transitionWasCancelled {
+    return NO; // not supported
+}
+
+- (CGAffineTransform)targetTransform {
+    return CGAffineTransformIdentity;
+}
+
+- (UIModalPresentationStyle)presentationStyle {
+    return UIModalPresentationNone;  // not applicable
+}
+
+- (void)updateInteractiveTransition:(CGFloat)percentComplete {
+    // not supported
+}
+
+- (void)finishInteractiveTransition {
+    // not supported
+}
+
+- (void)cancelInteractiveTransition {
+    // not supported
+}
+
+- (void)completeTransition:(BOOL)didComplete {
+    _completion();
+}
+
+- (UIViewController *)viewControllerForKey:(NSString *)key {
+    if ( [key isEqualToString:UITransitionContextFromViewControllerKey] )
+        return _fromViewController;
+    
+    if ( [key isEqualToString:UITransitionContextToViewControllerKey] )
+        return _toViewController;
+    
+    return nil;
+}
+
+- (UIView *)viewForKey:(NSString *)key {
+    return nil;
+}
+
+- (CGRect)initialFrameForViewController:(UIViewController *)vc {
+    return vc.view.frame;
+}
+
+- (CGRect)finalFrameForViewController:(UIViewController *)vc {
+    return vc.view.frame;
+}
+
+@end
+
 #pragma mark - PBRevealViewController Class
 
 @interface PBRevealViewController() <UIGestureRecognizerDelegate>
@@ -223,7 +316,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     
     self.contentView = [[UIView alloc] initWithFrame:frame];
     
-    //[_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+    [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
     self.view = _contentView;
     [_contentView addSubview:_mainViewController.view];
@@ -515,21 +608,33 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:toViewController];
         [fromViewController willMoveToParentViewController:nil];
         
-        toViewController.view.alpha = 0.8;
-        [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
-            fromViewController.view.alpha = 0.;
-            toViewController.view.alpha = toAlpha;
-        } completion:^(BOOL finished) {
+        void (^completion)() = ^{
             [fromViewController.view removeFromSuperview];
             [fromViewController removeFromParentViewController];
             [toViewController didMoveToParentViewController:self];
-            
             fromViewController.view.alpha = fromAlpha;
-            
             if ([_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)]) {
                 [_delegate revealController:self didAddViewController:toViewController forOperation:operation animated:animated];
             }
-        }];
+        };
+        
+        id<UIViewControllerAnimatedTransitioning>animator = nil;
+        if ([_delegate respondsToSelector:@selector(revealController:animationControllerForTransitionFromViewController:toViewController:forOperation:)]) {
+            animator = [_delegate revealController:self animationControllerForTransitionFromViewController:fromViewController toViewController:toViewController forOperation:operation];
+        }
+        if (animator) {
+            PBContextTransitionObject *transitioningObject = [[PBContextTransitionObject alloc]initWithRevealController:self containerView:_contentView fromViewController:fromViewController toViewController:toViewController completion:completion];
+            [animator animateTransition:transitioningObject];
+        }
+        else {
+            toViewController.view.alpha = 0.8;
+            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
+                fromViewController.view.alpha = 0.;
+                toViewController.view.alpha = toAlpha;
+            } completion:^(BOOL finished) {
+                completion();
+            }];
+        }
     }
 }
 
@@ -679,10 +784,19 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             customBlock = [_delegate revealController:self blockForOperation:operation fromViewController:fromViewController toViewController:toViewController finalBlock:completion];
         }
         
-        if (customBlock) {
+        id<UIViewControllerAnimatedTransitioning>animator = nil;
+        if ([_delegate respondsToSelector:@selector(revealController:animationControllerForTransitionFromViewController:toViewController:forOperation:)]) {
+            animator = [_delegate revealController:self animationControllerForTransitionFromViewController:fromViewController toViewController:toViewController forOperation:operation];
+        }
+        if (animator) {
+            PBContextTransitionObject *transitioningObject = [[PBContextTransitionObject alloc]initWithRevealController:self containerView:_contentView fromViewController:fromViewController toViewController:toViewController completion:completion];
+            [animator animateTransition:transitioningObject];
+        }
+        
+        else if (customBlock) {
             if (customBlock) customBlock();
         }
-        else {
+        else if (customAnimation) {
             [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 if (customAnimation) customAnimation();
             } completion:^(BOOL finished) {
@@ -1040,7 +1154,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 frame.size.width = _rightViewRevealWidth;
             }
             else {
-                frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealDisplacement;
+                frame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth + _rightViewRevealDisplacement;
                 frame.size.width = _rightViewRevealWidth;
             }
             _rightViewController.view.frame = frame;
@@ -1067,7 +1181,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - ABS(position);
             }
             else {
-                rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - ABS(position) - _rightViewRevealDisplacement + (ABS(position) * _rightViewRevealDisplacement / _rightViewRevealWidth);
+                CGFloat displacement = _rightViewRevealDisplacement - (ABS(position) * _rightViewRevealDisplacement / _rightViewRevealWidth);
+                rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth + displacement;
                 mainFrame.origin.x = position;
                 _mainViewController.view.frame = mainFrame;
             }

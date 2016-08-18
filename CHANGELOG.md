@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 1.0.0
+
+#### Add a new delegate method for asking a custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller.
+
+```
+- (id <UIViewControllerAnimatedTransitioning>)revealController:(PBRevealViewController *)revealController animationControllerForTransitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController forOperation:(PBRevealControllerOperation)operation;
+```
+
+#### Update Example4Swift with some custom animations.
+
 ## 0.4.0
 
 #### PBRevealViewController now can present the side views (left/right) below or above (default) the main view.

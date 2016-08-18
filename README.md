@@ -4,12 +4,14 @@
 [![License](https://img.shields.io/cocoapods/l/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 [![Platform](https://img.shields.io/cocoapods/p/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 
-A UIViewController subclass for revealing a left and/or right view controller above or below a main view controller.
+A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.
 
 ## Examples
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif) ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif) ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video4.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif)
+![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video4.gif)
 
 ## Installation
 
@@ -36,8 +38,9 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 * Can be deployed as a child of itself to create cascade-like, hierarchical interfaces.
 * Seamless integration of tap and pan gesture recognizers.
 * Delegate methods for getting full state of the controller and implementing your own code hooks for customizing behavior.
-* Delegate methods to ask animation/completion block for main view controller when pushing.
-* Delegate methods to ask block for child controller when pushing.
+* Delegate methods for asking animation/completion block for main view controller when pushing.
+* Delegate method for asking block for child controller when pushing.
+* Delegate method for asking an animator controller adopting the UIViewControllerAnimatedTransitioning protocol for custom animatiion transitions (push or set).
 
 ## Requirements
 
