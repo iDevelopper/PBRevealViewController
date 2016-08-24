@@ -41,6 +41,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     UIViewController *dvc = self.destinationViewController;
     
     if ([identifier isEqualToString:PBSegueMainIdentifier]) {
+        [rvc addChildViewController:dvc];
+        [dvc didMoveToParentViewController:rvc];
         rvc.mainViewController = dvc;
     }
     else if ([identifier isEqualToString:PBSegueLeftIdentifier]) {
@@ -236,8 +238,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     {
         [self initDefaultProperties];
         
-        _leftViewController = leftViewController;
+        [self addChildViewController:mainViewController];
+        [_mainViewController didMoveToParentViewController:self];
         _mainViewController = mainViewController;
+
+        _leftViewController = leftViewController;
         _rightViewController = rightViewController;
         
         [self reloadLeftShadow];
@@ -311,9 +316,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     
-    [self addChildViewController:_mainViewController];
-    [_mainViewController didMoveToParentViewController:self];
-    
     self.contentView = [[UIView alloc] initWithFrame:frame];
     
     [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
@@ -345,13 +347,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         @try
         {
-            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
+            [self performSegueWithIdentifier:PBSegueRightIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
         
         @try
         {
-            [self performSegueWithIdentifier:PBSegueRightIdentifier sender:nil];
+            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
     }
@@ -706,7 +708,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
 
-        [fromViewController.view removeFromSuperview];
+        [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
         
         mainFrame = toViewController.view.frame;
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth : -(_rightViewRevealWidth));
@@ -731,7 +733,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         __block CGRect mainFrame;
         __block CGRect sideFrame;
         
+
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
+
+        [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
+
         sidePresentViewOnTop = (_isLeftViewOpen ? _leftPresentViewOnTop : _rightPresentViewOnTop);
         
         sideFrame = sideViewController.view.frame;
@@ -741,6 +747,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         mainFrame = toViewController.view.frame;
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth + _leftViewRevealOverdraw : - (_rightViewRevealWidth) - _rightViewRevealOverdraw);
         
+        toViewController.view.hidden = YES;
+    
         [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
             sideViewController.view.frame = sideFrame;
             if (!sidePresentViewOnTop) {
@@ -754,8 +762,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             sideFrame.origin.x = (_isLeftViewOpen ? -(_leftViewRevealWidth) : +[UIScreen mainScreen].bounds.size.width);
             sideFrame.size.width = (_isLeftViewOpen ? _leftViewRevealWidth : _rightViewRevealWidth);
             
-            [fromViewController.view removeFromSuperview];
-            
+            toViewController.view.hidden = NO;
+
             [UIView animateWithDuration:duration/2 delay:0. options:UIViewAnimationOptionLayoutSubviews animations:^{
                 sideViewController.view.frame = sideFrame;
                 toViewController.view.frame = mainFrame;

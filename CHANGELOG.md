@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+
+#### Bug fixe when PBRevealViewController is embedded in a navigation controller.
+
 ## 1.0.0
 
 #### Add a new delegate method for asking a custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller.

@@ -25,7 +25,7 @@ class AnimationControllerForReplace: NSObject, UIViewControllerAnimatedTransitio
         initialToViewFrame.origin.x += finalToViewFrame.size.width
     
         toView!.frame = initialToViewFrame
-        transitionContext.containerView()?.bringSubviewToFront(toView!)
+        transitionContext.containerView()!.bringSubviewToFront(toView!)
 
         UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: [.TransitionNone, .ShowHideTransitionViews], animations: {
             toView!.frame = finalToViewFrame
