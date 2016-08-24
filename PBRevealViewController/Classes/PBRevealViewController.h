@@ -457,6 +457,22 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
 - (void)revealController:(PBRevealViewController *)revealController didShowLeftViewController:(UIViewController *)controller;
 
 /**
+ *  Called just before the left view controller is hidden.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The left view controller object.
+ */
+- (void)revealController:(PBRevealViewController *)revealController willHideLeftViewController:(UIViewController *)controller;
+
+/**
+ *  Called just after the left view controller is hidden.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The left view controller object.
+ */
+- (void)revealController:(PBRevealViewController *)revealController didHideLeftViewController:(UIViewController *)controller;
+
+/**
  *  Ask the delegate if the right view should be shown. Not called while a pan gesture.
  *
  *  @param revealController The reveal view controller object.
@@ -483,6 +499,22 @@ typedef NS_ENUM(NSInteger, PBRevealControllerPanDirection) {
  *  @param controller       The right view controller object.
  */
 - (void)revealController:(PBRevealViewController *)revealController didShowRightViewController:(UIViewController *)controller;
+
+/**
+ *  Called just before the right view controller is hidden.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The right view controller object.
+ */
+- (void)revealController:(PBRevealViewController *)revealController willHideRightViewController:(UIViewController *)controller;
+
+/**
+ *  Called just after the right view controller is hidden.
+ *
+ *  @param revealController The reveal view controller object.
+ *  @param controller       The right view controller object.
+ */
+- (void)revealController:(PBRevealViewController *)revealController didHideRightViewController:(UIViewController *)controller;
 
 /**
  *  Implement this to return NO when you want the pan gesture recognizer to be ignored.

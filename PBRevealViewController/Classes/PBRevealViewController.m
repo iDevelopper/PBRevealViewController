@@ -945,6 +945,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)hideLeftViewAnimated:(BOOL)animated
 {
     if (_leftViewController) {
+        if ([_delegate respondsToSelector:@selector(revealController:willHideLeftViewController:)]) {
+            [_delegate revealController:self willHideLeftViewController:_leftViewController];
+        }
         NSTimeInterval duration = animated ? _leftToggleAnimationDuration : 0.;
         
         CGRect leftFrame = _leftViewController.view.frame;
@@ -971,6 +974,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_leftViewController.view removeFromSuperview];
             [_leftViewController willMoveToParentViewController:nil];
             [_leftViewController removeFromParentViewController];
+            if ([_delegate respondsToSelector:@selector(revealController:didHideLeftViewController:)]) {
+                [_delegate revealController:self didHideLeftViewController:_leftViewController];
+            }
         }];
     }
 }
@@ -978,6 +984,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)hideRightViewAnimated:(BOOL)animated
 {
     if (_rightViewController) {
+        if ([_delegate respondsToSelector:@selector(revealController:willHideRightViewController:)]) {
+            [_delegate revealController:self willHideRightViewController:_rightViewController];
+        }
         NSTimeInterval duration = animated ? _rightToggleAnimationDuration : 0.;
         
         CGRect rightFrame = _rightViewController.view.frame;
@@ -1005,6 +1014,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_rightViewController.view removeFromSuperview];
             [_rightViewController willMoveToParentViewController:nil];
             [_rightViewController removeFromParentViewController];
+            if ([_delegate respondsToSelector:@selector(revealController:didHideRightViewController:)]) {
+                [_delegate revealController:self didHideRightViewController:_rightViewController];
+            }
         }];
     }
 }

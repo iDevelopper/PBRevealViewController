@@ -1,5 +1,43 @@
 # CHANGELOG
 
+## 1.0.2
+
+#### Add some delegate methods:
+
+```
+/**
+*  Called just before the left view controller is hidden.
+*
+*  @param revealController The reveal view controller object.
+*  @param controller       The left view controller object.
+*/
+- (void)revealController:(PBRevealViewController *)revealController willHideLeftViewController:(UIViewController *)controller;
+
+/**
+*  Called just after the left view controller is hidden.
+*
+*  @param revealController The reveal view controller object.
+*  @param controller       The left view controller object.
+*/
+- (void)revealController:(PBRevealViewController *)revealController didHideLeftViewController:(UIViewController *)controller;
+
+/**
+*  Called just before the right view controller is hidden.
+*
+*  @param revealController The reveal view controller object.
+*  @param controller       The right view controller object.
+*/
+- (void)revealController:(PBRevealViewController *)revealController willHideRightViewController:(UIViewController *)controller;
+
+/**
+*  Called just after the right view controller is hidden.
+*
+*  @param revealController The reveal view controller object.
+*  @param controller       The right view controller object.
+*/
+- (void)revealController:(PBRevealViewController *)revealController didHideRightViewController:(UIViewController *)controller;
+```
+
 ## 1.0.1
 
 #### Bug fixe when PBRevealViewController is embedded in a navigation controller.
