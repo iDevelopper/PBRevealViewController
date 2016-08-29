@@ -541,14 +541,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     UITableView *tableView;
     
     if ([sideViewController isKindOfClass:[UINavigationController class]]) {
-        UINavigationController *nc = sideViewController;
+        UINavigationController *nc = (UINavigationController *)sideViewController;
         tableView = [self tableViewInView:nc.topViewController.view];
     }
     else {
         tableView = [self tableViewInView:sideViewController.view];
     }
     if (style != PBRevealBlurEffectStyleNone) {
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:style];
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyle)style];
         UIVisualEffectView *sideEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
         sideEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         UIVibrancyEffect *vibancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
@@ -588,7 +588,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         else {
             UIView *sideView = sideViewController.view;
             if ([sideViewController isKindOfClass:[UINavigationController class]]) {
-                UINavigationController *nc = sideViewController;
+                UINavigationController *nc = (UINavigationController *)sideViewController;
                 sideView = nc.topViewController.view;
             }
             sideView.backgroundColor = [UIColor clearColor];
@@ -1572,12 +1572,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (UITableView *)tableViewInView:(UIView *)view
 {
     if ([view isKindOfClass:[UITableView class]]) {
-        return view;
+        return (UITableView *)view;
     }
     for (UIView *subview in view.subviews)
     {
         if ([subview isKindOfClass:[UITableView class]]) {
-            return subview;
+            return (UITableView *)subview;
         }
         
         if ([subview.subviews count] > 0)
