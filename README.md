@@ -37,6 +37,7 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 * Plays nicely with any child view controllers or parent controllers.
 * Can be deployed as a child of itself to create cascade-like, hierarchical interfaces.
 * Seamless integration of tap and pan gesture recognizers.
+* If needed, provide a blur effect to left/right views.
 * Delegate methods for getting full state of the controller and implementing your own code hooks for customizing behavior.
 * Delegate methods for asking animation/completion block for main view controller when pushing.
 * Delegate method for asking block for child controller when pushing.

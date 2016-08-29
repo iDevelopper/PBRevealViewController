@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## 1.0.3
+
+#### Add some properties:
+
+```
+/**
+*  Defines the left view's blur effect style, default is PBRevealBlurEffectStyleNone.
+*/
+@property (nonatomic) PBRevealBlurEffectStyle leftViewBlurEffectStyle;
+
+/**
+*  Defines the right view's blur effect style, default is PBRevealBlurEffectStyleNone.
+*/
+@property (nonatomic) PBRevealBlurEffectStyle rightViewBlurEffectStyle;
+```
+##### Fixe a bug when PBRevealToggleAnimationTypeSpring or PBRevealToggleAnimationPushSideView animation is used when the side view is not presented on top
+
 ## 1.0.2
 
 #### Add some delegate methods:

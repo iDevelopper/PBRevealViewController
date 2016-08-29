@@ -40,18 +40,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PBRevealViewControllerDel
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-    // MARK: - PBRevealViewController delegate
-    
-    func revealController(revealController: PBRevealViewController!, blockForOperation operation: PBRevealControllerOperation, fromViewController: UIViewController!, toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
-        let block = {
-            () -> Void in
-            
-            UIView.transitionFromView(fromViewController.view, toView: toViewController.view, duration: 0.8, options: .TransitionCurlUp, completion: { (finished) in
-                print("Custom completion")
-                finalBlock()
-            })
-        }
-        return block;
-    }
 }

@@ -80,6 +80,28 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
     PBRevealToggleAnimationTypeCustom
 };
 
+/**
+ *  Constants for blur effect style applied to left/right views
+ */
+typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
+    /**
+     *  None.
+     */
+    PBRevealBlurEffectStyleNone = -1,
+    /**
+     *  The area of the view is lighter in hue than the underlying view.
+     */
+    PBRevealBlurEffectStyleExtraLight = UIBlurEffectStyleExtraLight,
+    /**
+     *  The area of the view is the same approximate hue of the underlying view.
+     */
+    PBRevealBlurEffectStyleLight = UIBlurEffectStyleLight,
+    /**
+     *  The area of the view is darker in hue than the underlying view.
+     */
+    PBRevealBlurEffectStyleDark = UIBlurEffectStyleDark
+};
+
 #pragma mark - PBRevealViewController
 
 @interface PBRevealViewController : UIViewController
@@ -177,6 +199,11 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 @property (nonatomic) UIColor           *leftViewShadowColor;
 
 /**
+ *  Defines the left view's blur effect style, default is PBRevealBlurEffectStyleNone.
+ */
+@property (nonatomic) PBRevealBlurEffectStyle leftViewBlurEffectStyle;
+
+/**
  * If YES (default is NO) the left view controller will be ofsseted vertically by the height of a navigation bar plus the height of status bar.
  */
 @property (nonatomic) BOOL              rightPresentViewHierarchically;
@@ -236,6 +263,11 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  Defines the right view's shadow color, default is blackColor
  */
 @property (nonatomic) UIColor           *rightViewShadowColor;
+
+/**
+ *  Defines the right view's blur effect style, default is PBRevealBlurEffectStyleNone.
+ */
+@property (nonatomic) PBRevealBlurEffectStyle rightViewBlurEffectStyle;
 
 /**
  *  Animation type, default is PBRevealToggleAnimationTypeNone.
@@ -372,6 +404,23 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
  *  The delegate of the PBRevealViewController object.
  */
 @property (nonatomic,weak) id <PBRevealViewControllerDelegate> delegate;
+
+/**
+ *  Take a screenshot of the entire screen.
+ *
+ *  @return The image of the screenshot.
+ */
++ (UIImage *)screenShot;
+
+/**
+ *  Crop image by the specified rectangle.
+ *
+ *  @param image The image to crop.
+ *  @param rect  The specified rectangle.
+ *
+ *  @return The resized image.
+ */
++ (UIImage *)cropedImage:(UIImage *)image toRect:(CGRect)rect;
 
 @end
 

@@ -215,6 +215,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 @property (nonatomic) UINavigationBar   *navigationBar;
 
+@property (nonatomic) UIVisualEffectView    *leftEffectView;
+@property (nonatomic) UIVisualEffectView    *rightEffectView;
+
 @end
 
 @implementation PBRevealViewController
@@ -275,6 +278,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _leftViewShadowOpacity = 1.0f;
     _leftViewShadowColor = [UIColor blackColor];
     
+    _leftViewBlurEffectStyle = PBRevealBlurEffectStyleNone;
+    
     _rightPresentViewHierarchically = NO;
 
     _rightPresentViewOnTop = YES;
@@ -288,6 +293,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _rightViewShadowOffset = CGSizeMake(0.0f, 5.0f);
     _rightViewShadowOpacity = 1.0f;
     _rightViewShadowColor = [UIColor blackColor];
+    
+    _rightViewBlurEffectStyle = PBRevealBlurEffectStyleNone;
     
     _replaceViewAnimationDuration = 0.25f;
     
@@ -359,13 +366,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
 }
 
-#pragma mark - Public methods and property accessors
+#pragma mark - Property accessors
 
 - (void)setLeftPresentViewHierarchically:(BOOL)leftPresentViewHierarchically
 {
     _leftPresentViewHierarchically = leftPresentViewHierarchically;
     if (_leftPresentViewHierarchically) {
-        CGRect frame = [self adjustsLeftFrame];
+        CGRect frame = [self adjustsFrameForController:_leftViewController];
         _leftViewController.view.frame = frame;
     }
 }
@@ -374,7 +381,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     _rightPresentViewHierarchically = rightPresentViewHierarchically;
     if (_rightPresentViewHierarchically) {
-        CGRect frame = [self adjustsRightFrame];
+        CGRect frame = [self adjustsFrameForController:_rightViewController];
         _rightViewController.view.frame = frame;
     }
 }
@@ -483,6 +490,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     layer.shadowRadius = _leftViewShadowRadius;
 }
 
+- (void)setLeftViewBlurEffectStyle:(PBRevealBlurEffectStyle)leftViewBlurEffectStyle
+{
+    _leftViewBlurEffectStyle = leftViewBlurEffectStyle;
+    [self reloadSideBlurEffectStyle:_leftViewBlurEffectStyle forController:_leftViewController forOperation:PBRevealControllerOperationReplaceLeftController];
+}
+
 - (void)setRightViewShadowRadius:(CGFloat)rightViewShadowRadius
 {
     _rightViewShadowRadius = rightViewShadowRadius;
@@ -517,6 +530,121 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     layer.shadowRadius = _rightViewShadowRadius;
 }
 
+- (void)setRightViewBlurEffectStyle:(PBRevealBlurEffectStyle)rightViewBlurEffectStyle
+{
+    _rightViewBlurEffectStyle = rightViewBlurEffectStyle;
+    [self reloadSideBlurEffectStyle:_rightViewBlurEffectStyle forController:_rightViewController forOperation:PBRevealControllerOperationReplaceRightController];
+}
+
+- (void)reloadSideBlurEffectStyle:(PBRevealBlurEffectStyle)style forController:(UIViewController *)sideViewController forOperation:(PBRevealControllerOperation)operation
+{
+    UITableView *tableView;
+    
+    if ([sideViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *nc = sideViewController;
+        tableView = [self tableViewInView:nc.topViewController.view];
+    }
+    else {
+        tableView = [self tableViewInView:sideViewController.view];
+    }
+    if (style != PBRevealBlurEffectStyleNone) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:style];
+        UIVisualEffectView *sideEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
+        sideEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        UIVibrancyEffect *vibancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+        
+        switch (operation) {
+            case PBRevealControllerOperationReplaceLeftController:
+                [_leftEffectView removeFromSuperview];
+                self.leftEffectView = sideEffectView;
+                break;
+                
+            case PBRevealControllerOperationReplaceRightController:
+                [_rightEffectView removeFromSuperview];
+                self.rightEffectView = sideEffectView;
+                break;
+                
+            default:
+                break;
+        }
+        if (tableView) {
+            switch (operation) {
+                case PBRevealControllerOperationReplaceLeftController:
+                    _leftEffectView.frame = tableView.bounds;
+                    tableView.backgroundView = _leftEffectView;
+                    break;
+                    
+                case PBRevealControllerOperationReplaceRightController:
+                    _rightEffectView.frame = tableView.bounds;
+                    tableView.backgroundView = _rightEffectView;
+                    break;
+                    
+                default:
+                    break;
+            }
+            tableView.backgroundColor = [UIColor clearColor];
+            tableView.separatorEffect = vibancyEffect;
+        }
+        else {
+            UIView *sideView = sideViewController.view;
+            if ([sideViewController isKindOfClass:[UINavigationController class]]) {
+                UINavigationController *nc = sideViewController;
+                sideView = nc.topViewController.view;
+            }
+            sideView.backgroundColor = [UIColor clearColor];
+            
+            switch (operation) {
+                case PBRevealControllerOperationReplaceLeftController:
+                    _leftEffectView.frame = sideView.bounds;
+                    [sideView addSubview:_leftEffectView];
+                    break;
+                    
+                case PBRevealControllerOperationReplaceRightController:
+                    _rightEffectView.frame = sideView.bounds;
+                    [sideView addSubview:_rightEffectView];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+    }
+    else {
+        if (tableView) {
+            tableView.backgroundView = nil;
+            tableView.separatorEffect = nil;
+        }
+        else {
+            switch (operation) {
+                case PBRevealControllerOperationReplaceLeftController:
+                    [_leftEffectView removeFromSuperview];
+                    break;
+                    
+                case PBRevealControllerOperationReplaceRightController:
+                    [_rightEffectView removeFromSuperview];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
+        switch (operation) {
+            case PBRevealControllerOperationReplaceLeftController:
+                self.leftEffectView = nil;
+                break;
+                
+            case PBRevealControllerOperationReplaceRightController:
+                self.rightEffectView = nil;
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+#pragma mark - Public methods
+
 - (void)setLeftViewController:(UIViewController *)leftViewController
 {
     [self setLeftViewController:leftViewController animated:NO];
@@ -524,6 +652,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated
 {
+    if (_rightPresentViewHierarchically) {
+        CGRect frame = [self adjustsFrameForController:leftViewController];
+        leftViewController.view.frame = frame;
+    }
+    [self reloadSideBlurEffectStyle:_leftViewBlurEffectStyle forController:leftViewController forOperation:PBRevealControllerOperationReplaceLeftController];
     if (_isLeftViewOpen) {
         [self _swapFromViewController:_leftViewController toViewController:leftViewController operation:PBRevealControllerOperationReplaceLeftController animated:animated];
     }
@@ -552,6 +685,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)setRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated
 {
+    if (_rightPresentViewHierarchically) {
+        CGRect frame = [self adjustsFrameForController:rightViewController];
+        rightViewController.view.frame = frame;
+    }
+    [self reloadSideBlurEffectStyle:_rightViewBlurEffectStyle forController:rightViewController forOperation:PBRevealControllerOperationReplaceRightController];
     if (_isRightViewOpen) {
         [self _swapFromViewController:_rightViewController toViewController:rightViewController operation:PBRevealControllerOperationReplaceRightController animated:animated];
     }
@@ -708,7 +846,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
 
-        [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
+        [_contentView insertSubview:toViewController.view aboveSubview:fromViewController.view];
         
         mainFrame = toViewController.view.frame;
         mainFrame.origin.x = (_isLeftViewOpen ? _leftViewRevealWidth : -(_rightViewRevealWidth));
@@ -736,7 +874,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
         sideViewController = (_isLeftViewOpen ? _leftViewController : _rightViewController);
 
-        [_contentView insertSubview:toViewController.view belowSubview:sideViewController.view];
+        [_contentView insertSubview:toViewController.view aboveSubview:fromViewController.view];
 
         sidePresentViewOnTop = (_isLeftViewOpen ? _leftPresentViewOnTop : _rightPresentViewOnTop);
         
@@ -1067,6 +1205,18 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 return NO;
             }
         }
+        if (velocity > 0) {
+            if ([_delegate respondsToSelector:@selector(revealController:shouldShowLeftViewController:)]) {
+                if ([_delegate revealController:self shouldShowLeftViewController:_leftViewController] == NO)
+                    return NO;
+            }
+        }
+        else {
+            if ([_delegate respondsToSelector:@selector(revealController:shouldShowRightViewController:)]) {
+                if ([_delegate revealController:self shouldShowRightViewController:_rightViewController] == NO)
+                    return NO;
+            }
+        }
         if (_isLeftViewOpen || _isRightViewOpen) {
             return NO;
         }
@@ -1145,6 +1295,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             _isLeftViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             
+            leftFrame = _leftViewController.view.frame;
             leftFrame.origin.x = 0.;
             leftFrame.size.width = _leftViewRevealWidth;
             
@@ -1215,6 +1366,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
             
+            rightFrame = _rightViewController.view.frame;
             rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
             rightFrame.size.width = _rightViewRevealWidth;
             if (!_rightPresentViewOnTop) {
@@ -1362,19 +1514,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 # pragma mark - Adjusts frames
 
-- (CGRect)adjustsLeftFrame
+- (CGRect)adjustsFrameForController:(UIViewController *)sideViewController
 {
     CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
-    CGRect frame = _leftViewController.view.frame;
-    frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
-    frame.size.height = self.view.frame.size.height - barHeight - ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
-    return frame;
-}
-
-- (CGRect)adjustsRightFrame
-{
-    CGFloat barHeight = [_navigationBar sizeThatFits:CGSizeMake(100,100)].height;
-    CGRect frame = _rightViewController.view.frame;
+    CGRect frame = sideViewController.view.frame;
     frame.origin.y = barHeight + ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
     frame.size.height = self.view.frame.size.height - barHeight - ([UIApplication sharedApplication].isStatusBarHidden ? 0 : 20);
     return frame;
@@ -1389,7 +1532,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
          CGRect frame;
          
          if (_leftPresentViewHierarchically) {
-             frame = [self adjustsLeftFrame];
+             frame = [self adjustsFrameForController:_leftViewController];
          }
          else {
              frame = _leftViewController.view.frame;
@@ -1401,7 +1544,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
          _leftViewController.view.frame = frame;
          
          if (_rightPresentViewHierarchically) {
-             frame = [self adjustsRightFrame];
+             frame = [self adjustsFrameForController:_rightViewController];
          }
          else {
              frame = _rightViewController.view.frame;
@@ -1424,4 +1567,54 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
+# pragma mark - Private helpers
+
+- (UITableView *)tableViewInView:(UIView *)view
+{
+    if ([view isKindOfClass:[UITableView class]]) {
+        return view;
+    }
+    for (UIView *subview in view.subviews)
+    {
+        if ([subview isKindOfClass:[UITableView class]]) {
+            return subview;
+        }
+        
+        if ([subview.subviews count] > 0)
+        {
+            [self tableViewInView:subview];
+        }
+    }
+    return nil;
+}
+
+# pragma mark - Public helpers
+
++ (UIImage *)screenShot
+{
+    // Create graphics context with screen size
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIGraphicsBeginImageContext(screenRect.size);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    [[UIColor blackColor] set];
+    CGContextFillRect(ctx, screenRect);
+    
+    // Get reference to our window
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    
+    // Transfer content into our context
+    [window.layer renderInContext:ctx];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
++ (UIImage *)cropedImage:(UIImage *)image toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    UIImage *newImage   = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    return newImage;
+}
 @end

@@ -13,7 +13,10 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addBlurToTableView(UIImage(named: "Sunset1"))
+        tableView.backgroundColor = .clearColor();
+        
+        // No separator where there aren't cells
+        tableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,12 +65,15 @@ class MenuTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("Main") as! MainViewController
+        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
         
         switch indexPath.row {
         case 0:
@@ -97,28 +103,5 @@ class MenuTableViewController: UITableViewController {
         mainViewController.title = cell?.textLabel?.text
         let nc = UINavigationController(rootViewController: mainViewController)
         revealViewController().pushMainViewController(nc, animated:true)
-
-        addBlurToTableView(mainViewController.image)
-    }
-    
-    func addBlurToTableView(image: UIImage!) {
-        let effect = UIBlurEffect(style: .Light)
-        let resizingMask: UIViewAutoresizing = [.FlexibleWidth, .FlexibleHeight]
-        
-        let backgroundView = UIView(frame: view.frame)
-        backgroundView.autoresizingMask = resizingMask
-
-        let imageView = UIImageView(image: image)
-        imageView.frame = view.frame
-        imageView.autoresizingMask = resizingMask
-        backgroundView.addSubview(imageView)
-        
-        let blurView = UIVisualEffectView(effect: effect)
-        blurView.frame = view.frame
-        blurView.autoresizingMask = resizingMask
-        backgroundView.addSubview(blurView)
-        
-        tableView.backgroundView = backgroundView
-        tableView.separatorEffect = UIVibrancyEffect(forBlurEffect: effect)
     }
 }

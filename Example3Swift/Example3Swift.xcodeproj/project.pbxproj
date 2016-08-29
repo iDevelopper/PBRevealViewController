@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		262815F777B72E03281DE428 /* libPods-Example3Swift.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E92A3D1F03FEA586CBE6CE /* libPods-Example3Swift.a */; };
+		3209A9D61D71EF02003DFE1E /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209A9D51D71EF02003DFE1E /* RevealViewController.swift */; };
 		323F491A1D58EA7800C356F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F49191D58EA7800C356F9 /* AppDelegate.swift */; };
 		323F491F1D58EA7800C356F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 323F491D1D58EA7800C356F9 /* Main.storyboard */; };
 		323F49211D58EA7800C356F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 323F49201D58EA7800C356F9 /* Assets.xcassets */; };
@@ -15,9 +16,11 @@
 		323F492F1D58EBB000C356F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F492C1D58EBB000C356F9 /* MainViewController.swift */; };
 		323F49301D58EBB000C356F9 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F492D1D58EBB000C356F9 /* MenuTableViewController.swift */; };
 		323F49311D58EBB000C356F9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323F492E1D58EBB000C356F9 /* RightViewController.swift */; };
+		32D0A8BF1D7437FC004ADE29 /* RightViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D0A8BE1D7437FC004ADE29 /* RightViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3209A9D51D71EF02003DFE1E /* RevealViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
 		323F49161D58EA7800C356F9 /* Example3Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example3Swift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		323F49191D58EA7800C356F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		323F491E1D58EA7800C356F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		323F492C1D58EBB000C356F9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		323F492D1D58EBB000C356F9 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		323F492E1D58EBB000C356F9 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController.swift; sourceTree = "<group>"; };
+		32D0A8BE1D7437FC004ADE29 /* RightViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightViewController2.swift; sourceTree = "<group>"; };
 		92BEA45CC416F037A4DE3215 /* Pods-Example3Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example3Swift.release.xcconfig"; path = "../Example/Pods/Target Support Files/Pods-Example3Swift/Pods-Example3Swift.release.xcconfig"; sourceTree = "<group>"; };
 		96E92A3D1F03FEA586CBE6CE /* libPods-Example3Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example3Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B0AC9E2DBFAF5E88A4D8A0 /* Pods-Example3Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example3Swift.debug.xcconfig"; path = "../Example/Pods/Target Support Files/Pods-Example3Swift/Pods-Example3Swift.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,8 +80,10 @@
 			isa = PBXGroup;
 			children = (
 				323F49191D58EA7800C356F9 /* AppDelegate.swift */,
+				3209A9D51D71EF02003DFE1E /* RevealViewController.swift */,
 				323F492D1D58EBB000C356F9 /* MenuTableViewController.swift */,
 				323F492E1D58EBB000C356F9 /* RightViewController.swift */,
+				32D0A8BE1D7437FC004ADE29 /* RightViewController2.swift */,
 				323F492C1D58EBB000C356F9 /* MainViewController.swift */,
 				323F492B1D58EBB000C356F9 /* Example3Swift-Bridging-Header.h */,
 				323F491D1D58EA7800C356F9 /* Main.storyboard */,
@@ -220,7 +226,9 @@
 			files = (
 				323F491A1D58EA7800C356F9 /* AppDelegate.swift in Sources */,
 				323F49311D58EBB000C356F9 /* RightViewController.swift in Sources */,
+				3209A9D61D71EF02003DFE1E /* RevealViewController.swift in Sources */,
 				323F492F1D58EBB000C356F9 /* MainViewController.swift in Sources */,
+				32D0A8BF1D7437FC004ADE29 /* RightViewController2.swift in Sources */,
 				323F49301D58EBB000C356F9 /* MenuTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

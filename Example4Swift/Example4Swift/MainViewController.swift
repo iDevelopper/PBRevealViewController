@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        @IBOutlet weak var replaceButton: UIBarButtonItem!
         menuButton.target = self.revealViewController()
         menuButton.action = #selector(PBRevealViewController.revealLeftView)
         
