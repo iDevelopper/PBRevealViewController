@@ -83,7 +83,13 @@ On your project:
 - (void)setRightViewController:(UIViewController *)rightViewController animated:(BOOL)animated;
 ```
 
-* Other methods are documented in the PBRevealViewController.h header file. 
+* Other methods are documented in the PBRevealViewController.h header file and at [CocoaPods](http://cocoapods.org). 
+
+## Special Mention
+
+A Special Thank to [Joan Lluch](joan.lluch@sweetwilliamsl.com).
+
+This code was inspired on her excellent and similar class [SWRevealViewController](https://github.com/John-Lluch/SWRevealViewController).
 
 ## Author
 

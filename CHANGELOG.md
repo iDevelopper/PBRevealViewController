@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.0.4
+
+#### Update README.md
+
+Add some credit to [Joan Lluch](joan.lluch@sweetwilliamsl.com) for her class [SWRevealViewController](https://github.com/John-Lluch/SWRevealViewController).
+
 ## 1.0.3
 
 #### Add some properties:
