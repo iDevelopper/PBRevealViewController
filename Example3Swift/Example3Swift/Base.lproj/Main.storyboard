@@ -310,7 +310,7 @@
     <resources>
         <image name="Replace" width="25" height="25"/>
         <image name="Resize" width="25" height="25"/>
-        <image name="Reveal" width="21" height="21"/>
+        <image name="Reveal" width="25" height="25"/>
         <image name="Sunset1" width="1080" height="1920"/>
         <image name="Sunset2" width="1080" height="1920"/>
     </resources>

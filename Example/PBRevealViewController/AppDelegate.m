@@ -75,6 +75,13 @@
 - (void)revealController:(PBRevealViewController *)revealController didShowLeftViewController:(UIViewController *)controller
 {
     NSLog(@"didShowLeftViewController: %@", controller);
+    //revealController.mainViewController.view.userInteractionEnabled = NO;
+}
+
+- (void)revealController:(PBRevealViewController *)revealController didHideLeftViewController:(UIViewController *)controller
+{
+    NSLog(@"didHideLeftViewController: %@", controller);
+    //revealController.mainViewController.view.userInteractionEnabled = YES;
 }
 
 - (BOOL)revealController:(PBRevealViewController *)revealController shouldShowRightViewController:(UIViewController *)controller

@@ -206,6 +206,45 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 @end
 
+#pragma mark - PBRevealView Class
+
+@interface PBRevealView: UIView
+{
+    __weak PBRevealViewController *_revealController;
+}
+@end
+
+@implementation PBRevealView
+
+- (id)initWithFrame:(CGRect)frame controller:(PBRevealViewController*)revealController
+{
+    self = [super initWithFrame:frame];
+    if ( self )
+    {
+        _revealController = revealController;
+    }
+    return self;
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    BOOL isInside = [super pointInside:point withEvent:event];
+    if (isInside) {
+        _revealController.tapGestureRecognizer.enabled = YES;
+        
+        if (_revealController.isLeftViewOpen && point.x < _revealController.leftViewRevealWidth) {
+            _revealController.tapGestureRecognizer.enabled = NO;
+        }
+        if (_revealController.isRightViewOpen && point.x > (self.frame.size.width - _revealController.rightViewRevealWidth)) {
+            _revealController.tapGestureRecognizer.enabled = NO;
+        }
+        return YES;
+    }
+    return NO;
+}
+
+@end
+
 #pragma mark - PBRevealViewController Class
 
 @interface PBRevealViewController() <UIGestureRecognizerDelegate>
@@ -323,7 +362,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     
     CGRect frame = [[UIScreen mainScreen] bounds];
     
-    self.contentView = [[UIView alloc] initWithFrame:frame];
+    self.contentView = [[PBRevealView alloc] initWithFrame:frame controller:self];
     
     [_contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
     
@@ -735,10 +774,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 
             case PBRevealControllerOperationReplaceMainController:
                 [_contentView insertSubview:toViewController.view belowSubview:fromViewController.view];
-                // XXXX
-                [toViewController.view addGestureRecognizer:_tapGestureRecognizer];
-                [toViewController.view addGestureRecognizer:_panGestureRecognizer];
-                //
+                [_contentView addGestureRecognizer:_tapGestureRecognizer];
+                [_contentView addGestureRecognizer:_panGestureRecognizer];
                 break;
                 
             default:
@@ -811,10 +848,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         if (operation == PBRevealControllerOperationPushMainControllerFromRight) {
             [self hideRightViewAnimated:YES];
         }
-        // XXXX
-        [toViewController.view addGestureRecognizer:_tapGestureRecognizer];
-        [toViewController.view addGestureRecognizer:_panGestureRecognizer];
-        //
+        [_contentView addGestureRecognizer:_tapGestureRecognizer];
+        [_contentView addGestureRecognizer:_panGestureRecognizer];
+        
         if ([_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)]) {
             [_delegate revealController:self didAddViewController:toViewController forOperation:operation animated:animated];
         }
@@ -1170,7 +1206,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         _tapGestureRecognizer.cancelsTouchesInView = NO;
         _tapGestureRecognizer.delegate = self;
         
-        [_mainViewController.view addGestureRecognizer:_tapGestureRecognizer];
+        [_contentView addGestureRecognizer:_tapGestureRecognizer];
     }
     return _tapGestureRecognizer;
 }

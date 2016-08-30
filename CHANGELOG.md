@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5
+
+#### Allow tap gesture recognizer to be enabled on main view when userInteractionEnabled = false.
+
 ## 1.0.4
 
 #### Update README.md

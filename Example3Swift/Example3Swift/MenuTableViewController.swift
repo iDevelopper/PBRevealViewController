@@ -99,8 +99,6 @@ class MenuTableViewController: UITableViewController {
         default: break
         }
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
-        mainViewController.title = cell?.textLabel?.text
         let nc = UINavigationController(rootViewController: mainViewController)
         revealViewController().pushMainViewController(nc, animated:true)
     }

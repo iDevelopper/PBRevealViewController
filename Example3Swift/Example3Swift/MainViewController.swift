@@ -20,7 +20,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         leftButton.target = self.revealViewController()
         leftButton.action = #selector(PBRevealViewController.revealLeftView)
         

@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '1.0.4'
-  s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
+  s.version          = '1.0.5'
+  s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller inspired on SWRevealViewController subclass.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?

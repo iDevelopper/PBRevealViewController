@@ -29,7 +29,23 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
     }
 
     // MARK: - PBRevealViewController delegate
-
+/*
+    func revealController(revealController: PBRevealViewController!, didShowLeftViewController controller: UIViewController!) {
+        revealController.mainViewController.view.userInteractionEnabled = false
+    }
+    
+    func revealController(revealController: PBRevealViewController!, didHideLeftViewController controller: UIViewController!) {
+        revealController.mainViewController.view.userInteractionEnabled = true
+    }
+    
+    func revealController(revealController: PBRevealViewController!, didShowRightViewController controller: UIViewController!) {
+        revealController.mainViewController.view.userInteractionEnabled = false
+    }
+    
+    func revealController(revealController: PBRevealViewController!, didHideRightViewController controller: UIViewController!) {
+        revealController.mainViewController.view.userInteractionEnabled = true
+    }
+*/    
     func revealController(revealController: PBRevealViewController!, blockForOperation operation: PBRevealControllerOperation, fromViewController: UIViewController!, toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
         let block = {
             () -> Void in
