@@ -66,10 +66,12 @@
 
 - (IBAction)resizeLeftView:(id)sender {
     if (self.revealViewController.leftViewRevealWidth == 160.) {
-        self.revealViewController.leftViewRevealWidth = 300.;
+        //self.revealViewController.leftViewRevealWidth = 200.;
+        [self.revealViewController setLeftViewRevealWidth:200. animated:YES];
     }
     else {
-        self.revealViewController.leftViewRevealWidth = 160.;
+        //self.revealViewController.leftViewRevealWidth = 160.;
+        [self.revealViewController setLeftViewRevealWidth:160. animated:YES];
     }
 }
 
@@ -106,10 +108,11 @@
 
 - (IBAction)resizeRightView:(id)sender {
     if (self.revealViewController.rightViewRevealWidth == 160.) {
-        self.revealViewController.rightViewRevealWidth = 300.;
+        [self.revealViewController setRightViewRevealWidth:200. animated:YES];
     }
     else {
-        self.revealViewController.rightViewRevealWidth = 160.;
+        //self.revealViewController.rightViewRevealWidth = 160.;
+        [self.revealViewController setRightViewRevealWidth:160. animated:YES];
     }
 }
 

@@ -19,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 1000, 0, 0);
+    // No separator where there aren't cells
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +43,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     cell.backgroundColor = tableView.backgroundColor;
-    cell.separatorInset = UIEdgeInsetsMake(0, 15, 0, 0);
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.text = [NSString stringWithFormat:@"Item %ld", (long)indexPath.row];
     

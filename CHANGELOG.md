@@ -1,8 +1,12 @@
 # CHANGELOG
 
+## 1.0.6
+
+#### Compatibility fixes for iOS < 8.0 and >= 6.0.
+
 ## 1.0.5
 
-#### Allow tap gesture recognizer to be enabled on main view when userInteractionEnabled = false.
+#### Allow tap gesture recognizer to be enabled on main view when userInteractionEnabled is false.
 
 ## 1.0.4
 

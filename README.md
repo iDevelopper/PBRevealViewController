@@ -45,7 +45,7 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 
 ## Requirements
 
-* iOS 8.3 or later.
+* iOS 6.0 or later.
 * ARC memory management.
 
 ## Usage
@@ -55,7 +55,7 @@ On your project:
 * Use the PBRevealViewController instance in your code as you would use any view controller.
 * Deploy as the application window rootViewController, or as a child of other containment controllers.
 * You can leave panGestureRecognized and tapGestureRecognizer provided by the PBRevealViewController as they are for the default behavior or you can add them to a suitable view on your "main" view controller. For example add the panGestureRecognizer to a navigationBar on the viewDidLoad method of your main view controller.
-* Cancel the gestureRecoGnized provided by the PBRevealViewController:
+* Cancel the gestures recognizer behavior provided by the PBRevealViewController:
 ```objective-c
 - (BOOL)revealControllerTapGestureShouldBegin:
 - (BOOL)revealControllerPanGestureShouldBegin:direction:
@@ -87,7 +87,7 @@ On your project:
 
 ## Special Mention
 
-A Special Thank to [Joan Lluch](joan.lluch@sweetwilliamsl.com).
+A Special Thank to [Joan Lluch](https://github.com/John-Lluch).
 
 This code was inspired on her excellent and similar class [SWRevealViewController](https://github.com/John-Lluch/SWRevealViewController).
 

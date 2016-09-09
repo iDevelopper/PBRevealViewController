@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
 };
 
 /**
- *  Constants for blur effect style applied to left/right views
+ *  Constants for blur effect style to apply to left/right views (since iOS 8).
  */
 typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
     /**
@@ -153,9 +153,17 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 @property (nonatomic) CGFloat           leftViewRevealDisplacement;
 
 /**
- *  Defines how much of the left view is shown, default is 260.0f
+ *  Defines the width of the left view when it is shown, default is 260.0f.
  */
 @property (nonatomic) CGFloat           leftViewRevealWidth;
+
+/**
+ *  Defines the width of the left view when it is shown.
+ *
+ *  @param leftViewRevealWidth The left view width.
+ *  @param animated            Specify YES to animate the new width or NO if you do not want it to be animated.
+ */
+- (void)setLeftViewRevealWidth:(CGFloat)leftViewRevealWidth animated:(BOOL)animated;
 
 /**
  *  Duration for the left reveal/push animation, default is 0.5f.
@@ -201,6 +209,7 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 /**
  *  Defines the left view's blur effect style, default is PBRevealBlurEffectStyleNone.
  */
+
 @property (nonatomic) PBRevealBlurEffectStyle leftViewBlurEffectStyle;
 
 /**
@@ -219,9 +228,17 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 @property (nonatomic) CGFloat           rightViewRevealDisplacement;
 
 /**
- *  Defines how much of the right view is shown, default is 160.0f
+ *  Defines the width of the right view when it is shown, default is 160.0f.
  */
 @property (nonatomic) CGFloat           rightViewRevealWidth;
+
+/**
+ *  Defines the width of the right view.
+ *
+ *  @param rightViewRevealWidth The right view width.
+ *  @param animated             Specify YES to animate the new width or NO if you do not want it to be animated.
+ */
+- (void)setRightViewRevealWidth:(CGFloat)rightViewRevealWidth animated:(BOOL)animated;
 
 /**
  *  Duration for the right reveal/push animation, default is 0.5f.
@@ -267,6 +284,7 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 /**
  *  Defines the right view's blur effect style, default is PBRevealBlurEffectStyleNone.
  */
+
 @property (nonatomic) PBRevealBlurEffectStyle rightViewBlurEffectStyle;
 
 /**
@@ -404,23 +422,6 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
  *  The delegate of the PBRevealViewController object.
  */
 @property (nonatomic,weak) id <PBRevealViewControllerDelegate> delegate;
-
-/**
- *  Take a screenshot of the entire screen.
- *
- *  @return The image of the screenshot.
- */
-+ (UIImage *)screenShot;
-
-/**
- *  Crop image by the specified rectangle.
- *
- *  @param image The image to crop.
- *  @param rect  The specified rectangle.
- *
- *  @return The resized image.
- */
-+ (UIImage *)cropedImage:(UIImage *)image toRect:(CGRect)rect;
 
 @end
 
@@ -669,7 +670,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void)revealController:(PBRevealViewController *)revealController didAddViewController:(UIViewController *)viewController forOperation:(PBRevealControllerOperation)operation animated:(BOOL)animated;
 
 /**
- *  Ask for animation block of child controller replacement when pushed.
+ *  Ask for animation block while pushing main view controller.
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
@@ -683,7 +684,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void (^)(void))revealController:(PBRevealViewController *)revealController animationBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
 /**
- *  Ask for completion block of the main view controller replacement when pushed.
+ *  Ask for completion block while pushing main view controller.
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
@@ -697,7 +698,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController;
 
 /**
- *  Ask for a block with animation and completion of the main controller replacement when pushed, please add the final block to your completion
+ *  Ask for a block with animation and completion while replacing/pushing child view controllers, please add the final block to your completion.
  *
  *  @param revealController   The reveal view controller object.
  *  @param operation          The current operation (push from left or push from right).
@@ -713,7 +714,7 @@ tapGestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestur
 - (void (^)(void))revealController:(PBRevealViewController *)revealController blockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController finalBlock:(void(^)(void))finalBlock;
 
 /**
- *  Ask for custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller.
+ *  Ask for custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller (since iOS 7).
  *
  *  @param revealController   The reveal view controller object.
  *  @param fromViewController The child view controller to replace.

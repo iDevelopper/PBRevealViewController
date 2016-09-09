@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '1.0.5'
+  s.version          = '1.0.6'
   s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,7 @@ A category method on UIViewController, `revealViewController`, to get the parent
   s.source           = { :git => 'https://github.com/iDevelopper/PBRevealViewController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.3'
+  s.ios.deployment_target = '6.0'
 
   s.source_files = 'PBRevealViewController/Classes/**/*'
   
