@@ -10,16 +10,16 @@ import UIKit
 
 class AnimationControllerForPush: NSObject, UIViewControllerAnimatedTransitioning {
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.8
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
         let fromView = fromViewController?.view
-        UIView.transitionWithView(fromView!, duration: transitionDuration(transitionContext), options: [.TransitionCurlUp, .ShowHideTransitionViews] , animations: {
-            fromView?.hidden = true
+        UIView.transition(with: fromView!, duration: transitionDuration(using: transitionContext), options: [.transitionCurlUp, .showHideTransitionViews] , animations: {
+            fromView?.isHidden = true
         }) { (finished) in
             transitionContext.completeTransition(finished)
         }

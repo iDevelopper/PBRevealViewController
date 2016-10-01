@@ -10,24 +10,24 @@ import UIKit
 
 class AnimationControllerForReplace: NSObject, UIViewControllerAnimatedTransitioning {
 
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.8
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
         
         let toView = toViewController?.view
         
-        let finalToViewFrame = transitionContext.finalFrameForViewController(toViewController!)
+        let finalToViewFrame = transitionContext.finalFrame(for: toViewController!)
         var initialToViewFrame = finalToViewFrame
         initialToViewFrame.origin.x += finalToViewFrame.size.width
     
         toView!.frame = initialToViewFrame
-        transitionContext.containerView()!.bringSubviewToFront(toView!)
+        transitionContext.containerView.bringSubview(toFront: toView!)
 
-        UIView.animateWithDuration(transitionDuration(transitionContext), delay: 0.0, options: [.TransitionNone, .ShowHideTransitionViews], animations: {
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .showHideTransitionViews, animations: {
             toView!.frame = finalToViewFrame
         }) { (finished) in
             transitionContext.completeTransition(finished)

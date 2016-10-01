@@ -13,10 +13,10 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .clearColor();
+        tableView.backgroundColor = UIColor.clear
         
         // No separator where there aren't cells
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,21 +26,21 @@ class MenuTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
-        cell.backgroundColor = UIColor.clearColor()
-        cell.textLabel?.textColor = UIColor.whiteColor()
-        switch indexPath.row {
+        cell.backgroundColor = UIColor.clear
+        cell.textLabel?.textColor = UIColor.white
+        switch (indexPath as NSIndexPath).row {
         case 0:
             cell.textLabel!.text = "None"
             
@@ -65,35 +65,35 @@ class MenuTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.None
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.none
             mainViewController.image = UIImage(named: "Sunset1")
             
         case 1:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.CrossDissolve
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.crossDissolve
             mainViewController.image = UIImage(named: "Sunset2")
             
         case 2:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.PushSideView
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.pushSideView
             mainViewController.image = UIImage(named: "Sunset3")
             
         case 3:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.Spring
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.spring
             mainViewController.image = UIImage(named: "Sunset4")
             
         case 4:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.Custom
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.custom
             mainViewController.image = UIImage(named: "Sunset5")
             
         default: break

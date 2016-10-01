@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.0
+
+#### Compatibility fixes for Xcode 8, iOS 10 and Swift 3.
+
 ## 1.0.6
 
 #### Compatibility fixes for iOS < 8.0 and >= 6.0.

@@ -270,7 +270,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 @property (nonatomic) UINavigationBar       *navigationBar;
 
 @property (nonatomic) UIVisualEffectView    *leftEffectView;
+
+@property (nonatomic) UIView                *leftShadowView;
+@property (nonatomic) CGFloat               leftShadowOpacity;
+
 @property (nonatomic) UIVisualEffectView    *rightEffectView;
+
+@property (nonatomic) UIView                *rightShadowView;
+@property (nonatomic) CGFloat               rightShadowOpacity;
 
 
 @end
@@ -343,10 +350,18 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)initDefaultProperties
 {
-    self.navigationBar = [[UINavigationBar alloc]init];
+    _navigationBar = [[UINavigationBar alloc]init];
     
-    _mainViewShadowRadius = 5.0f;
-    _mainViewShadowOffset = CGSizeMake(0.0f, 5.0f);
+    _leftEffectView = nil;
+    _leftShadowView = nil;
+    _leftShadowOpacity = 0.0f;
+    
+    _rightEffectView = nil;
+    _rightShadowView = nil;
+    _rightShadowOpacity = 0.0f;
+    
+    _mainViewShadowRadius = 2.5f;
+    _mainViewShadowOffset = CGSizeMake(0.0f, 2.5f);
     _mainViewShadowOpacity = 1.0f;
     _mainViewShadowColor = [UIColor blackColor];
     
@@ -359,13 +374,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _leftToggleAnimationDuration = 0.5f;
     _leftToggleSpringDampingRatio = 0.8f;
     _leftToggleSpringVelocity = 0.5f;
-    _leftViewShadowRadius = 5.0f;
-    _leftViewShadowOffset = CGSizeMake(0.0f, 5.0f);
+    
+    _leftViewShadowRadius = 2.5f;
+    _leftViewShadowOffset = CGSizeMake(0.0f, 2.5f);
     _leftViewShadowOpacity = 1.0f;
     _leftViewShadowColor = [UIColor blackColor];
     
     _leftViewBlurEffectStyle = PBRevealBlurEffectStyleNone;
-
     
     _rightPresentViewHierarchically = NO;
 
@@ -376,8 +391,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _rightToggleAnimationDuration = 0.5f;
     _rightToggleSpringDampingRatio = 0.8f;
     _rightToggleSpringVelocity = 0.5f;
-    _rightViewShadowRadius = 5.0f;
-    _rightViewShadowOffset = CGSizeMake(0.0f, 5.0f);
+    
+    _rightViewShadowRadius = 2.5f;
+    _rightViewShadowOffset = CGSizeMake(0.0f, 2.5f);
     _rightViewShadowOpacity = 1.0f;
     _rightViewShadowColor = [UIColor blackColor];
     
@@ -441,6 +457,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         //Try each segue separately so it doesn't break prematurely if either Rear or Right views are not used.
         @try
         {
+            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
+        }
+        @catch(NSException *exception) {}
+        
+        @try
+        {
             [self performSegueWithIdentifier:PBSegueLeftIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
@@ -448,12 +470,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         @try
         {
             [self performSegueWithIdentifier:PBSegueRightIdentifier sender:nil];
-        }
-        @catch(NSException *exception) {}
-        
-        @try
-        {
-            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
     }
@@ -607,6 +623,29 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)reloadLeftShadow
 {
+    if (_leftShadowOpacity) {
+        _leftViewController.view.layer.shadowOpacity = 0.;
+        if (!_leftShadowView) {
+            self.leftShadowView = [[UIView alloc] initWithFrame:_leftViewController.view.bounds];
+        }
+        _leftShadowView.translatesAutoresizingMaskIntoConstraints = NO;
+        _leftShadowView.backgroundColor = [UIColor blackColor];
+        _leftShadowView.layer.masksToBounds = NO;
+        _leftShadowView.layer.shadowColor = _leftViewShadowColor.CGColor;
+        _leftShadowView.layer.shadowOffset = _leftViewShadowOffset;
+        _leftShadowView.layer.shadowOpacity = _leftViewShadowOpacity;
+        _leftShadowView.layer.shadowRadius = _leftViewShadowRadius;
+        
+        [_leftViewController.view insertSubview:_leftShadowView atIndex:0];
+        
+        // Set constraints programmatically, as this view is animatable
+        [NSLayoutConstraint constraintWithItem:_leftShadowView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_leftViewController.view attribute:NSLayoutAttributeTrailingMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_leftShadowView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_leftViewController.view attribute:NSLayoutAttributeTopMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_leftShadowView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_leftViewController.view attribute:NSLayoutAttributeBottomMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_leftShadowView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:5.0].active = YES;
+        return;
+    }
+
     CALayer *layer = _leftViewController.view.layer;
     layer.masksToBounds = NO;
     layer.shadowColor = _leftViewShadowColor.CGColor;
@@ -647,6 +686,29 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)reloadRightShadow
 {
+    if (_rightShadowOpacity) {
+        _rightViewController.view.layer.shadowOpacity = 0.;
+        if (!_rightShadowView) {
+            self.rightShadowView = [[UIView alloc] initWithFrame:_rightViewController.view.bounds];
+        }
+        _rightShadowView.translatesAutoresizingMaskIntoConstraints = NO;
+        _rightShadowView.backgroundColor = [UIColor whiteColor];
+        _rightShadowView.layer.masksToBounds = NO;
+        _rightShadowView.layer.shadowColor = _rightViewShadowColor.CGColor;
+        _rightShadowView.layer.shadowOffset = _rightViewShadowOffset;
+        _rightShadowView.layer.shadowOpacity = _rightViewShadowOpacity;
+        _rightShadowView.layer.shadowRadius = _rightViewShadowRadius;
+        
+        [_rightViewController.view insertSubview:_rightShadowView atIndex:0];
+        
+        // Set constraints programmatically, as this view is animatable
+        [NSLayoutConstraint constraintWithItem:_rightShadowView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:_rightViewController.view attribute:NSLayoutAttributeLeadingMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_rightShadowView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_rightViewController.view attribute:NSLayoutAttributeTopMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_rightShadowView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_rightViewController.view attribute:NSLayoutAttributeBottomMargin multiplier:1.0 constant:0.0].active = YES;
+        [NSLayoutConstraint constraintWithItem:_rightShadowView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:5.0].active = YES;
+        return;
+    }
+    
     CALayer *layer = _rightViewController.view.layer;
     layer.masksToBounds = NO;
     layer.shadowColor = _rightViewShadowColor.CGColor;
@@ -677,17 +739,33 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyle)style];
             UIVisualEffectView *sideEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
             sideEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-            UIVibrancyEffect *vibancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+            UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
             
             switch (operation) {
                 case PBRevealControllerOperationReplaceLeftController:
                     [_leftEffectView removeFromSuperview];
                     self.leftEffectView = sideEffectView;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+                    if ([[UIDevice currentDevice] systemVersion].floatValue >= 10.0) {
+                        if (_leftViewShadowOpacity > 0.0f) {
+                            self.leftShadowOpacity = _leftViewShadowOpacity;
+                            [self reloadLeftShadow];
+                        }
+                    }
+#endif
                     break;
                     
                 case PBRevealControllerOperationReplaceRightController:
                     [_rightEffectView removeFromSuperview];
                     self.rightEffectView = sideEffectView;
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000
+                    if ([[UIDevice currentDevice] systemVersion].floatValue >= 10.0) {
+                        if (_rightViewShadowOpacity > 0.0f) {
+                            self.rightShadowOpacity = _rightViewShadowOpacity;
+                            [self reloadRightShadow];
+                        }
+                    }
+#endif
                     break;
                     
                 default:
@@ -709,7 +787,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                         break;
                 }
                 tableView.backgroundColor = [UIColor clearColor];
-                tableView.separatorEffect = vibancyEffect;
+                tableView.separatorEffect = vibrancyEffect;
             }
             else {
                 UIView *sideView = sideViewController.view;
@@ -757,10 +835,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             switch (operation) {
                 case PBRevealControllerOperationReplaceLeftController:
                     self.leftEffectView = nil;
+                    self.leftShadowOpacity = 0.0f;
+                    [_leftShadowView removeFromSuperview];
                     break;
                     
                 case PBRevealControllerOperationReplaceRightController:
                     self.rightEffectView = nil;
+                    self.rightShadowOpacity = 0.0f;
+                    [_rightShadowView removeFromSuperview];
                     break;
                     
                 default:
@@ -777,7 +859,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)setLeftViewController:(UIViewController *)leftViewController animated:(BOOL)animated
 {
-    if (_rightPresentViewHierarchically) {
+    if (_leftPresentViewHierarchically) {
         CGRect frame = [self adjustsFrameForController:leftViewController];
         leftViewController.view.frame = frame;
     }
@@ -843,8 +925,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)_swapFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
     NSTimeInterval duration = animated ? _replaceViewAnimationDuration : 0.0;
-    CGFloat fromAlpha = fromViewController.view.alpha;
-    CGFloat toAlpha = toViewController.view.alpha;
     
     if (fromViewController != toViewController) {
         
@@ -877,7 +957,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [fromViewController.view removeFromSuperview];
             [fromViewController removeFromParentViewController];
             [toViewController didMoveToParentViewController:self];
-            fromViewController.view.alpha = fromAlpha;
             if ([_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)]) {
                 [_delegate revealController:self didAddViewController:toViewController forOperation:operation animated:animated];
             }
@@ -904,12 +983,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             customBlock();
         }
         else {
-            toViewController.view.alpha = 0.8;
-            [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
-                fromViewController.view.alpha = 0.;
-                toViewController.view.alpha = toAlpha;
+            [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                fromViewController.view.hidden = YES;
             } completion:^(BOOL finished) {
                 completion();
+                fromViewController.view.hidden = NO;
             }];
         }
     }
@@ -918,9 +996,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)_pushFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController operation:(PBRevealControllerOperation)operation animated:(BOOL)animated
 {
     NSTimeInterval duration = animated ? (_isLeftViewOpen ? _leftToggleAnimationDuration : _rightToggleAnimationDuration) : 0.0;
-    CGFloat fromAlpha = fromViewController.view.alpha;
-    CGFloat toAlpha = toViewController.view.alpha;
-    
     if (fromViewController == toViewController) {
         if (operation == PBRevealControllerOperationPushMainControllerFromLeft) {
             [self hideLeftViewAnimated:YES];
@@ -966,13 +1041,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-        toViewController.view.alpha = 0.8;
-        [UIView animateWithDuration:duration delay:0. options:UIViewAnimationOptionTransitionNone animations:^{
-            fromViewController.view.alpha = 0.;
-            toViewController.view.alpha = toAlpha;
+        [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            fromViewController.view.hidden = YES;
         } completion:^(BOOL finished) {
             completion();
-            fromViewController.view.alpha = fromAlpha;
+            fromViewController.view.hidden = NO;
         }];
     }
     
@@ -1149,7 +1222,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
 
         if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
+            [_leftViewController.view layoutIfNeeded];
             [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_leftViewController.view layoutIfNeeded];
                 _leftViewController.view.frame = leftFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1157,7 +1232,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }];
         }
         else {
+            [_leftViewController.view layoutIfNeeded];
             [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_leftViewController.view layoutIfNeeded];
                 _leftViewController.view.frame = leftFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1221,7 +1298,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         
         if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
+            [_rightViewController.view layoutIfNeeded];
             [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options: UIViewAnimationOptionLayoutSubviews animations:^{
+                [_rightViewController.view layoutIfNeeded];
                 _rightViewController.view.frame = rightFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1229,7 +1308,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }];
         }
         else {
+            [_rightViewController.view layoutIfNeeded];
             [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_rightViewController.view layoutIfNeeded];
                 _rightViewController.view.frame = rightFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1274,7 +1355,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         };
 
         if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
+            [_leftViewController.view layoutIfNeeded];
             [UIView animateWithDuration:duration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_leftViewController.view layoutIfNeeded];
                 _leftViewController.view.frame = leftFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1282,7 +1365,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }];
         }
         else {
+            [_leftViewController.view layoutIfNeeded];
             [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_leftViewController.view layoutIfNeeded];
                 _leftViewController.view.frame = leftFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1328,7 +1413,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         };
 
         if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
+            [_rightViewController.view layoutIfNeeded];
             [UIView animateWithDuration:duration delay:0. usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_rightViewController.view layoutIfNeeded];
                 _rightViewController.view.frame = rightFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1336,7 +1423,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }];
         }
         else {
+            [_rightViewController.view layoutIfNeeded];
             [UIView animateWithDuration:duration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                [_rightViewController.view layoutIfNeeded];
                 _rightViewController.view.frame = rightFrame;
                 _mainViewController.view.frame = mainFrame;
             } completion:^(BOOL finished) {
@@ -1424,7 +1513,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             CGRect frame = _leftViewController.view.frame;
             if (_leftPresentViewOnTop) {
                 frame.origin.x = -(_leftViewRevealWidth);
-                frame.size.width = 0;
+                frame.size.width = _leftViewRevealWidth;
             }
             else {
                 frame.origin.x = -(_leftViewRevealDisplacement);
@@ -1482,9 +1571,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                     [_delegate revealController:self didShowLeftViewController:_leftViewController];
                 }
             };
-
+            
             if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
-                [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
+                [_leftViewController.view layoutIfNeeded];
+                [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 usingSpringWithDamping:_leftToggleSpringDampingRatio initialSpringVelocity:_leftToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
+                    [_leftViewController.view layoutIfNeeded];
                     _leftViewController.view.frame = leftFrame;
                     _mainViewController.view.frame = mainFrame;
                 } completion:^(BOOL finished) {
@@ -1492,7 +1583,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 }];
             }
             else {
-                [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+                [_leftViewController.view layoutIfNeeded];
+                [UIView animateWithDuration:_leftToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                    [_leftViewController.view layoutIfNeeded];
                     _leftViewController.view.frame = leftFrame;
                     _mainViewController.view.frame = mainFrame;
                 } completion:^(BOOL finished) {
@@ -1538,6 +1631,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         else if (ABS(position) < _rightViewRevealWidth) {
             if (_rightPresentViewOnTop) {
                 rightFrame.origin.x = self.view.bounds.size.width - ABS(position);
+                rightFrame.size.width = ABS(position);
             }
             else {
                 CGFloat displacement = _rightViewRevealDisplacement - (ABS(position) * _rightViewRevealDisplacement / _rightViewRevealWidth);
@@ -1553,8 +1647,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
             _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
-            
-//            rightFrame.origin.x = [UIScreen mainScreen].bounds.size.width - _rightViewRevealWidth;
             rightFrame.origin.x = self.view.bounds.size.width - _rightViewRevealWidth;
             rightFrame.size.width = _rightViewRevealWidth;
             if (!_rightPresentViewOnTop) {
@@ -1568,7 +1660,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             };
             
             if ([[UIDevice currentDevice] systemVersion].floatValue >= 7.0) {
-                [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionTransitionNone animations:^{
+                [_rightViewController.view layoutIfNeeded];
+                [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 usingSpringWithDamping:_rightToggleSpringDampingRatio initialSpringVelocity:_rightToggleSpringVelocity options:UIViewAnimationOptionLayoutSubviews animations:^{
+                    [_rightViewController.view layoutIfNeeded];
                     _rightViewController.view.frame = rightFrame;
                     _mainViewController.view.frame = mainFrame;
                 } completion:^(BOOL finished) {
@@ -1576,7 +1670,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 }];
             }
             else {
-                [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionTransitionNone animations:^{
+                [_rightViewController.view layoutIfNeeded];
+                [UIView animateWithDuration:_rightToggleAnimationDuration delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+                    [_rightViewController.view layoutIfNeeded];
                     _rightViewController.view.frame = rightFrame;
                     _mainViewController.view.frame = mainFrame;
                 } completion:^(BOOL finished) {

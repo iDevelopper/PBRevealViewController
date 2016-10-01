@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func resizeLeftView(sender: UIButton) {
+    @IBAction func resizeLeftView(_ sender: UIButton) {
         if revealViewController().leftViewRevealWidth < 260 {
             revealViewController().leftViewRevealWidth = 260
         }
@@ -37,55 +37,55 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func replaceLeftView(sender: UIButton) {
+    @IBAction func replaceLeftView(_ sender: UIButton) {
         var controller: UIViewController?
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().leftViewController as! UINavigationController
         
         if nc.topViewController! is MenuTableViewController {
-            controller = storyboard.instantiateViewControllerWithIdentifier("RightMenuTableViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "RightMenuTableViewController")
         }
         else {
-            controller = storyboard.instantiateViewControllerWithIdentifier("MenuTableViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "MenuTableViewController")
         }
         
         let newNc = UINavigationController(rootViewController: controller!)
-        revealViewController().setLeftViewController(newNc, animated: true)
+        revealViewController().setLeft(newNc, animated: true)
     }
 
-    @IBAction func replaceMainView(sender: UIButton) {
+    @IBAction func replaceMainView(_ sender: UIButton) {
         var controller: UIViewController?
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().mainViewController as! UINavigationController
         
         if nc.topViewController! is MainViewController {
-            controller = storyboard.instantiateViewControllerWithIdentifier("SecondViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "SecondViewController")
         }
         else {
-            controller = storyboard.instantiateViewControllerWithIdentifier("MainViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
         }
         
         let newNc = UINavigationController(rootViewController: controller!)
-        revealViewController().setMainViewController(newNc, animated: true)
+        revealViewController().setMain(newNc, animated: true)
     }
     
-    @IBAction func replaceRightView(sender: UIButton) {
+    @IBAction func replaceRightView(_ sender: UIButton) {
         var controller: UIViewController?
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().rightViewController as! UINavigationController
         
         if nc.topViewController! is RightMenuTableViewController {
-            controller = storyboard.instantiateViewControllerWithIdentifier("MenuTableViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "MenuTableViewController")
         }
         else {
-            controller = storyboard.instantiateViewControllerWithIdentifier("RightMenuTableViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "RightMenuTableViewController")
         }
         
         let newNc = UINavigationController(rootViewController: controller!)
-        revealViewController().setRightViewController(newNc, animated: true)
+        revealViewController().setRight(newNc, animated: true)
     }
     
-    @IBAction func resizeRightView(sender: UIButton) {
+    @IBAction func resizeRightView(_ sender: UIButton) {
         if revealViewController().rightViewRevealWidth < 260 {
             revealViewController().rightViewRevealWidth = 260
         }

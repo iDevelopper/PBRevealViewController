@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="2ib-4I-t4j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="2ib-4I-t4j">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Reveal View Controller-->
@@ -14,9 +15,9 @@
                         <viewControllerLayoutGuide type="bottom" id="hcd-lv-7dl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3cW-wM-dWU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <segue destination="EvS-eq-gEt" kind="custom" identifier="pb_left" customClass="PBRevealViewControllerSegueSetController" id="pVb-KF-VHh"/>
@@ -33,15 +34,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="RightMenuTableViewController" id="WqH-Bh-LvA" customClass="RightMenuTableViewController" customModule="Example4Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wXV-kl-VzK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Gyh-Ud-bOe">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gyh-Ud-bOe" id="FGM-Gm-vnS">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -84,46 +85,41 @@
                         <viewControllerLayoutGuide type="bottom" id="BiQ-uQ-Mwn"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="x1a-pb-pdw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GcK-Ob-1J0">
-                                <rect key="frame" x="242" y="285" width="117" height="30"/>
                                 <state key="normal" title="Replace left view"/>
                                 <connections>
                                     <action selector="replaceLeftView:" destination="S27-Xx-nbQ" eventType="touchUpInside" id="g00-7h-DxX"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l1f-XU-4Xa">
-                                <rect key="frame" x="237" y="323" width="127" height="30"/>
                                 <state key="normal" title="Replace main view"/>
                                 <connections>
                                     <action selector="replaceMainView:" destination="S27-Xx-nbQ" eventType="touchUpInside" id="Rkj-YD-3lU"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vrs-PU-LBM">
-                                <rect key="frame" x="237" y="361" width="126" height="30"/>
                                 <state key="normal" title="Replace right view"/>
                                 <connections>
                                     <action selector="replaceRightView:" destination="S27-Xx-nbQ" eventType="touchUpInside" id="R91-SX-U3S"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhe-pl-Ybr">
-                                <rect key="frame" x="247" y="247" width="107" height="30"/>
                                 <state key="normal" title="Resize left view"/>
                                 <connections>
                                     <action selector="resizeLeftView:" destination="S27-Xx-nbQ" eventType="touchUpInside" id="vs6-xg-hog"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHw-pp-KMP">
-                                <rect key="frame" x="242" y="399" width="116" height="30"/>
                                 <state key="normal" title="Resize right view"/>
                                 <connections>
                                     <action selector="resizeRightView:" destination="S27-Xx-nbQ" eventType="touchUpInside" id="be1-5c-ghE"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.58751320139999996" green="0.77114146770000003" blue="0.99509214739999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.58751320139999996" green="0.77114146770000003" blue="0.99509214739999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="GcK-Ob-1J0" firstAttribute="top" secondItem="bhe-pl-Ybr" secondAttribute="bottom" constant="8" id="4L2-TG-dmc"/>
                             <constraint firstItem="fHw-pp-KMP" firstAttribute="centerX" secondItem="x1a-pb-pdw" secondAttribute="centerX" id="7FJ-Ep-T3O"/>
@@ -161,15 +157,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="MenuTableViewController" id="35j-P7-Id0" customClass="MenuTableViewController" customModule="Example4Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Qvy-YO-bzo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="o2i-pc-Sh2">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o2i-pc-Sh2" id="prh-rQ-rFm">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -212,9 +208,9 @@
                         <viewControllerLayoutGuide type="bottom" id="wBg-zo-nca"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s8Z-O6-l1v">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Second" id="5a5-Bc-5zp"/>
                 </viewController>

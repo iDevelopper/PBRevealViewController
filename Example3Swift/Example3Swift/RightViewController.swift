@@ -15,9 +15,9 @@ class RightViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = .clearColor()
+        //tableView.backgroundColor = UIColor.clear
 
-        tableView.tableFooterView = UIView(frame: CGRectZero)
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
     override func didReceiveMemoryWarning() {
@@ -27,55 +27,55 @@ class RightViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     // MARK: - Table view data source
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         // Configure the cell...
-        cell.backgroundColor = .clearColor()
-        cell.textLabel!.text = "Item \(indexPath.row)"
+        cell.backgroundColor = UIColor.clear
+        cell.textLabel!.text = "Item \((indexPath as NSIndexPath).row)"
         
         return cell
     }
     
     // MARK: - Table view delegate
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let mainViewController = storyboard.instantiateViewControllerWithIdentifier("MainViewController") as! MainViewController
+        let mainViewController = storyboard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.None
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.none
             mainViewController.image = UIImage(named: "Sunset1")
             
         case 1:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.CrossDissolve
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.crossDissolve
             mainViewController.image = UIImage(named: "Sunset2")
             
         case 2:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.PushSideView
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.pushSideView
             mainViewController.image = UIImage(named: "Sunset3")
             
         case 3:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.Spring
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.spring
             mainViewController.image = UIImage(named: "Sunset4")
             
         case 4:
-            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.Custom
+            self.revealViewController().toggleAnimationType = PBRevealToggleAnimationType.custom
             mainViewController.image = UIImage(named: "Sunset5")
             
         default: break

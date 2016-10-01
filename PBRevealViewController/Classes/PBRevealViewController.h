@@ -63,8 +63,6 @@ typedef NS_ENUM(NSInteger, PBRevealToggleAnimationType) {
     PBRevealToggleAnimationTypePushSideView,
     /**
      *  A transition that the side view move a little to right or left by the value of leftRevealOverdraw or rightRevealOverdraw before the main view push the left/right view until it is hidden.
-     *
-     *  @see 
      */
     PBRevealToggleAnimationTypeSpring,
     /**
@@ -118,12 +116,12 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 - (id)initWithLeftViewController:(UIViewController *)leftViewController mainViewController:(UIViewController *)mainViewController rightViewController:(UIViewController *)rightViewController;
 
 /**
- *  Defines the radius of the main view's shadow, default is 5.0f.
+ *  Defines the radius of the main view's shadow, default is 2.5f.
  */
 @property (nonatomic) CGFloat           mainViewShadowRadius;
 
 /**
- *  Defines the main view's shadow offset, default is {0.0f,5.0f}.
+ *  Defines the main view's shadow offset, default is {0.0f,2.5f}.
  */
 @property (nonatomic) CGSize            mainViewShadowOffset;
 
@@ -187,12 +185,12 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 @property (nonatomic) CGFloat           leftToggleSpringVelocity;
 
 /**
- *  Defines the radius of the left view's shadow, default is 5.0f.
+ *  Defines the radius of the left view's shadow, default is 2.5f.
  */
 @property (nonatomic) CGFloat           leftViewShadowRadius;
 
 /**
- *  Defines the left view's shadow offset, default is {0.0f,5.0f}.
+ *  Defines the left view's shadow offset, default is {0.0f, 2.5f}.
  */
 @property (nonatomic) CGSize            leftViewShadowOffset;
 
@@ -262,12 +260,12 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 @property (nonatomic) CGFloat           rightToggleSpringVelocity;
 
 /**
- *  Defines the radius of the lrighteft view's shadow, default is 5.0f.
+ *  Defines the radius of the lrighteft view's shadow, default is 2.5f.
  */
 @property (nonatomic) CGFloat           rightViewShadowRadius;
 
 /**
- *  Defines the right view's shadow offset, default is {0.0f,5.0f}.
+ *  Defines the right view's shadow offset, default is {0.0f, 2.5f}.
  */
 @property (nonatomic) CGSize            rightViewShadowOffset;
 

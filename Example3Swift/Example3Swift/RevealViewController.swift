@@ -16,11 +16,11 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         delegate = self
         
         leftViewRevealWidth = 180
-        leftViewShadowRadius = 0
-        leftViewBlurEffectStyle = .Light
-        
+        leftViewBlurEffectStyle = .light
+        leftToggleSpringDampingRatio = 1.0
+
         rightPresentViewHierarchically = true
-        rightViewBlurEffectStyle = .Light
+        rightViewBlurEffectStyle = .light
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,15 +46,31 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         revealController.mainViewController.view.userInteractionEnabled = true
     }
 */    
-    func revealController(revealController: PBRevealViewController!, blockForOperation operation: PBRevealControllerOperation, fromViewController: UIViewController!, toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
-        let block = {
-            () -> Void in
-            UIView.transitionWithView(fromViewController.view, duration: 0.8, options: [.TransitionCurlUp, .ShowHideTransitionViews], animations: {
-                fromViewController.view.hidden = true
-                }, completion: { (finished) in
-                    finalBlock()
-            })
+    func revealController(_ revealController: PBRevealViewController!, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController!, to toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
+        if operation == .pushMainControllerFromLeft || operation == .pushMainControllerFromRight {
+            let block = {
+                () -> Void in
+                UIView.transition(with: fromViewController.view, duration: 0.8, options: [.transitionCurlUp, .showHideTransitionViews], animations: {
+                    fromViewController.view.isHidden = true
+                    }, completion: { (finished) in
+                        finalBlock()
+                })
+            }
+            return block;
         }
-        return block;
+        /*
+        if operation == .replaceLeftController || operation == .replaceRightController {
+            let block = {
+                () -> Void in
+                UIView.transition(with: fromViewController.view, duration: 0.25, options: [.showHideTransitionViews, .transitionCrossDissolve], animations: {
+                    fromViewController.view.isHidden = true
+                    }, completion: { (finished) in
+                        finalBlock()
+                })
+            }
+            return block;
+        }
+        */
+        return nil
     }
 }

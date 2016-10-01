@@ -36,47 +36,48 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func replaceLeftView(sender: UIBarButtonItem) {
+    @IBAction func replaceLeftView(_ sender: UIBarButtonItem) {
         var controller: UIViewController?
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nc = revealViewController().leftViewController as! UINavigationController
         
         if nc.topViewController! is MenuTableViewController {
-            controller = storyboard.instantiateViewControllerWithIdentifier("RightViewController")
+            self.revealViewController().leftViewBlurEffectStyle = .none
+            controller = storyboard.instantiateViewController(withIdentifier: "RightViewController")
             controller!.title = "Menu"
         }
         else {
-            controller = storyboard.instantiateViewControllerWithIdentifier("MenuTableViewController")
+            self.revealViewController().leftViewBlurEffectStyle = .light
+            controller = storyboard.instantiateViewController(withIdentifier: "MenuTableViewController")
         }
         
         let newNc = UINavigationController(rootViewController: controller!)
-        revealViewController().setLeftViewController(newNc, animated: true)
+        revealViewController().setLeft(newNc, animated: true)
     }
     
-    @IBAction func resizeLeftView(sender: UIBarButtonItem) {
+    @IBAction func resizeLeftView(_ sender: UIBarButtonItem) {
         if revealViewController().leftViewRevealWidth < 200 {
-            revealViewController().leftViewRevealWidth = 200
+            revealViewController().setLeftViewRevealWidth(200, animated: true)
         }
         else {
-            revealViewController().leftViewRevealWidth = 180
+            revealViewController().setLeftViewRevealWidth(180, animated: true)
         }
     }
     
-    @IBAction func replaceRightView(sender: UIBarButtonItem) {
+    @IBAction func replaceRightView(_ sender: UIBarButtonItem) {
         var controller: UIViewController?
         let storyboard = UIStoryboard(name: "Main", bundle: nil)        
         
         if revealViewController().rightViewController is RightViewController2 {
-            controller = storyboard.instantiateViewControllerWithIdentifier("RightViewController")
-            revealViewController().setRightViewController(controller, animated: true)
+            controller = storyboard.instantiateViewController(withIdentifier: "RightViewController")
         }
         else {
-            controller = storyboard.instantiateViewControllerWithIdentifier("RightViewController2")
-            revealViewController().setRightViewController(controller, animated: true)
+            controller = storyboard.instantiateViewController(withIdentifier: "RightViewController2")
         }
+        revealViewController().setRight(controller, animated: true)
     }
     
-    @IBAction func resizeRightView(sender: UIBarButtonItem) {
+    @IBAction func resizeRightView(_ sender: UIBarButtonItem) {
         if revealViewController().rightViewRevealWidth < 180 {
             revealViewController().rightViewRevealWidth = 180
         }

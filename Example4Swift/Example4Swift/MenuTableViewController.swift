@@ -21,38 +21,38 @@ class MenuTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel!.text = "Controller \(indexPath.row)"
+        cell.textLabel!.text = "Controller \((indexPath as NSIndexPath).row)"
 
         return cell
     }
 
     // MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         var controller: UIViewController?
         
-        switch indexPath.row {
+        switch (indexPath as NSIndexPath).row {
         case 0:
-            controller = storyboard.instantiateViewControllerWithIdentifier("MainViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "MainViewController")
             
         case 1:
-            controller = storyboard.instantiateViewControllerWithIdentifier("SecondViewController")
+            controller = storyboard.instantiateViewController(withIdentifier: "SecondViewController")
             
         default:
             break
