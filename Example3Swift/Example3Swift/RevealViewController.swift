@@ -58,19 +58,21 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
             }
             return block;
         }
-        /*
-        if operation == .replaceLeftController || operation == .replaceRightController {
-            let block = {
-                () -> Void in
-                UIView.transition(with: fromViewController.view, duration: 0.25, options: [.showHideTransitionViews, .transitionCrossDissolve], animations: {
-                    fromViewController.view.isHidden = true
-                    }, completion: { (finished) in
-                        finalBlock()
-                })
+        
+        if (UIDevice.current.systemVersion as NSString).floatValue >= 10.0 {
+            if operation == .replaceLeftController || operation == .replaceRightController {
+                let block = {
+                    () -> Void in
+                    UIView.transition(with: fromViewController.view, duration: 0.25, options: [.showHideTransitionViews, .layoutSubviews], animations: {
+                        fromViewController.view.isHidden = true
+                        }, completion: { (finished) in
+                            finalBlock()
+                    })
+                }
+                return block;
             }
-            return block;
         }
-        */
+        
         return nil
     }
 }
