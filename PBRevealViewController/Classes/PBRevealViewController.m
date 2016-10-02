@@ -815,8 +815,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         else {
             if (tableView) {
-                tableView.backgroundView = nil;
-                tableView.separatorEffect = nil;
+                if (tableView.backgroundView && (tableView.backgroundView == _leftEffectView || tableView.backgroundView == _rightEffectView)) {
+                    tableView.backgroundView = nil;
+                    tableView.separatorEffect = nil;
+                }
             }
             else {
                 switch (operation) {

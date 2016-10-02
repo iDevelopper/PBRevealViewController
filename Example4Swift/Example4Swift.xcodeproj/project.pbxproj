@@ -143,7 +143,6 @@
 				TargetAttributes = {
 					327FA83C1D5C9C900055168A = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 5WSVF5KRRY;
 						LastSwiftMigration = 0800;
 					};
 				};
@@ -359,7 +358,7 @@
 			baseConfigurationReference = E778FD14ACC55ABF3DB58DF3 /* Pods-Example4Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WSVF5KRRY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Example4Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -375,7 +374,7 @@
 			baseConfigurationReference = 5442621C04BC865677D4F941 /* Pods-Example4Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WSVF5KRRY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Example4Swift/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
