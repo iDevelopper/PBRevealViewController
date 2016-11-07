@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1
+
+#### Bug fixes. Add child view controllers (left, main, right) to revealViewController early.
+
 ## 1.1.0
 
 #### Compatibility fixes for Xcode 8, iOS 10 and Swift 3.

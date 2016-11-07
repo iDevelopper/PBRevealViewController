@@ -40,8 +40,23 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     PBRevealViewController *rvc = self.sourceViewController;
     UIViewController *dvc = self.destinationViewController;
 
-    CGRect frame = dvc.view.frame;
+    if ([identifier isEqualToString:PBSegueMainIdentifier]) {
+        [rvc addChildViewController:dvc];
+        [dvc didMoveToParentViewController:rvc];
+        rvc.mainViewController = dvc;
+    }
+    else if ([identifier isEqualToString:PBSegueLeftIdentifier]) {
+        [rvc addChildViewController:dvc];
+        [dvc didMoveToParentViewController:rvc];
+        rvc.leftViewController = dvc;
+    }
+    else if ([identifier isEqualToString:PBSegueRightIdentifier]) {
+        [rvc addChildViewController:dvc];
+        [dvc didMoveToParentViewController:rvc];
+        rvc.rightViewController = dvc;
+    }
     if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
+        CGRect frame = dvc.view.frame;
         frame.origin.y = 0;
         if ([dvc isKindOfClass:[UINavigationController class]]) {
             BOOL statusBarIsHidden = ([UIApplication sharedApplication].statusBarFrame.size.height == 0.);
@@ -50,17 +65,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
         }
         dvc.view.frame = frame;
-    }
-    if ([identifier isEqualToString:PBSegueMainIdentifier]) {
-        [rvc addChildViewController:dvc];
-        [dvc didMoveToParentViewController:rvc];
-        rvc.mainViewController = dvc;
-    }
-    else if ([identifier isEqualToString:PBSegueLeftIdentifier]) {
-        rvc.leftViewController = dvc;
-    }
-    else if ([identifier isEqualToString:PBSegueRightIdentifier]) {
-        rvc.rightViewController = dvc;
     }
 }
 
@@ -303,6 +307,22 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     {
         [self initDefaultProperties];
         
+        [self addChildViewController:mainViewController];
+        [mainViewController didMoveToParentViewController:self];
+        _mainViewController = mainViewController;
+
+        if (leftViewController) {
+            [self addChildViewController:leftViewController];
+            [leftViewController didMoveToParentViewController:self];
+        }
+        _leftViewController = leftViewController;
+        
+        if (rightViewController) {
+            [self addChildViewController:rightViewController];
+            [rightViewController didMoveToParentViewController:self];
+        }
+        _rightViewController = rightViewController;
+        
         if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
             BOOL statusBarIsHidden = ([UIApplication sharedApplication].statusBarFrame.size.height == 0.);
             CGRect frame = mainViewController.view.frame;
@@ -334,12 +354,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 rightViewController.view.frame = frame;
             }
         }
-        [self addChildViewController:mainViewController];
-        [_mainViewController didMoveToParentViewController:self];
-        _mainViewController = mainViewController;
-
-        _leftViewController = leftViewController;
-        _rightViewController = rightViewController;
         
         [self reloadLeftShadow];
         [self reloadRightShadow];
@@ -457,13 +471,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         //Try each segue separately so it doesn't break prematurely if either Rear or Right views are not used.
         @try
         {
-            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
+            [self performSegueWithIdentifier:PBSegueLeftIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
         
         @try
         {
-            [self performSegueWithIdentifier:PBSegueLeftIdentifier sender:nil];
+            [self performSegueWithIdentifier:PBSegueMainIdentifier sender:nil];
         }
         @catch(NSException *exception) {}
         
