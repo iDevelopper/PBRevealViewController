@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.2
+
+#### Fix a bug when pan gesture is used first.
+
 ## 1.1.1
 
 #### Bug fixes. Add child view controllers (left, main, right) to revealViewController early.

@@ -1475,7 +1475,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         _panGestureRecognizer.delegate = self;
         
         [_mainViewController.view addGestureRecognizer:_panGestureRecognizer];
-    }
+
+        [_leftViewController willMoveToParentViewController:nil];
+        [_leftViewController removeFromParentViewController];
+
+        [_rightViewController willMoveToParentViewController:nil];
+        [_rightViewController removeFromParentViewController];
+}
     return _panGestureRecognizer;
 }
 
