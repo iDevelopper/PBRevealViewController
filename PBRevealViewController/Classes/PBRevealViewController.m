@@ -271,6 +271,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 @property (strong, nonatomic) UIView        *contentView;
 @property (nonatomic) BOOL                  userInteractionStore;
 
+@property (nonatomic) CGFloat               panBaseLocation;
+
 @property (nonatomic) UINavigationBar       *navigationBar;
 
 @property (nonatomic) UIVisualEffectView    *leftEffectView;
@@ -494,6 +496,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)setLeftPresentViewHierarchically:(BOOL)leftPresentViewHierarchically
 {
     _leftPresentViewHierarchically = leftPresentViewHierarchically;
+
+    CGRect frame = _leftViewController.view.frame;
+    frame.origin.y = 0;
+    frame.size.height = self.view.bounds.size.height;
+    _leftViewController.view.frame = frame;
+    
     if (_leftPresentViewHierarchically) {
         CGRect frame = [self adjustsFrameForController:_leftViewController];
         _leftViewController.view.frame = frame;
@@ -503,6 +511,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)setRightPresentViewHierarchically:(BOOL)rightPresentViewHierarchically
 {
     _rightPresentViewHierarchically = rightPresentViewHierarchically;
+
+    CGRect frame = _rightViewController.view.frame;
+    frame.origin.y = 0;
+    frame.size.height = self.view.bounds.size.height;
+    _rightViewController.view.frame = frame;
+    
     if (_rightPresentViewHierarchically) {
         CGRect frame = [self adjustsFrameForController:_rightViewController];
         _rightViewController.view.frame = frame;
@@ -885,6 +899,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self _swapFromViewController:_leftViewController toViewController:leftViewController operation:PBRevealControllerOperationReplaceLeftController animated:animated];
     }
     _leftViewController = leftViewController;
+    
     [self reloadLeftShadow];
 }
 
@@ -919,6 +934,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self _swapFromViewController:_rightViewController toViewController:rightViewController operation:PBRevealControllerOperationReplaceRightController animated:animated];
     }
     _rightViewController = rightViewController;
+    
     [self reloadRightShadow];
 }
 
@@ -1474,14 +1490,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         self.panGestureRecognizer = [[PBRevealViewControllerPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
         _panGestureRecognizer.delegate = self;
         
-        [_mainViewController.view addGestureRecognizer:_panGestureRecognizer];
+        [_contentView addGestureRecognizer:_panGestureRecognizer];
 
         [_leftViewController willMoveToParentViewController:nil];
         [_leftViewController removeFromParentViewController];
 
         [_rightViewController willMoveToParentViewController:nil];
         [_rightViewController removeFromParentViewController];
-}
+    }
     return _panGestureRecognizer;
 }
 
@@ -1503,9 +1519,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 return NO;
             }
         }
+        /* Allow pan gesture for closing left or right view
         if (_isLeftViewOpen || _isRightViewOpen) {
             return NO;
         }
+        */
     }
     return YES;
 }
@@ -1553,19 +1571,16 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         
         CGRect leftFrame = _leftViewController.view.frame;
-        if (_leftPresentViewOnTop) {
-            leftFrame.origin.x = 0;
-        }
         
         CGRect mainFrame = _mainViewController.view.frame;
-        
+
         if (position <= 0) {
             [self hideLeftViewAnimated:YES];
             self.panGestureRecognizer.state = UIGestureRecognizerStateCancelled;
         }
         else if (position < _leftViewRevealWidth) {
             if (_leftPresentViewOnTop) {
-                leftFrame.size.width = position;
+                leftFrame.origin.x = -(_leftViewRevealWidth) + position;
             }
             else {
                 leftFrame.origin.x = -(_leftViewRevealDisplacement - (position * _leftViewRevealDisplacement / _leftViewRevealWidth));
@@ -1653,7 +1668,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         else if (ABS(position) < _rightViewRevealWidth) {
             if (_rightPresentViewOnTop) {
                 rightFrame.origin.x = self.view.bounds.size.width - ABS(position);
-                rightFrame.size.width = ABS(position);
             }
             else {
                 CGFloat displacement = _rightViewRevealDisplacement - (ABS(position) * _rightViewRevealDisplacement / _rightViewRevealWidth);
@@ -1733,25 +1747,55 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (void)_handlePanGesture:(UIPanGestureRecognizer *)recognizer
 {
-    CGFloat position = [recognizer translationInView:_mainViewController.view].x;
-    CGFloat velocity = [recognizer velocityInView:_mainViewController.view].x;
+    CGFloat position = [recognizer translationInView:_contentView].x;
+    CGFloat velocity = [recognizer velocityInView:_contentView].x;
     
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
             [self notifyPanGestureBegan:position];
-            if (velocity > 0 && _leftViewController && !_isRightViewDragging) {
-                _isLeftViewDragging = YES;
-            }
-            else if (_rightViewController) {
-                _isRightViewDragging = YES;
-            }
-            [self disableUserInteraction];
-            if (ABS(velocity) > _swipeVelocity) {
-                if (_isLeftViewDragging) {
-                    [self _moveLeftViewToPosition:_leftViewRevealWidth];
+            
+            if (velocity > 0) {
+                if (_isRightViewOpen) {
+                    _isRightViewDragging = YES;
                 }
                 else {
-                    if (velocity < 0) [self _moveRightViewToPosition:-(_rightViewRevealWidth)];
+                    _isLeftViewDragging = YES;
+                }
+            }
+            else if (velocity < 0) {
+                if (_isLeftViewOpen) {
+                    _isLeftViewDragging = YES;
+                }
+                else {
+                    _isRightViewDragging = YES;
+                }
+            }
+            if (_isLeftViewDragging) {
+                self.panBaseLocation = 0.;
+                if (_isLeftViewOpen) {
+                    self.panBaseLocation = _leftViewRevealWidth;
+                }
+            }
+            if (_isRightViewDragging) {
+                self.panBaseLocation = 0.;
+                if (_isRightViewOpen) {
+                    self.panBaseLocation = -(_rightViewRevealWidth);
+                }
+            }
+            
+            _isLeftViewOpen = NO;
+            _isRightViewOpen = NO;
+            
+            [self disableUserInteraction];
+            
+            if (ABS(velocity) > _swipeVelocity) {
+                if (_isLeftViewDragging) {
+                    [self _moveLeftViewToPosition:_panBaseLocation > 0. ? 0. : _leftViewRevealWidth];
+                }
+                else {
+                    if (_isRightViewDragging) {
+                        [self _moveRightViewToPosition:_panBaseLocation < 0. ? self.view.bounds.size.width : -(_rightViewRevealWidth)];
+                    }
                 }
             }
             break;
@@ -1764,10 +1808,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
             
             if (_isLeftViewDragging) {
-                [self _moveLeftViewToPosition:position];
+                
+                CGFloat xLocation = _panBaseLocation + position;
+                [self _moveLeftViewToPosition:xLocation];
             }
             else {
-                [self _moveRightViewToPosition:position];
+                CGFloat xLocation = _panBaseLocation + position;
+                [self _moveRightViewToPosition:xLocation];
             }
             break;
             
@@ -1777,8 +1824,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 break;
             }
             
+            CGFloat xLocation = _panBaseLocation + position;
+            
             if (_isLeftViewDragging) {
-                if (position > _leftViewRevealWidth * 0.50) {
+                if (xLocation > (_leftViewRevealWidth * 0.50)) {
                     [self _moveLeftViewToPosition:_leftViewRevealWidth];
                 }
                 else {
@@ -1786,7 +1835,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 }
             }
             else {
-                if (ABS(position) > _rightViewRevealWidth * 0.50) {
+                if (ABS(xLocation) > (_rightViewRevealWidth * 0.50)) {
                     [self _moveRightViewToPosition:-(_rightViewRevealWidth)];
                 }
                 else {

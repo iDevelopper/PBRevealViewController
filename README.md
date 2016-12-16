@@ -50,7 +50,6 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 
 ## Usage
 
-On your project:
 * Initialize an instance of a PBRevealViewController passing in a "left" (optinal), "main" (required) and "right" (optional) view controllers.
 * Use the PBRevealViewController instance in your code as you would use any view controller.
 * Deploy as the application window rootViewController, or as a child of other containment controllers.
@@ -60,6 +59,42 @@ On your project:
 - (BOOL)revealControllerTapGestureShouldBegin:
 - (BOOL)revealControllerPanGestureShouldBegin:direction:
 ```
+Example: Allow opening left/right view only if the user starts swiping on the edge of the screen.
+
+Objective-C:
+```objective-c
+- (BOOL)revealControllerPanGestureShouldBegin:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction
+{
+	CGPoint point = [revealController.panGestureRecognizer locationInView:self.view];
+	if (!revealController.isLeftViewOpen && direction == PBRevealControllerPanDirectionRight && point.x < 50.0) {
+		return YES;
+	}
+	if (!revealController.isRightViewOpen && direction == PBRevealControllerPanDirectionLeft && point.x > (self.view.bounds.size.width - 50)) {
+		return YES;
+	}
+	if (revealController.isLeftViewOpen || revealController.isRightViewOpen) {
+		return YES;
+	}
+	return NO;
+}
+```
+Swift 3:
+```Swift
+    func revealControllerPanGestureShouldBegin(_ revealController: PBRevealViewController!, direction: PBRevealControllerPanDirection) -> Bool {
+        let point = revealController.panGestureRecognizer.location(in: view)
+        if !revealController.isLeftViewOpen && direction == .right && point.x < 50.0 {
+            return true
+        }
+        if !revealController.isRightViewOpen && direction == .left && point.x > (view.bounds.size.width - 50) {
+            return true
+        }
+        if revealController.isLeftViewOpen || revealController.isRightViewOpen {
+            return true
+        }
+        return false
+    }
+```
+
 * At any time, you can reveal, hide the "left" or "right" views or replace any of the view controllers, programmatically or based on user actions, with or without animations enabled
 
 ## Basic API Description

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '1.1.2'
+  s.version          = '1.1.3'
   s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.

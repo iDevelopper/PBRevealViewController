@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.3
+
+#### Allow pan gesture to close left or right view.
+#### Change the visual effect when the left or right view is revealed.
+#### Thanks to Alain L. for his suggestions for improvement.
+
 ## 1.1.2
 
 #### Fix a bug when pan gesture is used first.
