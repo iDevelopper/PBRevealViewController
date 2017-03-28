@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PBRevealViewController'
-  s.version          = '1.2.0'
+  s.version          = '1.1.3'
   s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS.
+A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.
 A category method on UIViewController, `revealViewController`, to get the parent `PBRevealViewController` of any child controller, similar to the UIViewController's property `navigationController`.
                        DESC
 
@@ -30,7 +30,6 @@ A category method on UIViewController, `revealViewController`, to get the parent
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '6.0'
-  s.tvos.deployment_target = '9.0'
 
   s.source_files = 'PBRevealViewController/Classes/**/*'
   

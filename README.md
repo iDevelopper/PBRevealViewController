@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 [![Platform](https://img.shields.io/cocoapods/p/PBRevealViewController.svg?style=flat)](http://cocoapods.org/pods/PBRevealViewController)
 
-A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS, inspired on SWRevealViewController subclass.
+A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller  inspired on SWRevealViewController subclass.
 
 ## Examples
 
@@ -46,7 +46,6 @@ PBRevealViewController is also available through [CocoaPods](http://cocoapods.or
 ## Requirements
 
 * iOS 6.0 or later.
-* tvOS 9.0 or later.
 * ARC memory management.
 
 ## Usage
