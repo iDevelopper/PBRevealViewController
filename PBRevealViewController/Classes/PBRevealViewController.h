@@ -330,6 +330,56 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
  */
 @property (nonatomic, readonly) BOOL    isRightViewDragging;
 
+// TODO
+#if TARGET_OS_TV
+
+/**
+ *  An optional invisible focusable button for revealing left view, default is nil, call [self tvOSLeftRevealButton] once to add it to the reveal view controller's view.
+ */
+@property (strong, nonatomic) UIButton  *tvOSLeftRevealButton;
+
+/**
+ *  An optional invisible focusable button for revealing right view, default is nil, call [self tvOSRightRevealButton] once to add it to the reveal view controller's view.
+ */
+@property (strong, nonatomic) UIButton  *tvOSRightRevealButton;
+
+/**
+ *  An optional swipe gesture recognizer for hidding left view, default is nil, call [self tvOSRightSwipeGestureRecognizer] once to add it to the reveal view controller's view.
+ */
+@property (strong, nonatomic) UISwipeGestureRecognizer  *tvOSRightSwipeGestureRecognizer;
+
+/**
+ *  An optional swipe gesture recognizer for hidding right view, default is nil, call [self tvOSLeftSwipeGestureRecognizer] once to add it to the reveal view controller's view.
+ */
+@property (strong, nonatomic) UISwipeGestureRecognizer  *tvOSLeftSwipeGestureRecognizer;
+
+/**
+ *  The preferred focused view on the main view.
+ */
+@property (strong, nonatomic) UIView    *tvOSMainPreferredFocusedView;
+
+/**
+ *  The preferred focused view on the left view.
+ */
+@property (strong, nonatomic) UIView    *tvOSLeftPreferredFocusedView;
+
+/**
+ *  The preferred focused view on the right view.
+ */
+@property (strong, nonatomic) UIView    *tvOSRightPreferredFocusedView;
+
+/**
+ *  If isPressTypeMenuAllowed is set to YES (default is NO), show left view when Apple TV Menu button is pressed, back to Apple TV home screen if left menu is open.
+ */
+@property (assign) BOOL                 isPressTypeMenuAllowed;
+
+/**
+ *  If isPressTypePlayPauseAllowed is set to YES (default is NO), hide left view if opened, show/hide right view when Apple TV PlayPause button is pressed.
+ */
+@property (assign) BOOL                 isPressTypePlayPauseAllowed;
+
+#endif
+
 /**
  *  The default tap gesture recognizer added to the main view. Default behavior will hide the left or right view.
  */

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.0
+
+#### tvOS support.
+
 ## 1.1.3
 
 #### Allow pan gesture to close left or right view.

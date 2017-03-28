@@ -24,3 +24,9 @@ target 'Example4Swift' do
     pod 'PBRevealViewController', :path => '../'
     
 end
+
+target 'PBRevealTVOS' do
+    project '../PBRevealTVOS/PBRevealTVOS'
+    pod 'PBRevealViewController', :path => '../'
+    
+end
