@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  ExampleFortvOS
+//  PBRevealTVOS
 //
-//  Created by Patrick BODET on 29/03/2017.
+//  Created by Patrick BODET on 11/02/2017.
 //  Copyright © 2017 iDevelopper. All rights reserved.
 //
 
