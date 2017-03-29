@@ -55,6 +55,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [dvc didMoveToParentViewController:rvc];
         rvc.rightViewController = dvc;
     }
+#if TARGET_OS_IOS
     if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
         CGRect frame = dvc.view.frame;
         frame.origin.y = 0;
@@ -66,6 +67,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         dvc.view.frame = frame;
     }
+#endif
 }
 
 @end
@@ -88,6 +90,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 @interface PBRevealViewControllerPanGestureRecognizer : UIPanGestureRecognizer
+
 @end
 
 @implementation PBRevealViewControllerPanGestureRecognizer
@@ -325,6 +328,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         _rightViewController = rightViewController;
         
+#if TARGET_OS_IOS
         if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
             BOOL statusBarIsHidden = ([UIApplication sharedApplication].statusBarFrame.size.height == 0.);
             CGRect frame = mainViewController.view.frame;
@@ -356,6 +360,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 rightViewController.view.frame = frame;
             }
         }
+#endif
         
         [self reloadLeftShadow];
         [self reloadRightShadow];
@@ -430,6 +435,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _isRightViewDragging = NO;
     
     _userInteractionStore = YES;
+
+#if TARGET_OS_TV
+    _isPressTypeMenuAllowed = NO;
+    _isPressTypePlayPauseAllowed = NO;
+#endif
 }
 
 #pragma mark - View lifecycle
@@ -441,12 +451,15 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     [self loadStoryboardControllers];
     
     CGRect frame = [[UIScreen mainScreen] bounds];
+    
+#if TARGET_OS_IOS
     if ([[UIDevice currentDevice] systemVersion].floatValue < 7.0) {
         BOOL statusBarIsHidden = ([UIApplication sharedApplication].statusBarFrame.size.height == 0.);
         if (!statusBarIsHidden) {
             frame.size.height -= [UIApplication sharedApplication].statusBarFrame.size.height;
         }
     }
+#endif
 
     self.contentView = [[PBRevealView alloc] initWithFrame:frame controller:self];
     
@@ -767,7 +780,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:(UIBlurEffectStyle)style];
             UIVisualEffectView *sideEffectView = [[UIVisualEffectView alloc]initWithEffect:blurEffect];
             sideEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+#if TARGET_OS_IOS
             UIVibrancyEffect *vibrancyEffect = [UIVibrancyEffect effectForBlurEffect:blurEffect];
+#endif
             
             switch (operation) {
                 case PBRevealControllerOperationReplaceLeftController:
@@ -815,7 +830,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                         break;
                 }
                 tableView.backgroundColor = [UIColor clearColor];
+#if TARGET_OS_IOS
                 tableView.separatorEffect = vibrancyEffect;
+#endif
             }
             else {
                 UIView *sideView = sideViewController.view;
@@ -845,7 +862,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             if (tableView) {
                 if (tableView.backgroundView && (tableView.backgroundView == _leftEffectView || tableView.backgroundView == _rightEffectView)) {
                     tableView.backgroundView = nil;
+#if TARGET_OS_IOS
                     tableView.separatorEffect = nil;
+#endif
                 }
             }
             else {
@@ -974,8 +993,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 
             case PBRevealControllerOperationReplaceMainController:
                 [_contentView insertSubview:toViewController.view belowSubview:fromViewController.view];
+#if TARGET_OS_IOS
                 [_contentView addGestureRecognizer:_tapGestureRecognizer];
                 [_contentView addGestureRecognizer:_panGestureRecognizer];
+#endif
                 break;
                 
             default:
@@ -1055,8 +1076,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         if (operation == PBRevealControllerOperationPushMainControllerFromRight) {
             [self hideRightViewAnimated:YES];
         }
+#if TARGET_OS_IOS
         [_contentView addGestureRecognizer:_tapGestureRecognizer];
         [_contentView addGestureRecognizer:_panGestureRecognizer];
+#endif
 
         if ([_delegate respondsToSelector:@selector(revealController:didAddViewController:forOperation:animated:)]) {
             [_delegate revealController:self didAddViewController:toViewController forOperation:operation animated:animated];
@@ -1240,6 +1263,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         void (^completion)() = ^{
             _isLeftViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+
+#if TARGET_OS_TV
+            [_tvOSLeftRevealButton removeFromSuperview];
+            [_tvOSRightRevealButton removeFromSuperview];
+            [self setNeedsFocusUpdate];
+            [self updateFocusIfNeeded];
+#endif
             if ([_delegate respondsToSelector:@selector(revealController:didShowLeftViewController:)]) {
                 [_delegate revealController:self didShowLeftViewController:_leftViewController];
             }
@@ -1316,6 +1346,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         void (^completion)() = ^{
             _isRightViewOpen = YES;
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+
+#if TARGET_OS_TV
+            [_tvOSLeftRevealButton removeFromSuperview];
+            [_tvOSRightRevealButton removeFromSuperview];
+            [self setNeedsFocusUpdate];
+            [self updateFocusIfNeeded];
+#endif
             if ([_delegate respondsToSelector:@selector(revealController:didShowRightViewController:)]) {
                 [_delegate revealController:self didShowRightViewController:_rightViewController];
             }
@@ -1381,6 +1418,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_leftViewController.view removeFromSuperview];
             [_leftViewController willMoveToParentViewController:nil];
             [_leftViewController removeFromParentViewController];
+            
+#if TARGET_OS_TV
+            [self setNeedsFocusUpdate];
+            [self updateFocusIfNeeded];
+            [_contentView addSubview:_tvOSLeftRevealButton];
+            [_contentView addSubview:_tvOSRightRevealButton];
+#endif
             if ([_delegate respondsToSelector:@selector(revealController:didHideLeftViewController:)]) {
                 [_delegate revealController:self didHideLeftViewController:_leftViewController];
             }
@@ -1439,6 +1483,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_rightViewController.view removeFromSuperview];
             [_rightViewController willMoveToParentViewController:nil];
             [_rightViewController removeFromParentViewController];
+            
+#if TARGET_OS_TV
+            [self setNeedsFocusUpdate];
+            [self updateFocusIfNeeded];
+            [_contentView addSubview:_tvOSLeftRevealButton];
+            [_contentView addSubview:_tvOSRightRevealButton];
+#endif
             if ([_delegate respondsToSelector:@selector(revealController:didHideRightViewController:)]) {
                 [_delegate revealController:self didHideRightViewController:_rightViewController];
             }
@@ -1469,8 +1520,74 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 #pragma mark - Gesture Recognizer
 
+#if TARGET_OS_TV
+- (UIButton *)tvOSLeftRevealButton
+{
+    if (_tvOSLeftRevealButton == nil)
+    {
+        /*
+        self.tvOSLeftRevealButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _tvOSLeftRevealButton.frame = CGRectMake(0, 0, 10., self.view.bounds.size.height);
+        _tvOSLeftRevealButton.backgroundColor =  [UIColor clearColor];
+        */
+
+        self.tvOSLeftRevealButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 10., self.view.bounds.size.height)];
+        _tvOSLeftRevealButton.backgroundColor =  [UIColor clearColor];
+        
+        [_contentView addSubview:_tvOSLeftRevealButton];
+    }
+    return _tvOSLeftRevealButton;
+}
+
+- (UIButton *)tvOSRightRevealButton
+{
+    if (_tvOSRightRevealButton == nil)
+    {
+        /*
+        self.tvOSRightRevealButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        _tvOSRightRevealButton.frame = CGRectMake(self.view.bounds.size.width - 10, 0, 10., self.view.bounds.size.height);
+        _tvOSRightRevealButton.backgroundColor =  [UIColor clearColor];
+        */
+        
+        self.tvOSRightRevealButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 10, 0, 10., self.view.bounds.size.height)];
+        _tvOSRightRevealButton.backgroundColor =  [UIColor clearColor];
+        
+        [_contentView addSubview:_tvOSRightRevealButton];
+    }
+    return _tvOSRightRevealButton;
+}
+
+- (UISwipeGestureRecognizer *)tvOSLeftSwipeGestureRecognizer
+{
+    if ( _tvOSLeftSwipeGestureRecognizer == nil )
+    {
+        self.tvOSLeftSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(_handleLeftSwipeGesture:)];
+        
+        _tvOSLeftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+        
+        [_contentView addGestureRecognizer:_tvOSLeftSwipeGestureRecognizer];
+    }
+    return _tvOSLeftSwipeGestureRecognizer;
+}
+
+- (UISwipeGestureRecognizer *)tvOSRightSwipeGestureRecognizer
+{
+    if ( _tvOSRightSwipeGestureRecognizer == nil )
+    {
+        self.tvOSRightSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(_handleRightSwipeGesture:)];
+        
+        _tvOSRightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+        
+        [_contentView addGestureRecognizer:_tvOSRightSwipeGestureRecognizer];
+    }
+    return _tvOSRightSwipeGestureRecognizer;
+}
+
+#endif
+
 - (UITapGestureRecognizer *)tapGestureRecognizer
 {
+#if TARGET_OS_IOS
     if (_tapGestureRecognizer == nil)
     {
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTapGesture:)];
@@ -1480,14 +1597,17 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         [_contentView addGestureRecognizer:_tapGestureRecognizer];
     }
+#endif
     return _tapGestureRecognizer;
 }
 
 - (UIPanGestureRecognizer*)panGestureRecognizer
 {
+#if TARGET_OS_IOS
     if ( _panGestureRecognizer == nil )
     {
         self.panGestureRecognizer = [[PBRevealViewControllerPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
+        
         _panGestureRecognizer.delegate = self;
         
         [_contentView addGestureRecognizer:_panGestureRecognizer];
@@ -1498,6 +1618,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [_rightViewController willMoveToParentViewController:nil];
         [_rightViewController removeFromParentViewController];
     }
+#endif
     return _panGestureRecognizer;
 }
 
@@ -1733,7 +1854,137 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 }
 
 
+#pragma mark - Presse button Handle
+
+#if TARGET_OS_TV
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    for (UIPress *item in presses) {
+        if (item.type == UIPressTypeMenu) {
+            if (!_isPressTypeMenuAllowed) {
+                [super pressesBegan:presses withEvent:event];
+                return;
+            }
+            if (_isLeftViewOpen) {
+                [super pressesBegan:presses withEvent:event];
+            }
+        }
+        else if (item.type == UIPressTypePlayPause) {
+            if (!_isPressTypePlayPauseAllowed) {
+                [super pressesBegan:presses withEvent:event];
+                return;
+            }
+        }
+        
+        else {
+            [super pressesBegan:presses withEvent:event];
+        }
+    }
+}
+
+- (void)pressesEnded:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    for (UIPress *item in presses) {
+        if (item.type == UIPressTypeMenu) {
+            if (!_isPressTypeMenuAllowed) {
+                [super pressesEnded:presses withEvent:event];
+                return;
+            }
+            if (_isLeftViewOpen) {
+                [super pressesEnded:presses withEvent:event];
+            }
+            else {
+                [self revealLeftView];
+            }
+        }
+        else if (item.type == UIPressTypePlayPause) {
+            if (!_isPressTypePlayPauseAllowed) {
+                [super pressesEnded:presses withEvent:event];
+                return;
+            }
+            if (_isLeftViewOpen) {
+                [self hideLeftViewAnimated:YES];
+            }
+            else {
+                [self revealRightView];
+            }
+        }
+        else {
+            [super pressesEnded:presses withEvent:event];
+        }
+    }
+}
+
+#endif
+
+#pragma mark - Focus environment protocol
+
+#if TARGET_OS_TV
+
+- (NSArray<id<UIFocusEnvironment>> *)preferredFocusEnvironments
+{
+    if (_isLeftViewOpen) {
+        if (_tvOSLeftPreferredFocusedView) {
+            return @[_tvOSLeftPreferredFocusedView];
+        }
+        return @[_leftViewController.view];
+    }
+    
+    if (_isRightViewOpen) {
+        if (_tvOSRightPreferredFocusedView) {
+            return @[_tvOSRightPreferredFocusedView];
+        }
+        return @[_rightViewController.view];
+    }
+    
+    if (_tvOSMainPreferredFocusedView) {
+        return @[_tvOSMainPreferredFocusedView];
+    }
+    
+    return [super preferredFocusEnvironments];
+}
+
+- (BOOL)shouldUpdateFocusInContext:(UIFocusUpdateContext *)context
+{
+    return [super shouldUpdateFocusInContext:context];
+}
+
+- (void)didUpdateFocusInContext:(UIFocusUpdateContext *)context withAnimationCoordinator:(UIFocusAnimationCoordinator *)coordinator
+{
+    if (_tvOSLeftRevealButton && context.nextFocusedView == _tvOSLeftRevealButton) {
+        self.tvOSMainPreferredFocusedView = context.previouslyFocusedView;
+        [self revealLeftView];
+    }
+    
+    if (_tvOSRightRevealButton && context.nextFocusedView == _tvOSRightRevealButton) {
+        self.tvOSMainPreferredFocusedView = context.previouslyFocusedView;
+        [self revealRightView];
+    }
+    [super didUpdateFocusInContext:context withAnimationCoordinator:coordinator];
+}
+
+#endif
+
 #pragma mark - Gesture Handle
+
+#if TARGET_OS_TV
+
+- (void)_handleLeftSwipeGesture:(UISwipeGestureRecognizer *)recognizer
+{
+    if (_isRightViewOpen) {
+        [self hideRightViewAnimated:YES];
+    }
+}
+
+- (void)_handleRightSwipeGesture:(UISwipeGestureRecognizer *)recognizer
+{
+    if (_isLeftViewOpen) {
+        [self hideLeftViewAnimated:YES];
+    }
+}
+
+#endif
 
 - (void)_handleTapGesture:(UITapGestureRecognizer *)recognizer
 {
@@ -1753,6 +2004,15 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
             [self notifyPanGestureBegan:position];
+            
+            if (velocity > 0 && _isLeftViewOpen) {
+                self.panGestureRecognizer.state = UIGestureRecognizerStateCancelled;
+                return;
+            }
+            if (velocity < 0 && _isRightViewOpen) {
+                self.panGestureRecognizer.state = UIGestureRecognizerStateCancelled;
+                return;
+            }
             
             if (velocity > 0) {
                 if (_isRightViewOpen) {
@@ -1893,7 +2153,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         frame.size.height = self.view.bounds.size.height - barHeight;
     }
     else {
+#if TARGET_OS_IOS
         BOOL statusBarIsHidden = [UIApplication sharedApplication].statusBarFrame.size.height == 0.;
+#else
+        BOOL statusBarIsHidden = YES;
+#endif
         frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20);
         frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20);
     }
