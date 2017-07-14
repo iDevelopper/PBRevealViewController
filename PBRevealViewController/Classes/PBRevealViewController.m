@@ -440,6 +440,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _isPressTypeMenuAllowed = NO;
     _isPressTypePlayPauseAllowed = NO;
 #endif
+    
+    _panFromLeftEdgeZoneWidth = 0.0;
+    _panFromRightEdgeZoneWidth = 0.0;
 }
 
 #pragma mark - View lifecycle
@@ -886,12 +889,14 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                     self.leftEffectView = nil;
                     self.leftShadowOpacity = 0.0f;
                     [_leftShadowView removeFromSuperview];
+                    [self reloadLeftShadow];
                     break;
                     
                 case PBRevealControllerOperationReplaceRightController:
                     self.rightEffectView = nil;
                     self.rightShadowOpacity = 0.0f;
                     [_rightShadowView removeFromSuperview];
+                    [self reloadRightShadow];
                     break;
                     
                 default:
@@ -1634,7 +1639,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
     }
     if (recognizer == _panGestureRecognizer) {
-        CGFloat velocity = [_panGestureRecognizer velocityInView:_mainViewController.view].x;
+        CGFloat velocity = [_panGestureRecognizer velocityInView:_contentView].x;
         if ([_delegate respondsToSelector:@selector(revealControllerPanGestureShouldBegin:direction:)]) {
             if ([_delegate revealControllerPanGestureShouldBegin:self direction:velocity > 0 ? PBRevealControllerPanDirectionRight : PBRevealControllerPanDirectionLeft] == NO) {
                 return NO;
@@ -1645,6 +1650,16 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             return NO;
         }
         */
+
+        CGPoint point = [recognizer locationInView:recognizer.view];
+        
+        if (_panFromLeftEdgeZoneWidth > 0.0 && !_isLeftViewOpen && velocity > 0.0 && point.x >_panFromLeftEdgeZoneWidth) {
+            return NO;
+        }
+        
+        if (_panFromRightEdgeZoneWidth > 0.0 && !_isRightViewOpen && velocity < 0.0 && point.x < (recognizer.view.bounds.size.width - _panFromRightEdgeZoneWidth)) {
+            return NO;
+        }
     }
     return YES;
 }
@@ -2117,7 +2132,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)notifyPanGestureBegan:(CGFloat)position
 {
     if ([_delegate respondsToSelector:@selector(revealControllerPanGestureBegan:direction:)]) {
-        CGFloat velocity = [_panGestureRecognizer velocityInView:_mainViewController.view].x;
+        CGFloat velocity = [_panGestureRecognizer velocityInView:_contentView].x;
         [_delegate revealControllerPanGestureBegan:self direction:velocity > 0 ? PBRevealControllerPanDirectionRight : PBRevealControllerPanDirectionLeft];
     }
 }
@@ -2125,7 +2140,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 - (void)notifyPanGestureMoved:(CGFloat)position
 {
     if ([_delegate respondsToSelector:@selector(revealControllerPanGestureMoved:direction:)]) {
-        CGFloat velocity = [_panGestureRecognizer velocityInView:_mainViewController.view].x;
+        CGFloat velocity = [_panGestureRecognizer velocityInView:_contentView].x;
         [_delegate revealControllerPanGestureMoved:self direction:velocity > 0 ? PBRevealControllerPanDirectionRight : PBRevealControllerPanDirectionLeft];
     }
 }
@@ -2136,7 +2151,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _isRightViewDragging = NO;
     [self restoreUserInteraction];
     if ([_delegate respondsToSelector:@selector(revealControllerPanGestureEnded:direction:)]) {
-        CGFloat velocity = [_panGestureRecognizer velocityInView:_mainViewController.view].x;
+        CGFloat velocity = [_panGestureRecognizer velocityInView:_contentView].x;
         [_delegate revealControllerPanGestureEnded:self direction:velocity > 0 ? PBRevealControllerPanDirectionRight : PBRevealControllerPanDirectionLeft];
     }
 }
