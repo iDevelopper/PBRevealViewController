@@ -471,8 +471,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     self.view = _contentView;
     [_contentView addSubview:_mainViewController.view];
     
+#if TARGET_OS_IOS
     [self tapGestureRecognizer];
     [self panGestureRecognizer];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -1267,7 +1269,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         void (^completion)() = ^{
             _isLeftViewOpen = YES;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+#endif
 
 #if TARGET_OS_TV
             [_tvOSLeftRevealButton removeFromSuperview];
@@ -1350,7 +1354,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         void (^completion)() = ^{
             _isRightViewOpen = YES;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+#endif
 
 #if TARGET_OS_TV
             [_tvOSLeftRevealButton removeFromSuperview];
@@ -1416,10 +1422,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         void (^completion)() = ^{
             _isLeftViewOpen = NO;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
             if (_isRightViewOpen) {
                 self.tapGestureRecognizer.cancelsTouchesInView = YES;
             }
+#endif
             [_leftViewController.view removeFromSuperview];
             [_leftViewController willMoveToParentViewController:nil];
             [_leftViewController removeFromParentViewController];
@@ -1481,10 +1489,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         void (^completion)() = ^{
             _isRightViewOpen = NO;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
             if (_isLeftViewOpen) {
                 self.tapGestureRecognizer.cancelsTouchesInView = YES;
             }
+#endif
             [_rightViewController.view removeFromSuperview];
             [_rightViewController willMoveToParentViewController:nil];
             [_rightViewController removeFromParentViewController];
@@ -1592,7 +1602,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
 - (UITapGestureRecognizer *)tapGestureRecognizer
 {
-#if TARGET_OS_IOS
+//#if TARGET_OS_IOS
     if (_tapGestureRecognizer == nil)
     {
         self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_handleTapGesture:)];
@@ -1602,13 +1612,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         
         [_contentView addGestureRecognizer:_tapGestureRecognizer];
     }
-#endif
+//#endif
     return _tapGestureRecognizer;
 }
 
 - (UIPanGestureRecognizer*)panGestureRecognizer
 {
-#if TARGET_OS_IOS
+//#if TARGET_OS_IOS
     if ( _panGestureRecognizer == nil )
     {
         self.panGestureRecognizer = [[PBRevealViewControllerPanGestureRecognizer alloc] initWithTarget:self action:@selector(_handlePanGesture:)];
@@ -1623,7 +1633,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [_rightViewController willMoveToParentViewController:nil];
         [_rightViewController removeFromParentViewController];
     }
-#endif
+//#endif
     return _panGestureRecognizer;
 }
 
@@ -1730,7 +1740,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 [_delegate revealController:self willShowLeftViewController:_leftViewController];
             }
             _isLeftViewOpen = YES;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+#endif
             
             leftFrame.origin.x = 0.;
             leftFrame.size.width = _leftViewRevealWidth;
@@ -1818,7 +1830,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 [_delegate revealController:self willShowRightViewController:_rightViewController];
             }
             _isRightViewOpen = YES;
+#if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
+#endif
             rightFrame.origin.x = self.view.bounds.size.width - _rightViewRevealWidth;
             rightFrame.size.width = _rightViewRevealWidth;
             if (!_rightPresentViewOnTop) {
