@@ -390,14 +390,14 @@ typedef NS_ENUM(NSInteger, PBRevealBlurEffectStyle) {
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
 /**
- *  The default zone width allowing pan gesture from left edge. If > 0.0, this the acceptable starting width for the gesture.
+ *  The default border width allowing pan gesture from left. If > 0.0, this the acceptable starting width for the gesture.
  */
-@property (nonatomic) CGFloat panFromLeftEdgeZoneWidth;
+@property (nonatomic) CGFloat panFromLeftBorderWidth;
 
 /**
- *  The default zone width allowing pan gesture from right edge. If > 0.0, this the acceptable starting width for the gesture.
+ *  The default border width allowing pan gesture from right. If > 0.0, this the acceptable starting width for the gesture.
  */
-@property (nonatomic) CGFloat panFromRightEdgeZoneWidth;
+@property (nonatomic) CGFloat panFromRightBorderWidth;
 
 /**
  *  Optional left view controller, can be nil if not used.

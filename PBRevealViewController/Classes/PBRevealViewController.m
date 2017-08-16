@@ -441,8 +441,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     _isPressTypePlayPauseAllowed = NO;
 #endif
     
-    _panFromLeftEdgeZoneWidth = 0.0;
-    _panFromRightEdgeZoneWidth = 0.0;
+    _panFromLeftBorderWidth = 0.0;
+    _panFromRightBorderWidth = 0.0;
 }
 
 #pragma mark - View lifecycle
@@ -1663,11 +1663,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 
         CGPoint point = [recognizer locationInView:recognizer.view];
         
-        if (_panFromLeftEdgeZoneWidth > 0.0 && !_isLeftViewOpen && velocity > 0.0 && point.x >_panFromLeftEdgeZoneWidth) {
+        if (_panFromLeftBorderWidth > 0.0 && !_isLeftViewOpen && velocity > 0.0 && point.x >_panFromLeftBorderWidth) {
             return NO;
         }
         
-        if (_panFromRightEdgeZoneWidth > 0.0 && !_isRightViewOpen && velocity < 0.0 && point.x < (recognizer.view.bounds.size.width - _panFromRightEdgeZoneWidth)) {
+        if (_panFromRightBorderWidth > 0.0 && !_isRightViewOpen && velocity < 0.0 && point.x < (recognizer.view.bounds.size.width - _panFromRightBorderWidth)) {
             return NO;
         }
     }
