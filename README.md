@@ -134,3 +134,11 @@ iDevelopper, patrick.bodet4@wanadoo.fr
 ## License
 
 PBRevealViewController is available under the MIT license. See the LICENSE file for more info.
+
+Please tell me when you use this controller in your project!
+
+Regards,
+
+Patrick Bodet aka iDevelopper
+
+
