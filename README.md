@@ -80,6 +80,8 @@ pod 'PBRevealViewController/Swift'
 ```
 Example: Allow opening left/right view only if the user starts swiping on the edge of the screen.
 
+New: See panFromLeftBorderWidth and panFromRightBorderWidth properties!
+
 Objective-C:
 ```objective-c
 - (BOOL)revealControllerPanGestureShouldBegin:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction
