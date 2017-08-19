@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 1.2.2
+
+#### Add some properties for pan gesture.
+
+```
+/**
+*  The default border width allowing pan gesture from left. If > 0.0, this is the acceptable starting width for the gesture.
+*/
+@property (nonatomic) CGFloat panFromLeftBorderWidth;
+
+/**
+*  The default border width allowing pan gesture from right. If > 0.0, this is the acceptable starting width for the gesture.
+*/
+@property (nonatomic) CGFloat panFromRightBorderWidth;
+```
+
 ## 1.2.1
 
 #### tvOS support.
