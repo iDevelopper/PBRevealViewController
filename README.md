@@ -6,6 +6,8 @@
 
 A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS, inspired on SWRevealViewController subclass.
 
+PBRevealViewController is compatible with both iOS and tvOS, and currently works with Swift 3.0 and Objective-C!
+
 ## Examples
 
 ![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif)
@@ -19,13 +21,29 @@ To run the example projects, clone the repo, and run `pod install` in your Termi
 
 You can also run `pod try PBRevealViewController` in your Terminal from anywhere.
 
+## In your project
+
 The easiest way to install it is by copying the following to your project:
 * PBRevealViewController.h
 * PBRevealViewController.m
 
-PBRevealViewController is also available through [CocoaPods](http://cocoapods.org). To install the library to your project, simply copy to clipbooard the pod command as shown below and paste it in your Podfile:
+Or
+* PBRevealViewController.swift
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Cocoa.png)
+PBRevealViewController is also available through [CocoaPods](http://cocoapods.org).
+
+To install the library to your project:
+
+PBRevealViewController has [subspecs](https://guides.cocoapods.org/syntax/podspec.html#subspec) for both Objective-C and Swift! Currently, Objective-C is the default subspec.
+
+That means to use PBRevealViewController in an Objective-C project, add the following to your project's Podfile:
+```ruby
+pod 'PBRevealViewController'
+```
+But if you're using Swift, add the following instead to specify the Swift subspec:
+```ruby
+pod 'PBRevealViewController/Swift'
+```
 
 ## Features
 

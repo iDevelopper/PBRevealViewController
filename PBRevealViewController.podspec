@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'PBRevealViewController'
-  s.version          = '1.2.2'
-  s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
+    s.name             = 'PBRevealViewController'
+    s.version          = '1.2.1'
+    s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,28 +17,42 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = <<-DESC
+    s.description      = <<-DESC
 A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS.
 A category method on UIViewController, `revealViewController`, to get the parent `PBRevealViewController` of any child controller, similar to the UIViewController's property `navigationController`.
-                       DESC
+DESC
 
-  s.homepage         = 'https://github.com/iDevelopper/PBRevealViewController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'iDevelopper' => 'patrick.bodet4@wanadoo.fr' }
-  s.source           = { :git => 'https://github.com/iDevelopper/PBRevealViewController.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+    s.homepage         = 'https://github.com/iDevelopper/PBRevealViewController'
+    # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
+    s.license          = { :type => 'MIT', :file => 'LICENSE' }
+    s.author           = { 'iDevelopper' => 'patrick.bodet4@wanadoo.fr' }
+    s.source           = { :git => 'https://github.com/iDevelopper/PBRevealViewController.git', :tag => s.version.to_s }
+    # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '6.0'
-  s.tvos.deployment_target = '9.0'
+    s.ios.deployment_target = '6.0'
+    s.tvos.deployment_target = '9.0'
 
-  s.source_files = 'PBRevealViewController/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'PBRevealViewController' => ['PBRevealViewController/Assets/*.png']
-  # }
+    s.default_subspec = 'ObjC'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.subspec 'ObjC' do |ss|
+        ss.ios.deployment_target = '6.0'
+        ss.tvos.deployment_target = '9.0'
+        ss.source_files = 'PBRevealViewController/Classes/**/*.{h,m}'
+    end
+
+    s.subspec 'Swift' do |ss|
+        ss.ios.deployment_target = '8.0'
+        ss.tvos.deployment_target = '9.0'
+        ss.source_files = 'PBRevealViewController/Classes/**/*.swift'
+    end
+
+    #s.source_files = 'PBRevealViewController/Classes/**/*'
+
+    # s.resource_bundles = {
+    #   'PBRevealViewController' => ['PBRevealViewController/Assets/*.png']
+    # }
+
+    # s.public_header_files = 'Pod/Classes/**/*.h'
+    # s.frameworks = 'UIKit', 'MapKit'
+    # s.dependency 'AFNetworking', '~> 2.3'
 end

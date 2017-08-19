@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.3
+
+#### Add Swift 3 version of the library.
+
 ## 1.2.2
 
 #### Add some properties for pan gesture.
