@@ -31,3 +31,10 @@ target 'ExampleFortvOS' do
     pod 'PBRevealViewController', :path => '../'
     
 end
+
+target 'ExampleWithSwiftLibrary' do
+    use_frameworks!
+    project '../ExampleWithSwiftLibrary/ExampleWithSwiftLibrary'
+    pod 'PBRevealViewController/Swift', :path => '../'
+    
+end
