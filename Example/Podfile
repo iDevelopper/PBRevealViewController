@@ -28,6 +28,7 @@ end
 
 target 'ExampleFortvOS' do
     project '../ExampleFortvOS/ExampleFortvOS'
+    platform :tvos, '10.2'
     pod 'PBRevealViewController', :path => '../'
     
 end
