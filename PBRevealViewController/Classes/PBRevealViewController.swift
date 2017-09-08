@@ -2447,29 +2447,36 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     // MARK: - Override rotation
     
     private func viewWillTransitionToSize(_ size: CGSize) {
+        
         var frame: CGRect
-        if self.isLeftPresentViewHierarchically {
-            frame = adjustsFrameForController(self.leftViewController!)
+        
+        if self.leftViewController != nil {
+            if self.isLeftPresentViewHierarchically {
+                frame = adjustsFrameForController(self.leftViewController!)
+            }
+            else {
+                frame = (self.leftViewController?.view.frame)!
+                frame.size.height = size.height
+            }
+            frame.size.width = leftViewRevealWidth
+            self.leftViewController?.view.frame = frame
         }
-        else {
-            frame = (self.leftViewController?.view.frame)!
-            frame.size.height = size.height
+        
+        if self.rightViewController != nil {
+            if self.isRightPresentViewHierarchically {
+                frame = adjustsFrameForController(self.rightViewController!)
+            }
+            else {
+                frame = (self.rightViewController?.view.frame)!
+                frame.size.height = size.height
+            }
+            frame.origin.x = size.width
+            if isRightViewOpen {
+                frame.origin.x = size.width - rightViewRevealWidth
+            }
+            frame.size.width = rightViewRevealWidth
+            self.rightViewController?.view.frame = frame
         }
-        frame.size.width = leftViewRevealWidth
-        self.leftViewController?.view.frame = frame
-        if self.isRightPresentViewHierarchically {
-            frame = adjustsFrameForController(self.rightViewController!)
-        }
-        else {
-            frame = (self.rightViewController?.view.frame)!
-            frame.size.height = size.height
-        }
-        frame.origin.x = size.width
-        if isRightViewOpen {
-            frame.origin.x = size.width - rightViewRevealWidth
-        }
-        frame.size.width = rightViewRevealWidth
-        self.rightViewController?.view.frame = frame
     }
 
     // MARK: - Override rotation

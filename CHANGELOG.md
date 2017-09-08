@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.4
+
+#### Fix [Issue 32](https://github.com/iDevelopper/PBRevealViewController/issues/32).
+
 ## 1.2.3
 
 #### Add Swift 3 version of the library.

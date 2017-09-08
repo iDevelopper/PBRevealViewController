@@ -2199,33 +2199,37 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     CGRect frame;
     
-    if (_leftPresentViewHierarchically) {
-        frame = [self adjustsFrameForController:_leftViewController];
-    }
-    else {
-        frame = _leftViewController.view.frame;
-        frame.size.height = size.height;
-    }
-    
-    frame.size.width = _leftViewRevealWidth;
-    
-    _leftViewController.view.frame = frame;
-    
-    if (_rightPresentViewHierarchically) {
-        frame = [self adjustsFrameForController:_rightViewController];
-    }
-    else {
-        frame = _rightViewController.view.frame;
-        frame.size.height = size.height;
+    if (_leftViewController) {
+        if (_leftPresentViewHierarchically) {
+            frame = [self adjustsFrameForController:_leftViewController];
+        }
+        else {
+            frame = _leftViewController.view.frame;
+            frame.size.height = size.height;
+        }
+        
+        frame.size.width = _leftViewRevealWidth;
+        
+        _leftViewController.view.frame = frame;
     }
     
-    frame.origin.x = size.width;
-    if (_isRightViewOpen) {
-        frame.origin.x = size.width - _rightViewRevealWidth;
+    if (_rightViewController) {
+        if (_rightPresentViewHierarchically) {
+            frame = [self adjustsFrameForController:_rightViewController];
+        }
+        else {
+            frame = _rightViewController.view.frame;
+            frame.size.height = size.height;
+        }
+        
+        frame.origin.x = size.width;
+        if (_isRightViewOpen) {
+            frame.origin.x = size.width - _rightViewRevealWidth;
+        }
+        frame.size.width = _rightViewRevealWidth;
+        
+        _rightViewController.view.frame = frame;
     }
-    frame.size.width = _rightViewRevealWidth;
-    
-    _rightViewController.view.frame = frame;
 }
 
 # pragma mark - Override rotation
