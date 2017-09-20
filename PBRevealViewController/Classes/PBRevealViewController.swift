@@ -378,7 +378,7 @@ Use a reveal view controller delegate (a custom object that implements this prot
      - Returns:
         A block to be inserted in the view animation.
      */
-    @objc optional func revealController(_ revealController: PBRevealViewController, animationBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> ((_: Void) -> Void)?
+    @objc optional func revealController(_ revealController: PBRevealViewController, animationBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> (() -> Void)?
 
     /**
      Ask for completion block while pushing main view controller.
@@ -396,7 +396,7 @@ Use a reveal view controller delegate (a custom object that implements this prot
      - Returns:
         A block to be inserted in the view animation completion.
      */
-    @objc optional func revealController(_ revealController: PBRevealViewController, completionBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> ((_: Void) -> Void)?
+    @objc optional func revealController(_ revealController: PBRevealViewController, completionBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> (() -> Void)?
 
     /**
      Ask for a block with animation and completion while replacing/pushing child view controllers, please add the final block to your completion.
@@ -419,7 +419,7 @@ Use a reveal view controller delegate (a custom object that implements this prot
      - Returns:
         A block with animation and completion (add the final block to your completion).
      */
-    @objc optional func revealController(_ revealController: PBRevealViewController, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController, finalBlock: @escaping (_: Void) -> Void) -> ((_: Void) -> Void)?
+    @objc optional func revealController(_ revealController: PBRevealViewController, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController, finalBlock: @escaping () -> Void) -> (() -> Void)?
 
     /**
      Ask for custom transition animations controller while replacing/pushing child view controllers. If implemented, it will be fired in response to calls setXXXViewController or pushXXXViewController child view controller (since iOS 7).
@@ -2567,9 +2567,9 @@ private class PBContextTransitionObject: NSObject, UIViewControllerContextTransi
     weak internal var revealController: PBRevealViewController?
     internal var toViewController: UIViewController?
     internal var fromViewController: UIViewController?
-    internal var completion: ((_: Void) -> Void)? = nil
+    internal var completion: (() -> Void)? = nil
 
-    init(revealController: PBRevealViewController, containerView: UIView, fromViewController: UIViewController, toViewController: UIViewController, completion: @escaping (_: Void) -> Void) {
+    init(revealController: PBRevealViewController, containerView: UIView, fromViewController: UIViewController, toViewController: UIViewController, completion: @escaping () -> Void) {
         
         self.revealController = revealController
         self.containerView = containerView
