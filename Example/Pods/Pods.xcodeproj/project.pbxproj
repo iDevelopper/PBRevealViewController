@@ -82,7 +82,7 @@
 		0835697FA77B1501683F621EBAB5B209 /* PBRevealViewController-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PBRevealViewController-Swift-prefix.pch"; path = "../PBRevealViewController-Swift/PBRevealViewController-Swift-prefix.pch"; sourceTree = "<group>"; };
 		08714E3AD8BFC725BE4E159955518715 /* PBRevealViewController-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "PBRevealViewController-Swift-dummy.m"; path = "../PBRevealViewController-Swift/PBRevealViewController-Swift-dummy.m"; sourceTree = "<group>"; };
 		0D4AD29C8B006232967CE44461852F30 /* Pods-PBRevealViewController_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PBRevealViewController_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		11068032C8D725998539BD81CE9428EC /* libPBRevealViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libPBRevealViewController.a; path = libPBRevealViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		11068032C8D725998539BD81CE9428EC /* libPBRevealViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPBRevealViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		14834D4B2DA60B92F6686F35AF5D9B10 /* PBRevealViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PBRevealViewController-prefix.pch"; sourceTree = "<group>"; };
 		18D1FF09417C5943514895266198BD02 /* Pods-Example4Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example4Swift-dummy.m"; sourceTree = "<group>"; };
 		2643D590A0260C02CF4F5BD1BAFE8EDC /* Pods-Example4Swift-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example4Swift-resources.sh"; sourceTree = "<group>"; };
@@ -92,24 +92,24 @@
 		2DE72C26A85F2063E9EE5F594F6EB5B3 /* Pods-ExampleWithSwiftLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ExampleWithSwiftLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		398CD3B206FE5AE792CF8E1128121692 /* Pods-Example3Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example3Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		3B12EF05F18B8E9538AE5E8D940345D9 /* PBRevealViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PBRevealViewController.swift; sourceTree = "<group>"; };
-		3C498F50DC3554908333062B2ED8D122 /* Pods_ExampleWithSwiftLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_ExampleWithSwiftLibrary.framework; path = "Pods-ExampleWithSwiftLibrary.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4559BAFD68F44F0BE2E6C0BECB39E067 /* libPods-Example3Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Example3Swift.a"; path = "libPods-Example3Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C498F50DC3554908333062B2ED8D122 /* Pods_ExampleWithSwiftLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ExampleWithSwiftLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4559BAFD68F44F0BE2E6C0BECB39E067 /* libPods-Example3Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example3Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46D54CCC01158ADD0B4C2B310C338C3A /* Pods-Example2-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example2-acknowledgements.markdown"; sourceTree = "<group>"; };
 		53B7917600F4127E0CE0F15519815D38 /* Pods-Example3Swift-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example3Swift-resources.sh"; sourceTree = "<group>"; };
 		585DA5AD51DB4D9838AF962F24021B6B /* Pods-ExampleFortvOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-ExampleFortvOS-acknowledgements.plist"; sourceTree = "<group>"; };
 		5A02BE26A76BF0A01DF128EBD92A30AF /* Pods-Example3Swift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example3Swift-frameworks.sh"; sourceTree = "<group>"; };
-		5B4F7EA3E98A864342DC2187DCD833B7 /* libPods-PBRevealViewController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-PBRevealViewController_Example.a"; path = "libPods-PBRevealViewController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B4F7EA3E98A864342DC2187DCD833B7 /* libPods-PBRevealViewController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PBRevealViewController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6604A7D69453B4569E4E4827FB9155A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		684BF397508E0448FA4C22DEABA33200 /* libPods-Example4Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Example4Swift.a"; path = "libPods-Example4Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		684BF397508E0448FA4C22DEABA33200 /* libPods-Example4Swift.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example4Swift.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69349A72C2A8F82B6E80A780FDF5C1EC /* PBRevealViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = PBRevealViewController.m; sourceTree = "<group>"; };
 		69E454D7B2220A8AE77FCB75D9C26D2F /* Pods-ExampleFortvOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ExampleFortvOS-dummy.m"; sourceTree = "<group>"; };
 		70D3F42A48DBF331715F836D7B7A81B9 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		797E6D358D5C2B241033F075DE4A1AE6 /* Pods-ExampleFortvOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ExampleFortvOS-frameworks.sh"; sourceTree = "<group>"; };
 		839741FF8E1DAB8343EBB058AE8491EB /* Pods-Example3Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example3Swift.release.xcconfig"; sourceTree = "<group>"; };
-		8452D71B9BC0EAE375A9305F266E2A0F /* libPods-ExampleFortvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-ExampleFortvOS.a"; path = "libPods-ExampleFortvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8452D71B9BC0EAE375A9305F266E2A0F /* libPods-ExampleFortvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExampleFortvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BAE1A4AE9953F0FD7A987E6109F8563 /* Pods-Example3Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example3Swift-dummy.m"; sourceTree = "<group>"; };
 		8C18278FE9A855672808F9C2D20B3C46 /* Pods-Example3Swift-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example3Swift-acknowledgements.plist"; sourceTree = "<group>"; };
-		8D2CBC410D4F8AC5FEA117A8EA82A04D /* libPods-Example2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-Example2.a"; path = "libPods-Example2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D2CBC410D4F8AC5FEA117A8EA82A04D /* libPods-Example2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Example2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EC9535541FC88CA2FA36589B1299D1A /* Pods-Example2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example2.debug.xcconfig"; sourceTree = "<group>"; };
 		908CEED51D6DB3CBDEE523B23CCB617D /* Pods-PBRevealViewController_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PBRevealViewController_Example-dummy.m"; sourceTree = "<group>"; };
 		91C3BE1D21022EC3E3E1CA2D073A97A2 /* Pods-Example2-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example2-resources.sh"; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		928BA29371219F4EDFF2996DB6C0B5B2 /* PBRevealViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PBRevealViewController.xcconfig; sourceTree = "<group>"; };
 		92C5353B769917BC987335ABC2A4DACB /* Pods-ExampleFortvOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-ExampleFortvOS-acknowledgements.markdown"; sourceTree = "<group>"; };
 		932A05165FCFE3A62FA47A1A60C9D89A /* Pods-ExampleWithSwiftLibrary-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ExampleWithSwiftLibrary-resources.sh"; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9D440FD50E62A89D2EFC0BE62B388CC8 /* Pods-ExampleWithSwiftLibrary-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-ExampleWithSwiftLibrary-umbrella.h"; sourceTree = "<group>"; };
 		A2A2DDCC22F1B661266D92BFCA1846B7 /* Pods-ExampleWithSwiftLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ExampleWithSwiftLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		A2C236ED75571A7E9563DE8161AA6086 /* PBRevealViewController-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "PBRevealViewController-Swift-umbrella.h"; path = "../PBRevealViewController-Swift/PBRevealViewController-Swift-umbrella.h"; sourceTree = "<group>"; };
@@ -132,10 +132,10 @@
 		C50B8879CF7EAC7BCE314962A4369DF4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C6B4FECD9E8F0D59F3EFA266005CF278 /* Pods-Example3Swift-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example3Swift-acknowledgements.markdown"; sourceTree = "<group>"; };
 		D1CDE90FBC9E18577BE102B4836F87B2 /* Pods-ExampleWithSwiftLibrary-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-ExampleWithSwiftLibrary-dummy.m"; sourceTree = "<group>"; };
-		D39E017E79AFB22E5879E5FC7C5733B5 /* PBRevealViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PBRevealViewController.framework; path = "PBRevealViewController-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		DC08EC5A11B53D04936B59D2389BBFEF /* Pods-ExampleWithSwiftLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-ExampleWithSwiftLibrary.modulemap"; sourceTree = "<group>"; };
+		D39E017E79AFB22E5879E5FC7C5733B5 /* PBRevealViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PBRevealViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC08EC5A11B53D04936B59D2389BBFEF /* Pods-ExampleWithSwiftLibrary.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ExampleWithSwiftLibrary.modulemap"; sourceTree = "<group>"; };
 		DC6256CAE099A5FDD6E5BB0747680AD1 /* Pods-Example4Swift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example4Swift-frameworks.sh"; sourceTree = "<group>"; };
-		E824EC415744E77462AA94487B384226 /* PBRevealViewController-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; name = "PBRevealViewController-Swift.modulemap"; path = "../PBRevealViewController-Swift/PBRevealViewController-Swift.modulemap"; sourceTree = "<group>"; };
+		E824EC415744E77462AA94487B384226 /* PBRevealViewController-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; name = "PBRevealViewController-Swift.modulemap"; path = "../PBRevealViewController-Swift/PBRevealViewController-Swift.modulemap"; sourceTree = "<group>"; };
 		EB0A26029B5B13C007188B5A4334895C /* Pods-ExampleFortvOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-ExampleFortvOS-resources.sh"; sourceTree = "<group>"; };
 		EF7021536CBE2F7178D78E7802D18319 /* Pods-Example2-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example2-frameworks.sh"; sourceTree = "<group>"; };
 		EFBDC0EA50A361245DFEFE2D68A99907 /* Pods-ExampleFortvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ExampleFortvOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -218,7 +218,6 @@
 			children = (
 				89D07539CA6ECCFEF7E368B83AFEDB87 /* Classes */,
 			);
-			name = PBRevealViewController;
 			path = PBRevealViewController;
 			sourceTree = "<group>";
 		};
@@ -235,7 +234,6 @@
 			children = (
 				3B12EF05F18B8E9538AE5E8D940345D9 /* PBRevealViewController.swift */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -244,7 +242,6 @@
 			children = (
 				2A6E1AF4579CA22B348C84F49EB0C170 /* Classes */,
 			);
-			name = PBRevealViewController;
 			path = PBRevealViewController;
 			sourceTree = "<group>";
 		};
@@ -349,7 +346,6 @@
 				BDCBCBB2E3B4E2878882FA84231D8B4B /* PBRevealViewController.h */,
 				69349A72C2A8F82B6E80A780FDF5C1EC /* PBRevealViewController.m */,
 			);
-			name = Classes;
 			path = Classes;
 			sourceTree = "<group>";
 		};
@@ -624,7 +620,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0900;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -853,7 +849,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -861,15 +859,21 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
@@ -925,7 +929,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/PBRevealViewController/PBRevealViewController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -972,7 +976,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/PBRevealViewController/PBRevealViewController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1121,7 +1125,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1129,14 +1135,20 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_RELEASE=1",
 					"$(inherited)",
@@ -1150,6 +1162,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
