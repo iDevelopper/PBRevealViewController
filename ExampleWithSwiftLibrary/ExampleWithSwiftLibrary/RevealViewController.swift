@@ -159,19 +159,19 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         print("didAdd:for:")
     }
     
-    func revealController(_ revealController: PBRevealViewController, animationBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> ((_: Void) -> Void)?
+    func revealController(_ revealController: PBRevealViewController, animationBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> (() -> Void)?
     {
         print("animationBlockFor:from:to:")
         return nil
     }
     
-    func revealController(_ revealController: PBRevealViewController, completionBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> ((_: Void) -> Void)?
+    func revealController(_ revealController: PBRevealViewController, completionBlockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController) -> (() -> Void)?
     {
         print("completionBlockFor:from:to:")
         return nil
     }
     
-    func revealController(_ revealController: PBRevealViewController, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController, finalBlock: @escaping (_: Void) -> Void) -> ((_: Void) -> Void)?
+    func revealController(_ revealController: PBRevealViewController, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController, to toViewController: UIViewController, finalBlock: @escaping () -> Void) -> (() -> Void)?
     {
         print("blockFor:from:to:")
         return nil
