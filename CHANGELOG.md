@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.5
+
+#### Swift 4 ans iOS 11 compatibility.
+
 ## 1.2.4
 
 #### Fix [Issue 32](https://github.com/iDevelopper/PBRevealViewController/issues/32).
