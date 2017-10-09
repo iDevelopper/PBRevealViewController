@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.6
+
+#### Swift 4 ans iOS 11 compatibility. Fix some warnings.
+
 ## 1.2.5
 
 #### Swift 4 ans iOS 11 compatibility.
