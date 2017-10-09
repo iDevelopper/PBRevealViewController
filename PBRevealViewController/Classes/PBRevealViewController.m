@@ -1013,7 +1013,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:toViewController];
         [fromViewController willMoveToParentViewController:nil];
         
-        void (^completion)() = ^{
+        void (^completion)(void) = ^{
             [fromViewController.view removeFromSuperview];
             [fromViewController removeFromParentViewController];
             [toViewController didMoveToParentViewController:self];
@@ -1022,7 +1022,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             }
         };
         
-        void (^customBlock)();
+        void (^customBlock)(void);
         
         if ([_delegate respondsToSelector:@selector(revealController:blockForOperation:fromViewController:toViewController:finalBlock:)]) {
             customBlock = [_delegate revealController:self blockForOperation:operation fromViewController:fromViewController toViewController:toViewController finalBlock:completion];
@@ -1072,7 +1072,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [_delegate revealController:self willAddViewController:toViewController forOperation:operation animated:animated];
     }
     
-    void (^completion)() = ^{
+    void (^completion)(void) = ^{
         [fromViewController.view removeFromSuperview];
         [fromViewController removeFromParentViewController];
         [toViewController didMoveToParentViewController:self];
@@ -1183,19 +1183,19 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeCustom) {
-        void (^customAnimation)();
+        void (^customAnimation)(void);
         
         if ([_delegate respondsToSelector:@selector(revealController:animationBlockForOperation:fromViewController:toViewController:)]) {
             customAnimation = [_delegate revealController:self animationBlockForOperation:operation fromViewController:fromViewController toViewController:toViewController];
         }
         
-        void (^customCompletion)();
+        void (^customCompletion)(void);
         
         if ([_delegate respondsToSelector:@selector(revealController:completionBlockForOperation:fromViewController:toViewController:)]) {
             customCompletion = [_delegate revealController:self completionBlockForOperation:operation fromViewController:fromViewController toViewController:toViewController];
         }
         
-        void (^customBlock)();
+        void (^customBlock)(void);
         
         if ([_delegate respondsToSelector:@selector(revealController:blockForOperation:fromViewController:toViewController:finalBlock:)]) {
             customBlock = [_delegate revealController:self blockForOperation:operation fromViewController:fromViewController toViewController:toViewController finalBlock:completion];
@@ -1267,7 +1267,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:_leftViewController];
         [_leftViewController didMoveToParentViewController:self];
         
-        void (^completion)() = ^{
+        void (^completion)(void) = ^{
             _isLeftViewOpen = YES;
 #if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
@@ -1352,7 +1352,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         [self addChildViewController:_rightViewController];
         [_rightViewController didMoveToParentViewController:self];
         
-        void (^completion)() = ^{
+        void (^completion)(void) = ^{
             _isRightViewOpen = YES;
 #if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = YES;
@@ -1420,7 +1420,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         CGRect mainFrame = _mainViewController.view.frame;
         mainFrame.origin.x = 0;
         
-        void (^completion)() = ^{
+        void (^completion)(void) = ^{
             _isLeftViewOpen = NO;
 #if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -1487,7 +1487,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         CGRect mainFrame = _mainViewController.view.frame;
         mainFrame.origin.x = 0;
         
-        void (^completion)() = ^{
+        void (^completion)(void) = ^{
             _isRightViewOpen = NO;
 #if TARGET_OS_IOS
             self.tapGestureRecognizer.cancelsTouchesInView = NO;
@@ -1751,7 +1751,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 mainFrame.origin.x = _leftViewRevealWidth;
             }
             
-            void (^completion)() = ^{
+            void (^completion)(void) = ^{
                 if ([_delegate respondsToSelector:@selector(revealController:didShowLeftViewController:)]) {
                     [_delegate revealController:self didShowLeftViewController:_leftViewController];
                 }
@@ -1839,7 +1839,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 mainFrame.origin.x = - (_rightViewRevealWidth);
             }
             
-            void (^completion)() = ^{
+            void (^completion)(void) = ^{
                 if ([_delegate respondsToSelector:@selector(revealController:didShowRightViewController:)]) {
                     [_delegate revealController:self didShowRightViewController:_rightViewController];
                 }
