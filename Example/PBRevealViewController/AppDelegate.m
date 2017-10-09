@@ -171,7 +171,7 @@
     
     // See willAddViewController above
     
-    void (^animation)();
+    void (^animation)(void);
     
     if ([toViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *)toViewController;
@@ -191,7 +191,7 @@
 - (void (^)(void))revealController:(PBRevealViewController *)revealController completionBlockForOperation:(PBRevealControllerOperation)operation fromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController
 {
     NSLog(@"completionBlockForOperation");
-    void (^completion)() = ^{ NSLog(@"Completion"); };
+    void (^completion)(void) = ^{ NSLog(@"Completion"); };
     return completion;
 }
 
@@ -202,7 +202,7 @@
     if ([toViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *nc = (UINavigationController *)toViewController;
         if ([nc.topViewController isKindOfClass:[ThirdViewController class]]) {
-            void (^block)() = ^{
+            void (^block)(void) = ^{
                 __block CGRect leftFrame = revealController.leftViewController.view.frame;
                 leftFrame.size.width += 100.;
                 __block CGRect mainFrame = toViewController.view.frame;
