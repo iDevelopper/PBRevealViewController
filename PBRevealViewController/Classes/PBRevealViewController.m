@@ -2251,12 +2251,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 // iOS < 8.0
 - (BOOL)shouldAutorotate
 {
-    return YES;
+    return [super shouldAutorotate];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAllButUpsideDown;
+    return  [super supportedInterfaceOrientations];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
