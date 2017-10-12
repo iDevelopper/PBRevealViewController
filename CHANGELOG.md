@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.7
+
+#### Fix device rotation for ObjC Library and iOS < 8.0.
+
 ## 1.2.6
 
 #### Swift 4 ans iOS 11 compatibility. Fix some warnings.
