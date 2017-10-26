@@ -924,6 +924,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_isLeftViewOpen) {
         [self _swapFromViewController:_leftViewController toViewController:leftViewController operation:PBRevealControllerOperationReplaceLeftController animated:animated];
     }
+    if (!_leftViewController) {
+        [self addChildViewController:leftViewController];
+        [leftViewController didMoveToParentViewController:self];
+    }
+    
     _leftViewController = leftViewController;
     
     [self reloadLeftShadow];
@@ -939,7 +944,13 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_mainViewController && animated) {
         [self _swapFromViewController:_mainViewController toViewController:mainViewController operation:PBRevealControllerOperationReplaceMainController animated:animated];
     }
+    if (!_mainViewController) {
+        [self addChildViewController:mainViewController];
+        [mainViewController didMoveToParentViewController:self];
+    }
+    
     _mainViewController = mainViewController;
+    
     [self reloadMainShadow];
 }
 
@@ -959,6 +970,12 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     if (_isRightViewOpen) {
         [self _swapFromViewController:_rightViewController toViewController:rightViewController operation:PBRevealControllerOperationReplaceRightController animated:animated];
     }
+    
+    if (!_rightViewController) {
+        [self addChildViewController:rightViewController];
+        [rightViewController didMoveToParentViewController:self];
+    }
+    
     _rightViewController = rightViewController;
     
     [self reloadRightShadow];

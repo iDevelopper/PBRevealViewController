@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.8
+
+#### Fix [issue 34](https://github.com/iDevelopper/PBRevealViewController/issues/34). Add Main/Left/Right View Controller to parentViewController at first call of setXXXXViewController, if initWithLeftViewController:mainViewController:rightViewController: not used.
+
 ## 1.2.7
 
 #### Fix device rotation for ObjC Library and iOS < 8.0.

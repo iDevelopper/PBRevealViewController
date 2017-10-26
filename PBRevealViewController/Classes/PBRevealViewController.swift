@@ -1161,6 +1161,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         if isLeftViewOpen {
             _swapFromViewController(self.leftViewController!, toViewController: leftViewController, operation: .replaceLeftController, animated: animated)
         }
+        if self.leftViewController == nil {
+            addChildViewController(leftViewController)
+            leftViewController.didMove(toParentViewController: self)
+        }
         self.leftViewController = leftViewController
         _reloadLeftShadow()
     }
@@ -1175,6 +1179,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     @objc open func setMainViewController(_ mainViewController: UIViewController, animated: Bool) {
         if (self.mainViewController != nil) && animated {
             _swapFromViewController(self.mainViewController!, toViewController: mainViewController, operation: .replaceMainController, animated: animated)
+        }
+        if self.mainViewController == nil {
+            addChildViewController(mainViewController)
+            mainViewController.didMove(toParentViewController: self)
         }
         self.mainViewController = mainViewController
         _reloadMainShadow()
@@ -1195,6 +1203,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         _reloadSideBlurEffectStyle(style: self.rightViewBlurEffectStyle.rawValue, forController: rightViewController, forOperation: .replaceRightController)
         if isRightViewOpen {
             _swapFromViewController(self.rightViewController!, toViewController: rightViewController, operation: .replaceRightController, animated: animated)
+        }
+        if self.rightViewController == nil {
+            addChildViewController(rightViewController)
+            rightViewController.didMove(toParentViewController: self)
         }
         self.rightViewController = rightViewController
         _reloadRightShadow()
