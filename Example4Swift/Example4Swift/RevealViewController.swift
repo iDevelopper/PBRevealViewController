@@ -40,7 +40,7 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
         let block = {
             () -> Void in
             
-            UIView.transition(with: fromViewController.view, duration: 0.8, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
+            UIView.transition(with: fromViewController.view.superview!, duration: 0.8, options: [.transitionFlipFromRight, .showHideTransitionViews], animations: {
                 fromViewController.view.isHidden = true
                 }, completion: { (finished) in
                     print("Custom completion")

@@ -2445,13 +2445,17 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             frame.size.height = view.bounds.size.height - barHeight
         }
         else {
-#if os(iOS)
+            #if os(iOS)
             let statusBarIsHidden: Bool = UIApplication.shared.statusBarFrame.size.height == 0.0
-#else
+            let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+            #else
             let statusBarIsHidden: Bool = true
-#endif
-            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20)
-            frame.size.height = view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20)
+            let statusBarHeight: CGFloat = 0.0
+            #endif
+            //            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20)
+            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : statusBarHeight)
+            //            frame.size.height = view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20)
+            frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : statusBarHeight)
         }
         return frame
     }
