@@ -181,9 +181,11 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
     {
         print("animationControllerForTransitionFrom:to:for:")
         if operation == .pushMainControllerFromLeft {
+            revealController.revealLeftView()
             return AnimationControllerForPush()
         }
         if operation == .pushMainControllerFromRight {
+            revealController.revealRightView()
             return AnimationControllerForPush()
         }
         return nil

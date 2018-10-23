@@ -458,18 +458,18 @@ open class PBRevealViewControllerSegueSetController: UIStoryboardSegue {
         let rvc: PBRevealViewController? = source as? PBRevealViewController
         let dvc: UIViewController? = destination
         if (identifier == PBSegueMainIdentifier) {
-            rvc?.addChildViewController(dvc!)
-            dvc?.didMove(toParentViewController: rvc)
+            rvc?.addChild(dvc!)
+            dvc?.didMove(toParent: rvc)
             rvc?.mainViewController = dvc
         }
         else if (identifier == PBSegueLeftIdentifier) {
-            rvc?.addChildViewController(dvc!)
-            dvc?.didMove(toParentViewController: rvc)
+            rvc?.addChild(dvc!)
+            dvc?.didMove(toParent: rvc)
             rvc?.leftViewController = dvc
         }
         else if (identifier == PBSegueRightIdentifier) {
-            rvc?.addChildViewController(dvc!)
-            dvc?.didMove(toParentViewController: rvc)
+            rvc?.addChild(dvc!)
+            dvc?.didMove(toParent: rvc)
             rvc?.rightViewController = dvc
         }
         
@@ -951,17 +951,17 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     @objc public init(leftViewController: UIViewController?, mainViewController: UIViewController, rightViewController: UIViewController?) {
         super.init(nibName: nil, bundle: nil)
         
-        addChildViewController(mainViewController)
-        mainViewController.didMove(toParentViewController: self)
+        addChild(mainViewController)
+        mainViewController.didMove(toParent: self)
         self.mainViewController = mainViewController
         if (leftViewController != nil) {
-            addChildViewController(leftViewController!)
-            leftViewController!.didMove(toParentViewController: self)
+            addChild(leftViewController!)
+            leftViewController!.didMove(toParent: self)
         }
         self.leftViewController = leftViewController
         if rightViewController != nil {
-            addChildViewController(rightViewController!)
-            rightViewController!.didMove(toParentViewController: self)
+            addChild(rightViewController!)
+            rightViewController!.didMove(toParent: self)
         }
         self.rightViewController = rightViewController
         
@@ -1162,8 +1162,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             _swapFromViewController(self.leftViewController!, toViewController: leftViewController, operation: .replaceLeftController, animated: animated)
         }
         if self.leftViewController == nil {
-            addChildViewController(leftViewController)
-            leftViewController.didMove(toParentViewController: self)
+            addChild(leftViewController)
+            leftViewController.didMove(toParent: self)
         }
         self.leftViewController = leftViewController
         _reloadLeftShadow()
@@ -1181,8 +1181,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             _swapFromViewController(self.mainViewController!, toViewController: mainViewController, operation: .replaceMainController, animated: animated)
         }
         if self.mainViewController == nil {
-            addChildViewController(mainViewController)
-            mainViewController.didMove(toParentViewController: self)
+            addChild(mainViewController)
+            mainViewController.didMove(toParent: self)
         }
         self.mainViewController = mainViewController
         _reloadMainShadow()
@@ -1205,8 +1205,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             _swapFromViewController(self.rightViewController!, toViewController: rightViewController, operation: .replaceRightController, animated: animated)
         }
         if self.rightViewController == nil {
-            addChildViewController(rightViewController)
-            rightViewController.didMove(toParentViewController: self)
+            addChild(rightViewController)
+            rightViewController.didMove(toParent: self)
         }
         self.rightViewController = rightViewController
         _reloadRightShadow()
@@ -1267,8 +1267,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             else {
                 self.contentView?.insertSubview((self.leftViewController?.view)!, belowSubview: (self.mainViewController?.view)!)
             }
-            addChildViewController(self.leftViewController!)
-            self.leftViewController?.didMove(toParentViewController: self)
+            addChild(self.leftViewController!)
+            self.leftViewController?.didMove(toParent: self)
             let completion: (() -> Void) = {() -> Void in
                 self.isLeftViewOpen = true
                 #if os(iOS)
@@ -1342,8 +1342,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             else {
                 self.contentView?.insertSubview((self.rightViewController?.view)!, belowSubview: (self.mainViewController?.view)!)
             }
-            addChildViewController(self.rightViewController!)
-            self.rightViewController?.didMove(toParentViewController: self)
+            addChild(self.rightViewController!)
+            self.rightViewController?.didMove(toParent: self)
             let completion: (() -> Void) = {() -> Void in
                 self.isRightViewOpen = true
                 #if os(iOS)
@@ -1415,8 +1415,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                     }
                 #endif
                 self.leftViewController?.view.removeFromSuperview()
-                self.leftViewController?.willMove(toParentViewController: nil)
-                self.leftViewController?.removeFromParentViewController()
+                self.leftViewController?.willMove(toParent: nil)
+                self.leftViewController?.removeFromParent()
                 #if os(tvOS)
                     self.setNeedsFocusUpdate()
                     self.updateFocusIfNeeded()
@@ -1477,8 +1477,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                     }
                 #endif
                 self.rightViewController?.view.removeFromSuperview()
-                self.rightViewController?.willMove(toParentViewController: nil)
-                self.rightViewController?.removeFromParentViewController()
+                self.rightViewController?.willMove(toParent: nil)
+                self.rightViewController?.removeFromParent()
                 #if os(tvOS)
                     self.setNeedsFocusUpdate()
                     self.updateFocusIfNeeded()
@@ -1599,7 +1599,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 tableView = self.tableViewInView((sideViewController?.view)!)
             }
             if style != PBRevealBlurEffectStyle.none.rawValue {
-                let blurEffect = UIBlurEffect(style: UIBlurEffectStyle(rawValue: style)!)
+                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style(rawValue: style)!)
                 let sideEffectView = UIVisualEffectView(effect: blurEffect)
                 sideEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 #if os(iOS)
@@ -1738,12 +1738,12 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 break
             }
             
-            addChildViewController(toViewController)
-            fromViewController.willMove(toParentViewController: nil)
+            addChild(toViewController)
+            fromViewController.willMove(toParent: nil)
             let completion: (() -> Void) = {() -> Void in
                 fromViewController.view.removeFromSuperview()
-                fromViewController.removeFromParentViewController()
-                toViewController.didMove(toParentViewController: self)
+                fromViewController.removeFromParent()
+                toViewController.didMove(toParent: self)
                 self.delegate?.revealController?(self, didAdd: toViewController, for: operation, animated: animated)
             }
             var customBlock: (() -> Void)?
@@ -1761,7 +1761,15 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 customBlock!()
             }
             else {
+                /*
                 UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
+                    fromViewController.view.isHidden = true
+                }, completion: {(_ finished: Bool) -> Void in
+                    completion()
+                    fromViewController.view.isHidden = false
+                })
+                */
+                UIView.transition(with: self.contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                     fromViewController.view.isHidden = true
                 }, completion: {(_ finished: Bool) -> Void in
                     completion()
@@ -1787,8 +1795,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         
         let completion: (() -> Void) = {() -> Void in
             fromViewController.view.removeFromSuperview()
-            fromViewController.removeFromParentViewController()
-            toViewController.didMove(toParentViewController: self)
+            fromViewController.removeFromParent()
+            toViewController.didMove(toParent: self)
             if operation == .pushMainControllerFromLeft {
                 self.hideLeftView(animated: true)
             }
@@ -1802,13 +1810,21 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             self.delegate?.revealController?(self, didAdd: toViewController, for: operation, animated: animated)
         }
         self.contentView?.insertSubview(toViewController.view, belowSubview: fromViewController.view)
-        addChildViewController(toViewController)
-        fromViewController.willMove(toParentViewController: nil)
+        addChild(toViewController)
+        fromViewController.willMove(toParent: nil)
         if self.toggleAnimationType == .none {
             completion()
         }
         else if self.toggleAnimationType == .crossDissolve {
+            /*
             UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
+                fromViewController.view.isHidden = true
+            }, completion: {(_ finished: Bool) -> Void in
+                completion()
+                fromViewController.view.isHidden = false
+            })
+            */
+            UIView.transition(with: self.contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                 fromViewController.view.isHidden = true
             }, completion: {(_ finished: Bool) -> Void in
                 completion()
@@ -1898,7 +1914,6 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 })
             }
         }
-        
     }
 
 // MARK: - Gesture Recognizer
@@ -1959,10 +1974,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             self.panGestureRecognizer = PBRevealViewControllerPanGestureRecognizer(target: self, action: #selector(self._handlePanGesture(_:)))
             self.panGestureRecognizer?.delegate = self
             self.contentView?.addGestureRecognizer(self.panGestureRecognizer!)
-            self.leftViewController?.willMove(toParentViewController: nil)
-            self.leftViewController?.removeFromParentViewController()
-            self.rightViewController?.willMove(toParentViewController: nil)
-            self.rightViewController?.removeFromParentViewController()
+            self.leftViewController?.willMove(toParent: nil)
+            self.leftViewController?.removeFromParent()
+            self.rightViewController?.willMove(toParent: nil)
+            self.rightViewController?.removeFromParent()
         }
 //#endif
         return self.panGestureRecognizer!
@@ -2015,7 +2030,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
 
     private func _moveLeftView(toPosition position: CGFloat) {
         if (self.leftViewController != nil) {
-            if !self.childViewControllers.contains(self.leftViewController!) {
+            if !self.children.contains(self.leftViewController!) {
                 var frame: CGRect = self.leftViewController!.view.frame
                 if self.isLeftPresentViewOnTop {
                     frame.origin.x = -(self.leftViewRevealWidth)
@@ -2032,8 +2047,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 else {
                     self.contentView?.insertSubview((self.leftViewController?.view)!, belowSubview: (self.mainViewController?.view)!)
                 }
-                addChildViewController(self.leftViewController!)
-                self.leftViewController?.didMove(toParentViewController: self)
+                addChild(self.leftViewController!)
+                self.leftViewController?.didMove(toParent: self)
             }
             var leftFrame: CGRect = self.leftViewController!.view.frame
             var mainFrame: CGRect = self.mainViewController!.view.frame
@@ -2092,7 +2107,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
 
     private func _moveRightView(toPosition position: CGFloat) {
         if (self.rightViewController != nil) {
-            if !self.childViewControllers.contains(self.rightViewController!) {
+            if !self.children.contains(self.rightViewController!) {
                 var frame: CGRect = self.rightViewController!.view.frame
                 if self.isRightPresentViewOnTop {
                     frame.origin.x = view.bounds.size.width
@@ -2109,8 +2124,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 else {
                     self.contentView?.insertSubview((rightViewController?.view)!, belowSubview: (mainViewController?.view)!)
                 }
-                addChildViewController(self.rightViewController!)
-                self.rightViewController?.didMove(toParentViewController: self)
+                addChild(self.rightViewController!)
+                self.rightViewController?.didMove(toParent: self)
             }
             var rightFrame: CGRect = self.rightViewController!.view.frame
             var mainFrame: CGRect = self.mainViewController!.view.frame
@@ -2450,8 +2465,11 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
 #else
             let statusBarIsHidden: Bool = true
 #endif
-            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20)
-            frame.size.height = view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20)
+            let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
+//            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20)
+            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : statusBarHeight)
+//            frame.size.height = view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20)
+            frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : statusBarHeight)
         }
         return frame
     }

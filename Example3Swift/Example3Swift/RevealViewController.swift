@@ -47,10 +47,13 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
     }
 */    
     func revealController(_ revealController: PBRevealViewController!, blockFor operation: PBRevealControllerOperation, from fromViewController: UIViewController!, to toViewController: UIViewController!, finalBlock: (() -> Void)!) -> (() -> Void)! {
+    
         if operation == .pushMainControllerFromLeft || operation == .pushMainControllerFromRight {
             let block = {
                 () -> Void in
-                UIView.transition(with: fromViewController.view, duration: 0.8, options: [.transitionCurlUp, .showHideTransitionViews], animations: {
+                if operation == .pushMainControllerFromLeft {revealController.revealLeftView()} else {revealController.revealRightView()}
+                // superview: Container view
+                UIView.transition(with: fromViewController.view.superview!, duration: 0.8, options: [.transitionCurlUp, .showHideTransitionViews], animations: {
                     fromViewController.view.isHidden = true
                     }, completion: { (finished) in
                         finalBlock()
@@ -63,7 +66,7 @@ class RevealViewController: PBRevealViewController, PBRevealViewControllerDelega
             if operation == .replaceLeftController || operation == .replaceRightController {
                 let block = {
                     () -> Void in
-                    UIView.transition(with: fromViewController.view, duration: 0.25, options: [.showHideTransitionViews, .layoutSubviews], animations: {
+                    UIView.transition(with: fromViewController.view.superview!, duration: 0.25, options: [.transitionCrossDissolve, .showHideTransitionViews, .layoutSubviews], animations: {
                         fromViewController.view.isHidden = true
                         }, completion: { (finished) in
                             finalBlock()
