@@ -1761,7 +1761,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 customBlock!()
             }
             else {
-                UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
+                UIView.transition(with: contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                     fromViewController.view.isHidden = true
                 }, completion: {(_ finished: Bool) -> Void in
                     completion()
@@ -1808,7 +1808,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             completion()
         }
         else if self.toggleAnimationType == .crossDissolve {
-            UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
+            UIView.transition(with: contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                 fromViewController.view.isHidden = true
             }, completion: {(_ finished: Bool) -> Void in
                 completion()

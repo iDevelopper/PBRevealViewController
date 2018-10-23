@@ -1060,7 +1060,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             customBlock();
         }
         else {
-            [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            [UIView transitionWithView:_contentView duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 fromViewController.view.hidden = YES;
             } completion:^(BOOL finished) {
                 completion();
@@ -1120,7 +1120,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-        [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView transitionWithView:_contentView duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
             fromViewController.view.hidden = YES;
         } completion:^(BOOL finished) {
             completion();

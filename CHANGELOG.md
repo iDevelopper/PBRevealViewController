@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.0
+
+#### iOS 12 compatibility.
+
 ## 1.2.9
 
 #### Update targets version to Swift 4.0.
