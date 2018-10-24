@@ -10,10 +10,10 @@ PBRevealViewController is compatible with both iOS and tvOS, and currently works
 
 ## Examples
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video4.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video2.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video3.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video4.gif)
 
 ## Installation
 
@@ -126,7 +126,7 @@ Swift 3:
 ```
 * Initializing a PBRevealViewController with Storyboard:
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Story.png)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Story.png)
 
 * Pushing a main view controller:
 ```objective-c
