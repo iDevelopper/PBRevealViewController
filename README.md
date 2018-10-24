@@ -6,14 +6,14 @@
 
 A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS, inspired on SWRevealViewController subclass.
 
-PBRevealViewController is compatible with both iOS and tvOS, and currently works with Swift 3.0 and Objective-C!
+PBRevealViewController is compatible with both iOS and tvOS, and currently works with Swift 4.0 and Objective-C!
 
 ## Examples
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video2.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video3.gif)
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Video4.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video2.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video3.gif)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Video4.gif)
 
 ## Installation
 
@@ -86,34 +86,34 @@ Objective-C:
 ```objective-c
 - (BOOL)revealControllerPanGestureShouldBegin:(PBRevealViewController *)revealController direction:(PBRevealControllerPanDirection)direction
 {
-	CGPoint point = [revealController.panGestureRecognizer locationInView:self.view];
-	if (!revealController.isLeftViewOpen && direction == PBRevealControllerPanDirectionRight && point.x < 50.0) {
-		return YES;
-	}
-	if (!revealController.isRightViewOpen && direction == PBRevealControllerPanDirectionLeft && point.x > (self.view.bounds.size.width - 50)) {
-		return YES;
-	}
-	if (revealController.isLeftViewOpen || revealController.isRightViewOpen) {
-		return YES;
-	}
-	return NO;
+CGPoint point = [revealController.panGestureRecognizer locationInView:self.view];
+if (!revealController.isLeftViewOpen && direction == PBRevealControllerPanDirectionRight && point.x < 50.0) {
+return YES;
+}
+if (!revealController.isRightViewOpen && direction == PBRevealControllerPanDirectionLeft && point.x > (self.view.bounds.size.width - 50)) {
+return YES;
+}
+if (revealController.isLeftViewOpen || revealController.isRightViewOpen) {
+return YES;
+}
+return NO;
 }
 ```
 Swift 3:
 ```Swift
-    func revealControllerPanGestureShouldBegin(_ revealController: PBRevealViewController!, direction: PBRevealControllerPanDirection) -> Bool {
-        let point = revealController.panGestureRecognizer.location(in: view)
-        if !revealController.isLeftViewOpen && direction == .right && point.x < 50.0 {
-            return true
-        }
-        if !revealController.isRightViewOpen && direction == .left && point.x > (view.bounds.size.width - 50) {
-            return true
-        }
-        if revealController.isLeftViewOpen || revealController.isRightViewOpen {
-            return true
-        }
-        return false
-    }
+func revealControllerPanGestureShouldBegin(_ revealController: PBRevealViewController!, direction: PBRevealControllerPanDirection) -> Bool {
+let point = revealController.panGestureRecognizer.location(in: view)
+if !revealController.isLeftViewOpen && direction == .right && point.x < 50.0 {
+return true
+}
+if !revealController.isRightViewOpen && direction == .left && point.x > (view.bounds.size.width - 50) {
+return true
+}
+if revealController.isLeftViewOpen || revealController.isRightViewOpen {
+return true
+}
+return false
+}
 ```
 
 * At any time, you can reveal, hide the "left" or "right" views or replace any of the view controllers, programmatically or based on user actions, with or without animations enabled
@@ -126,7 +126,7 @@ Swift 3:
 ```
 * Initializing a PBRevealViewController with Storyboard:
 
-![Image](https://github.com/iDevelopper/PBRevealViewController/blob/master/PBRevealViewController_Story.png)
+![Image](https://raw.githubusercontent.com/iDevelopper/PBRevealViewController/master/PBRevealViewController/Assets/PBRevealViewController_Story.png)
 
 * Pushing a main view controller:
 ```objective-c
