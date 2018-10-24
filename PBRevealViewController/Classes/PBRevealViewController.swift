@@ -1761,14 +1761,6 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 customBlock!()
             }
             else {
-                /*
-                UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
-                    fromViewController.view.isHidden = true
-                }, completion: {(_ finished: Bool) -> Void in
-                    completion()
-                    fromViewController.view.isHidden = false
-                })
-                */
                 UIView.transition(with: self.contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                     fromViewController.view.isHidden = true
                 }, completion: {(_ finished: Bool) -> Void in
@@ -1816,14 +1808,6 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             completion()
         }
         else if self.toggleAnimationType == .crossDissolve {
-            /*
-            UIView.transition(with: fromViewController.view, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
-                fromViewController.view.isHidden = true
-            }, completion: {(_ finished: Bool) -> Void in
-                completion()
-                fromViewController.view.isHidden = false
-            })
-            */
             UIView.transition(with: self.contentView!, duration: duration, options: [.layoutSubviews, .transitionCrossDissolve], animations: {() -> Void in
                 fromViewController.view.isHidden = true
             }, completion: {(_ finished: Bool) -> Void in
@@ -2467,9 +2451,7 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             let statusBarIsHidden: Bool = true
             let statusBarHeight: CGFloat = 0.0
             #endif
-            //            frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20)
             frame.origin.y = barHeight + (statusBarIsHidden ? 0 : statusBarHeight)
-            //            frame.size.height = view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20)
             frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : statusBarHeight)
         }
         return frame
@@ -2519,22 +2501,6 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         })
         super.viewWillTransition(to: size, with: coordinator)
     }
-
-    // iOS < 8.0
-    /*
-    override func shouldAutorotate() -> Bool {
-        return true
-    }
-
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
-    }
-
-    override func willAnimateRotation(toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        viewWillTransition(to: view.bounds.size)
-    }
-    */
-    //
 
     // MARK: - Helpers
     

@@ -1060,14 +1060,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             customBlock();
         }
         else {
-            /*
-            [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
-                fromViewController.view.hidden = YES;
-            } completion:^(BOOL finished) {
-                completion();
-                fromViewController.view.hidden = NO;
-            }];
-            */
             [UIView transitionWithView:_contentView duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 fromViewController.view.hidden = YES;
             } completion:^(BOOL finished) {
@@ -1128,14 +1120,6 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     }
     
     else if (_toggleAnimationType == PBRevealToggleAnimationTypeCrossDissolve) {
-        /*
-        [UIView transitionWithView:fromViewController.view duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            fromViewController.view.hidden = YES;
-        } completion:^(BOOL finished) {
-            completion();
-            fromViewController.view.hidden = NO;
-        }];
-        */
         [UIView transitionWithView:_contentView duration:duration options:UIViewAnimationOptionLayoutSubviews | UIViewAnimationOptionTransitionCrossDissolve animations:^{
             fromViewController.view.hidden = YES;
         } completion:^(BOOL finished) {
@@ -2222,9 +2206,7 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         BOOL statusBarIsHidden = YES;
         CGFloat statusBarHeight = 0.0;
 #endif
-//        frame.origin.y = barHeight + (statusBarIsHidden ? 0 : 20);
         frame.origin.y = barHeight + (statusBarIsHidden ? 0 : statusBarHeight);
-//        frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : 20);
         frame.size.height = self.view.frame.size.height - barHeight - (statusBarIsHidden ? 0 : statusBarHeight);
     }
     return frame;
