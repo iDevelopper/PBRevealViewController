@@ -1291,8 +1291,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 #endif
 
 #if TARGET_OS_TV
-            [_tvOSLeftRevealButton removeFromSuperview];
-            [_tvOSRightRevealButton removeFromSuperview];
+            [self->_tvOSLeftRevealButton removeFromSuperview];
+            [self->_tvOSRightRevealButton removeFromSuperview];
             [self setNeedsFocusUpdate];
             [self updateFocusIfNeeded];
 #endif
@@ -1376,8 +1376,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 #endif
 
 #if TARGET_OS_TV
-            [_tvOSLeftRevealButton removeFromSuperview];
-            [_tvOSRightRevealButton removeFromSuperview];
+            [self->_tvOSLeftRevealButton removeFromSuperview];
+            [self->_tvOSRightRevealButton removeFromSuperview];
             [self setNeedsFocusUpdate];
             [self updateFocusIfNeeded];
 #endif
@@ -1452,8 +1452,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 #if TARGET_OS_TV
             [self setNeedsFocusUpdate];
             [self updateFocusIfNeeded];
-            [_contentView addSubview:_tvOSLeftRevealButton];
-            [_contentView addSubview:_tvOSRightRevealButton];
+            [self->_contentView addSubview:self->_tvOSLeftRevealButton];
+            [self->_contentView addSubview:self->_tvOSRightRevealButton];
 #endif
             if ([self->_delegate respondsToSelector:@selector(revealController:didHideLeftViewController:)]) {
                 [self->_delegate revealController:self didHideLeftViewController:self->_leftViewController];
@@ -1519,8 +1519,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 #if TARGET_OS_TV
             [self setNeedsFocusUpdate];
             [self updateFocusIfNeeded];
-            [_contentView addSubview:_tvOSLeftRevealButton];
-            [_contentView addSubview:_tvOSRightRevealButton];
+            [self->_contentView addSubview:self->_tvOSLeftRevealButton];
+            [self->_contentView addSubview:self->_tvOSRightRevealButton];
 #endif
             if ([self->_delegate respondsToSelector:@selector(revealController:didHideRightViewController:)]) {
                 [self->_delegate revealController:self didHideRightViewController:self->_rightViewController];

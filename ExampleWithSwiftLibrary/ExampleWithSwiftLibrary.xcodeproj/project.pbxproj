@@ -152,7 +152,6 @@
 				TargetAttributes = {
 					324A09551F4893A10026647B = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = 5WSVF5KRRY;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -382,7 +381,7 @@
 			baseConfigurationReference = F6E518652608EAC7227BDB65 /* Pods-ExampleWithSwiftLibrary.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WSVF5KRRY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ExampleWithSwiftLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.bodetpatrick.ExampleWithSwiftLibrary;
@@ -397,7 +396,7 @@
 			baseConfigurationReference = A4B358A7129C2DCF7390E20C /* Pods-ExampleWithSwiftLibrary.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 5WSVF5KRRY;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ExampleWithSwiftLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fr.bodetpatrick.ExampleWithSwiftLibrary;

@@ -31,6 +31,8 @@ DESC
 
     s.ios.deployment_target = '6.0'
     s.tvos.deployment_target = '9.0'
+    
+    s.swift_version = '4.0'
 
     s.default_subspec = 'ObjC'
 
@@ -43,7 +45,8 @@ DESC
     s.subspec 'Swift' do |ss|
         ss.ios.deployment_target = '8.0'
         ss.tvos.deployment_target = '9.0'
-        ss.source_files = 'PBRevealViewController/Classes/**/*.swift'
+        #ss.swift_version = '4.0'
+        ss.source_files = 'PBRevealViewController/Classes/**/*.{swift}'
     end
 
     #s.source_files = 'PBRevealViewController/Classes/**/*'
