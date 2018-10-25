@@ -197,7 +197,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Example/Pods/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PBRevealViewController-Swift/PBRevealViewController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -206,7 +206,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Example/Pods/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		880E7B4E1B99E3BC449EA6E6 /* [CP] Check Pods Manifest.lock */ = {
