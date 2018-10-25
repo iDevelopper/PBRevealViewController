@@ -6,7 +6,7 @@
 
 A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller for iOS and tvOS, inspired on SWRevealViewController subclass.
 
-PBRevealViewController is compatible with both iOS and tvOS, and currently works with Swift 4.0 and Objective-C!
+PBRevealViewController is compatible with both iOS and tvOS, and currently works with Swift 4.0, Swift 4.2 (swift-4.2 branch) and Objective-C!
 
 ## Examples
 
