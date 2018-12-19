@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.1
+
+#### Fix an issue when panFromLeftBorderWidth and panFromRightBorderWidth properties are used.
+
 ## 1.3.0
 
 #### iOS 12 compatibility.
