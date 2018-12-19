@@ -1980,11 +1980,11 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             if (delegate?.revealControllerPanGestureShouldBegin?(self, direction: velocity > 0.0 ? .right : .left)) == false {
                 return false
             }
-            /* Allow pan gesture for closing left or right view
-             if (_isLeftViewOpen || _isRightViewOpen) {
-             return NO;
-             }
-             */
+
+            if isLeftViewOpen || isRightViewOpen {
+                return true
+            }
+            
             let point: CGPoint = recognizer.location(in: recognizer.view)
             
             if self.panFromLeftBorderWidth > 0.0 && !isLeftViewOpen && velocity > 0.0 && point.x > self.panFromLeftBorderWidth {

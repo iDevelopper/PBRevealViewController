@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.1
+
+#### Fix an issue when panFromLeftBorderWidth and panFromRightBorderWidth properties are used.
+
 ## 2.0.0
 
 #### Swift 4.2 ans iOS 12 compatibility.
