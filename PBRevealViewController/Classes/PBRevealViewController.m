@@ -1672,11 +1672,10 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
                 return NO;
             }
         }
-        /* Allow pan gesture for closing left or right view
+
         if (_isLeftViewOpen || _isRightViewOpen) {
-            return NO;
+            return YES;
         }
-        */
 
         CGPoint point = [recognizer locationInView:recognizer.view];
         
