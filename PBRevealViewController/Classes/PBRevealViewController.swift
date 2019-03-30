@@ -1252,7 +1252,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 return
             }
             delegate?.revealController?(self, willShowLeft: self.leftViewController!)
-            var leftFrame: CGRect = self.leftViewController!.view.frame
+            //var leftFrame: CGRect = self.leftViewController!.view.frame
+            var leftFrame: CGRect = self.mainViewController!.view.frame
             if self.isLeftPresentViewOnTop {
                 leftFrame.origin.x = -(self.leftViewRevealWidth)
             }
@@ -1327,7 +1328,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
                 return
             }
             delegate?.revealController?(self, willShowRight: self.rightViewController!)
-            var rightFrame: CGRect = self.rightViewController!.view.frame
+            //var rightFrame: CGRect = self.rightViewController!.view.frame
+            var rightFrame: CGRect = self.mainViewController!.view.frame
             if self.isRightPresentViewOnTop {
                 rightFrame.origin.x = view.bounds.size.width
             }
@@ -1396,7 +1398,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         if (self.leftViewController != nil) {
             delegate?.revealController?(self, willHideLeft: self.leftViewController!)
             let duration: TimeInterval = animated ? leftToggleAnimationDuration : 0.0
-            var leftFrame: CGRect = self.leftViewController!.view.frame
+            //var leftFrame: CGRect = self.leftViewController!.view.frame
+            var leftFrame: CGRect = self.mainViewController!.view.frame
             if isLeftPresentViewOnTop {
                 leftFrame.origin.x = -(self.leftViewRevealWidth)
             }
@@ -1458,7 +1461,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
         if (self.rightViewController != nil) {
             delegate?.revealController?(self, willHideRight: self.rightViewController!)
             let duration: TimeInterval = animated ? rightToggleAnimationDuration : 0.0
-            var rightFrame: CGRect = self.rightViewController!.view.frame
+            //var rightFrame: CGRect = self.rightViewController!.view.frame
+            var rightFrame: CGRect = self.mainViewController!.view.frame
             if self.isRightPresentViewOnTop {
                 rightFrame.origin.x = view.bounds.size.width
             }
@@ -1722,7 +1726,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     private func _swapFromViewController(_ fromViewController: UIViewController, toViewController: UIViewController, operation: PBRevealControllerOperation, animated: Bool) {
         let duration: TimeInterval = animated ? replaceViewAnimationDuration : 0.0
         if fromViewController != toViewController {
-            toViewController.view.frame = fromViewController.view.frame
+            //toViewController.view.frame = fromViewController.view.frame
+            var frame: CGRect = self.mainViewController!.view.frame
+            frame.origin.x = fromViewController.view.frame.origin.x
+            toViewController.view.frame = frame
             delegate?.revealController?(self, willAdd: toViewController, for: operation, animated: animated)
             switch operation {
             case .replaceLeftController, .replaceRightController:
@@ -1782,7 +1789,10 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
             }
             return
         }
-        toViewController.view.frame = fromViewController.view.frame
+        //toViewController.view.frame = fromViewController.view.frame
+        var frame: CGRect = self.mainViewController!.view.frame
+        frame.origin.x = fromViewController.view.frame.origin.x
+        toViewController.view.frame = frame
         delegate?.revealController?(self, willAdd: toViewController, for: operation, animated: animated)
         
         let completion: (() -> Void) = {() -> Void in
@@ -2016,7 +2026,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     private func _moveLeftView(toPosition position: CGFloat) {
         if (self.leftViewController != nil) {
             if !self.childViewControllers.contains(self.leftViewController!) {
-                var frame: CGRect = self.leftViewController!.view.frame
+                //var frame: CGRect = self.leftViewController!.view.frame
+                var frame: CGRect = self.mainViewController!.view.frame
                 if self.isLeftPresentViewOnTop {
                     frame.origin.x = -(self.leftViewRevealWidth)
                     frame.size.width = self.leftViewRevealWidth
@@ -2093,7 +2104,8 @@ open class PBRevealViewController: UIViewController, UIGestureRecognizerDelegate
     private func _moveRightView(toPosition position: CGFloat) {
         if (self.rightViewController != nil) {
             if !self.childViewControllers.contains(self.rightViewController!) {
-                var frame: CGRect = self.rightViewController!.view.frame
+                //var frame: CGRect = self.rightViewController!.view.frame
+                var frame: CGRect = self.mainViewController!.view.frame
                 if self.isRightPresentViewOnTop {
                     frame.origin.x = view.bounds.size.width
                     frame.size.width = self.rightViewRevealWidth
