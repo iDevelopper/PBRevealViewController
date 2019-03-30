@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.3.2
+
+#### Fix some issues when used with transformed views.
+#### Update to recommanded settings.
+
 ## 1.3.1
 
 #### Fix an issue when panFromLeftBorderWidth and panFromRightBorderWidth properties are used.

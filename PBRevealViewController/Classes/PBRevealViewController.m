@@ -1003,8 +1003,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
     
     if (fromViewController != toViewController) {
         
-        toViewController.view.frame = fromViewController.view.frame;
-        
+        //toViewController.view.frame = fromViewController.view.frame;
+        CGRect frame = _mainViewController.view.frame;
+        frame.origin.x = fromViewController.view.frame.origin.x;
+        toViewController.view.frame = frame;
+
         if ([_delegate respondsToSelector:@selector(revealController:willAddViewController:forOperation:animated:)]) {
             [_delegate revealController:self willAddViewController:toViewController forOperation:operation animated:animated];
         }
@@ -1083,8 +1086,11 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         return;
     }
     
-    toViewController.view.frame = fromViewController.view.frame;
-    
+    //toViewController.view.frame = fromViewController.view.frame;
+    CGRect frame = _mainViewController.view.frame;
+    frame.origin.x = fromViewController.view.frame.origin.x;
+    toViewController.view.frame = frame;
+
     if ([_delegate respondsToSelector:@selector(revealController:willAddViewController:forOperation:animated:)]) {
         [_delegate revealController:self willAddViewController:toViewController forOperation:operation animated:animated];
     }
@@ -1264,8 +1270,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowLeftViewController:_leftViewController];
         }
         
-        CGRect leftFrame = _leftViewController.view.frame;
-        
+        //CGRect leftFrame = _leftViewController.view.frame;
+        CGRect leftFrame = _mainViewController.view.frame;
+
         if (_leftPresentViewOnTop) {
             leftFrame.origin.x = -(_leftViewRevealWidth);
         }
@@ -1350,7 +1357,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
             [_delegate revealController:self willShowRightViewController:_rightViewController];
         }
         
-        CGRect rightFrame = _rightViewController.view.frame;
+        //CGRect rightFrame = _rightViewController.view.frame;
+        CGRect rightFrame = _mainViewController.view.frame;
+        
         if (_rightPresentViewOnTop) {
             rightFrame.origin.x = self.view.bounds.size.width;
         }
@@ -1425,7 +1434,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         NSTimeInterval duration = animated ? _leftToggleAnimationDuration : 0.;
         
-        CGRect leftFrame = _leftViewController.view.frame;
+        //CGRect leftFrame = _leftViewController.view.frame;
+        CGRect leftFrame = _mainViewController.view.frame;
+        
         if (_leftPresentViewOnTop) {
             leftFrame.origin.x = -(_leftViewRevealWidth);
         }
@@ -1491,8 +1502,9 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
         }
         NSTimeInterval duration = animated ? _rightToggleAnimationDuration : 0.;
         
-        CGRect rightFrame = _rightViewController.view.frame;
-        
+        //CGRect rightFrame = _rightViewController.view.frame;
+        CGRect rightFrame = _mainViewController.view.frame;
+
         if (_rightPresentViewOnTop) {
             rightFrame.origin.x = self.view.bounds.size.width;
         }
@@ -1712,7 +1724,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     if (_leftViewController) {
         if (![self.childViewControllers containsObject:_leftViewController]) {
-            CGRect frame = _leftViewController.view.frame;
+            //CGRect frame = _leftViewController.view.frame;
+            CGRect frame = _mainViewController.view.frame;
             if (_leftPresentViewOnTop) {
                 frame.origin.x = -(_leftViewRevealWidth);
                 frame.size.width = _leftViewRevealWidth;
@@ -1801,7 +1814,8 @@ NSString * const PBSegueRightIdentifier =   @"pb_right";
 {
     if (_rightViewController) {
         if (![self.childViewControllers containsObject:_rightViewController]) {
-            CGRect frame = _rightViewController.view.frame;
+            //CGRect frame = _rightViewController.view.frame;
+            CGRect frame = _mainViewController.view.frame;
             if (_rightPresentViewOnTop) {
                 frame.origin.x = self.view.bounds.size.width;
                 frame.size.width = _rightViewRevealWidth;
