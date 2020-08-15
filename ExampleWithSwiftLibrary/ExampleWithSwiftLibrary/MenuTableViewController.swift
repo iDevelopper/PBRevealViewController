@@ -43,7 +43,7 @@ class MenuTableViewController: UITableViewController {
         cell.textLabel?.text = items[indexPath.row]
         
         cell.backgroundColor = UIColor.white
-        if revealViewController()?.leftViewBlurEffectStyle != .none {
+        if revealViewController()?.leftViewBlurEffectStyle != PBRevealBlurEffectStyle.none {
             cell.backgroundColor = UIColor.clear
         }
         
