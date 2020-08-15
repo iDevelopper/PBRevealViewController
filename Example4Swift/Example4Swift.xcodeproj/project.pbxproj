@@ -136,7 +136,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = iDevelopper;
 				TargetAttributes = {
 					327FA83C1D5C9C900055168A = {
@@ -147,10 +147,9 @@
 			};
 			buildConfigurationList = 327FA8381D5C9C900055168A /* Build configuration list for PBXProject "Example4Swift" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
