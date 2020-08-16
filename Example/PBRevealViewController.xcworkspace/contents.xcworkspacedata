@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:PBRevealViewController.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Example2/Example2.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Example3Swift/Example3Swift.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../Example4Swift/Example4Swift.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../ExampleFortvOS/ExampleFortvOS.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:../ExampleWithSwiftLibrary/ExampleWithSwiftLibrary.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
