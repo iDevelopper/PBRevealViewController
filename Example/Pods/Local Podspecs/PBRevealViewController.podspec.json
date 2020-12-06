@@ -16,16 +16,16 @@
     "tag": "1.3.2"
   },
   "platforms": {
-    "ios": "9.0",
+    "ios": "8.0",
     "tvos": "9.0"
   },
-  "swift_versions": "5.2",
+  "swift_versions": "4.0",
   "default_subspecs": "ObjC",
   "subspecs": [
     {
       "name": "ObjC",
       "platforms": {
-        "ios": "9.0",
+        "ios": "8.0",
         "tvos": "9.0"
       },
       "source_files": "PBRevealViewController/Classes/**/*.{h,m}"
@@ -33,11 +33,11 @@
     {
       "name": "Swift",
       "platforms": {
-        "ios": "9.0",
+        "ios": "8.0",
         "tvos": "9.0"
       },
       "source_files": "PBRevealViewController/Classes/**/*.{swift}"
     }
   ],
-  "swift_version": "5.2"
+  "swift_version": "4.0"
 }

@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PBRevealViewController: 0e870cab48d1c344d25bf23debfabbf98e1d937e
+  PBRevealViewController: 3e1de4f6083af3dbbd028a0d3a788814decb1c5d
 
 PODFILE CHECKSUM: 480bbd770d4dca4ca94a0ab37b055b3a2c3caefc
 

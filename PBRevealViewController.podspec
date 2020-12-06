@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'PBRevealViewController'
-    s.version          = '1.3.2'
+    s.version          = '1.3.3'
     s.summary          = 'A slide UIViewController subclass for revealing a side (left and/or right) view controller above or below a main view controller.'
 
 # This description is used to generate tags and improve search results.
@@ -39,14 +39,14 @@ DESC
     s.subspec 'ObjC' do |ss|
         ss.ios.deployment_target = '8.0'
         ss.tvos.deployment_target = '9.0'
-        ss.source_files = 'PBRevealViewController/Classes/**/*.{h,m}'
+        ss.source_files = 'Sources/Classes/**/*.{h,m}'
     end
 
     s.subspec 'Swift' do |ss|
         ss.ios.deployment_target = '8.0'
         ss.tvos.deployment_target = '9.0'
         #ss.swift_version = '4.0'
-        ss.source_files = 'PBRevealViewController/Classes/**/*.{swift}'
+        ss.source_files = 'Sources/Classes/**/*.{swift}'
     end
 
     #s.source_files = 'PBRevealViewController/Classes/**/*'

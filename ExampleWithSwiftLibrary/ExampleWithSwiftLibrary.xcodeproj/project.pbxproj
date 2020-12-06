@@ -129,7 +129,6 @@
 				324A09521F4893A10026647B /* Sources */,
 				324A09531F4893A10026647B /* Frameworks */,
 				324A09541F4893A10026647B /* Resources */,
-				78B10BBD45FFF1A043922BC7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -190,24 +189,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		78B10BBD45FFF1A043922BC7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/../Example/Pods/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/PBRevealViewController-Swift/PBRevealViewController.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PBRevealViewController.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Example/Pods/Target Support Files/Pods-ExampleWithSwiftLibrary/Pods-ExampleWithSwiftLibrary-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		880E7B4E1B99E3BC449EA6E6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
