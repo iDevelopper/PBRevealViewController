@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "PBRevealViewController",
             dependencies: [],
-            path: "PBRevealViewController/Classes/",
+            path: "Sources/Classes/",
             exclude: ["PBRevealViewController.h",
                       "PBRevealViewController.m"
             ]
