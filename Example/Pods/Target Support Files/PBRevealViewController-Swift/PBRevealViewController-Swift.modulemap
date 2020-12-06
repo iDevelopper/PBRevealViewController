@@ -1,0 +1,6 @@
+framework module PBRevealViewController {
+  umbrella header "PBRevealViewController-Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
