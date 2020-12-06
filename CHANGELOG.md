@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.4
+
+#### SPM Support.
+
 ## 1.3.3
 
 #### SPM Support.
