@@ -21,7 +21,11 @@ To run the example projects, clone the repo, and run `pod install` in your Termi
 
 You can also run `pod try PBRevealViewController` in your Terminal from anywhere.
 
-## In your project
+### Swift Package Manager
+
+PBRevealViewController supports SPM versions 5.1.0 and above. To use SPM, you should use Xcode 11 or above to open your project. Click `File` -> `Swift Packages` -> `Add Package Dependency`, enter `https://github.com/iDevelopper/PBRevealViewController`. Select the version you’d like to use.
+
+### Manual
 
 The easiest way to install it is by copying the following to your project:
 * PBRevealViewController.h
@@ -29,6 +33,8 @@ The easiest way to install it is by copying the following to your project:
 
 Or
 * PBRevealViewController.swift
+
+### CocoaPods
 
 PBRevealViewController is also available through [CocoaPods](http://cocoapods.org).
 
