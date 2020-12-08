@@ -1,8 +1,8 @@
 PODS:
-  - PBRevealViewController (1.3.2):
-    - PBRevealViewController/ObjC (= 1.3.2)
-  - PBRevealViewController/ObjC (1.3.2)
-  - PBRevealViewController/Swift (1.3.2)
+  - PBRevealViewController (1.3.5):
+    - PBRevealViewController/ObjC (= 1.3.5)
+  - PBRevealViewController/ObjC (1.3.5)
+  - PBRevealViewController/Swift (1.3.5)
 
 DEPENDENCIES:
   - PBRevealViewController (from `../`)
@@ -13,7 +13,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PBRevealViewController: 3e1de4f6083af3dbbd028a0d3a788814decb1c5d
+  PBRevealViewController: dea8c21b8ca00d4aed0f8bfb102882eead6e5c18
 
 PODFILE CHECKSUM: 480bbd770d4dca4ca94a0ab37b055b3a2c3caefc
 
