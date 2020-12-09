@@ -74,7 +74,7 @@
 		701AD51B0E87DEF4F4EC44BC /* libPods-PBRevealViewController_Example.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PBRevealViewController_Example.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		748D20AAB09FD2F121F5B3F0 /* Pods-PBRevealViewController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		BC0D3305A5BD0DAFCE179144 /* Pods-PBRevealViewController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PBRevealViewController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PBRevealViewController_Example/Pods-PBRevealViewController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		C5B15792058643581984A5D1 /* PBRevealViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PBRevealViewController.podspec; path = ../PBRevealViewController.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		C5B15792058643581984A5D1 /* PBRevealViewController.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PBRevealViewController.podspec; path = ../PBRevealViewController.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
